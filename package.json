@@ -1,0 +1,23 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "going back to the basics",
+  "main": "/server/app.js",
+  "scripts": {
+    "test": "cd server && node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/buddyeorl/portfolio.git"
+  },
+  "keywords": [
+    "portfolio",
+    "yay!"
+  ],
+  "author": "Alexander Lizarraga",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/buddyeorl/portfolio/issues"
+  },
+  "homepage": "https://github.com/buddyeorl/portfolio#readme"
+}
