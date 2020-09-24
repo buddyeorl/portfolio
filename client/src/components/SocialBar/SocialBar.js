@@ -4,8 +4,14 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import FacebookIcon from '@material-ui/icons/Facebook';
 
+//react router
+import {
+    useLocation
+} from "react-router-dom";
+
 
 const Item = ({ icon, styles, backgroundColor = 'white', iconColor = '#7a7a7a' }) => {
+
     const [hover, setHover] = useState(false);
     const [newChild, setNewChild] = useState(icon)
 
@@ -43,14 +49,17 @@ const Item = ({ icon, styles, backgroundColor = 'white', iconColor = '#7a7a7a' }
 }
 
 const SocialBar = () => {
+    const location = useLocation();
+
     const styles = {
         container: {
             zIndex: 1001,
             position: 'fixed',
             left: 0,
-            top: 'calc(50% - (275px / 2))',
+            top: location.pathname === '/' ? 'calc(50% - (275px / 2))' : 'calc(100% - (275px))',
             width: '55px',
             height: '275px',
+            transition: 'top 500ms'
         },
         ul: {
             listStyle: 'none',

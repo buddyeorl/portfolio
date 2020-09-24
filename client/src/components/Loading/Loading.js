@@ -34,7 +34,7 @@ const Loading = ({ onEnd = () => { return true } }) => {
 
     useEffect(() => {
         setTimeout(() => {
-            setTop('0%');
+            setTop('50%');
         }, 100)
 
         setTimeout(() => {
@@ -69,7 +69,7 @@ const Loading = ({ onEnd = () => { return true } }) => {
             width: '100%',
             height: '100%',
             position: 'absolute',
-            top: '0%',
+            top: '50%',
             transition: 'top 1s'
         },
         lower: {
@@ -96,7 +96,7 @@ const Loading = ({ onEnd = () => { return true } }) => {
     const handleTransitionEnd = () => {
 
         setTimeout(() => {
-            setTop('-100%');
+            setTop('150%');
             if (!loading) {
                 onEnd();
             }

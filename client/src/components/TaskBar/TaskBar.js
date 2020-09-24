@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+//transitions
 import Buff from '../../effects/Buff'
 
 //icons
@@ -58,17 +60,6 @@ const TaskBar = ({ loading }) => {
             marginLeft: '5px'
         }
     }
-
-
-    // useEffect(() => {
-    //     if (!loading && animation1Ended) {
-    //         history.push("/projects");
-    //     }
-    // }, [loading])
-
-    // const handleClick = () => {
-    //     setLoading(true);
-    // }
 
     const handleEffectEnded = () => {
         setAnimation1Ended(true)

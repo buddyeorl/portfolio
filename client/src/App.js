@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
 
+import './App.css'
+
 import Intro from './components/Intro'
 import SocialBar from './components/SocialBar';
 import TaskBar from './components/TaskBar';
 import Loading from './components/Loading'
 import Projects from './components/Projects'
+import SideBar from './components/SideBar'
 
 
 //react router
@@ -12,12 +15,14 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+  Link,
 } from "react-router-dom";
+import { useEffect } from 'react';
 
 function App() {
   const [isIntroDone, setIsIntroDone] = useState(false);
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(false);
+
   const styles = {
     container: {
       //display: 'flex',
@@ -34,6 +39,7 @@ function App() {
     }
   }
 
+
   const handleIsIntroDone = () => {
     setIsIntroDone(true)
   }
@@ -46,7 +52,7 @@ function App() {
   }
 
   return (
-    <Router>
+    <Router >
       {loading && <Loading onEnd={() => { setLoading(false) }} />}
       <section style={styles.container}>
         <SocialBar />
@@ -58,21 +64,14 @@ function App() {
             }
           </Route>
           <Route exact path="/projects" >
+            <SideBar loading={handleLoading} />
             <Projects />
           </Route>
 
         </Switch>
       </section>
 
-    </Router >
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
+    </Router>
   );
 }
 export default App;

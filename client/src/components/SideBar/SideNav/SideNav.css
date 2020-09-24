@@ -1,0 +1,12 @@
+.sideNavLink{
+    display: block;
+    padding: 5px 0px;
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(139, 139, 139);
+    font-weight: 700;
+}
+
+.sideNavLink:hover {
+	color: black;
+}
