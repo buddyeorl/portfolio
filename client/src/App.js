@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import './App.css'
 
 import Intro from './components/Intro'
@@ -7,8 +6,10 @@ import SocialBar from './components/SocialBar';
 import TaskBar from './components/TaskBar';
 import Loading from './components/Loading'
 import Projects from './components/Projects'
+import ProjectPage from './components/Projects/ProjectPage'
 import SideBar from './components/SideBar'
-
+//import projects data as shortProjects 
+import shortProjects from './components/Projects/ProjectData.js';
 
 //react router
 import {
@@ -17,7 +18,6 @@ import {
   Route,
   Link,
 } from "react-router-dom";
-import { useEffect } from 'react';
 
 function App() {
   const [isIntroDone, setIsIntroDone] = useState(false);
@@ -65,7 +65,13 @@ function App() {
           </Route>
           <Route exact path="/projects" >
             <SideBar loading={handleLoading} />
-            <Projects />
+            <Projects loading={handleLoading} />
+          </Route>
+          <Route exact path="/projects/machinerypal" >
+            <ProjectPage loading={handleLoading} data={shortProjects && shortProjects['machinerypal'] && shortProjects['machinerypal']} />
+          </Route>
+          <Route exact path="/projects/katena" >
+            <ProjectPage loading={handleLoading} data={shortProjects && shortProjects['katena'] && shortProjects['katena']} />
           </Route>
 
         </Switch>

@@ -108,10 +108,42 @@ const Projects = () => {
     const [select, setSelect] = useState('')
 
     const styles = {
+        // container: {
+        //     //display: 'flex',
+        //     display: 'grid',
+        //     gridTemplateColumns: 'repeat(4, 1fr)',
+        //     gridAutoRows: 'minmax(150px, auto)',
+        //     alignItems: 'center',
+        //     alignSelf: 'baseline',
+        //     justifyContent: 'center',
+        //     overflow: 'hidden',
+        //     textAlign: 'center',
+        //     fontSize: '1em',
+        //     height: '800px',
+        //     width: '800px',
+        //     maxWidth: '800px',
+        //     maxHeight: '800px',
+        //     paddingTop: '8%',
+        //     //gridTemplateRows: '50% 50%',
+        //     //flexDirection: 'column',
+        //     //position: 'absolute',
+        //     //backgroundColor: 'rgb(25, 23, 23)',
+        //     gridTemplateAreas: '"a b c d""display display display f ""display display display  h ""stack stack stack l"',
+        //     position: 'absolute',
+        //     zIndex: 1002,
+        //     background: 'white'
+        // },
+
         container: {
-            //display: 'flex',
+            position: 'fixed',
+            left: '300px',
+            width: 'calc(100% - 300px)',
+            height: '100%',
+            background: 'white',
+            zIndex: '1001',
+
             display: 'grid',
-            gridTemplateColumns: 'repeat(4, 1fr)',
+            gridTemplateColumns: 'repeat(6, 1fr)',
             gridAutoRows: 'minmax(150px, auto)',
             alignItems: 'center',
             alignSelf: 'baseline',
@@ -119,23 +151,14 @@ const Projects = () => {
             overflow: 'hidden',
             textAlign: 'center',
             fontSize: '1em',
-            height: '800px',
-            width: '800px',
-            maxWidth: '800px',
-            maxHeight: '800px',
-            paddingTop: '8%',
-            //gridTemplateRows: '50% 50%',
-            //flexDirection: 'column',
-            //position: 'absolute',
-            //backgroundColor: 'rgb(25, 23, 23)',
-            gridTemplateAreas: '"a b c d""display display display f ""display display display  h ""stack stack stack l"'
+            gridTemplateAreas: '"display display display description description description""display display display description description description ""main main main  description description description""stack stack stack l l l"',
+            position: 'absolute',
+            background: 'white'
         },
 
 
 
-
-
-        description: {
+        mainImage: {
             borderRadius: '2rem',
             backgroundColor: 'rgb(25, 23, 23)',
             width: '500px',
@@ -194,6 +217,35 @@ const Projects = () => {
             cursor: 'pointer',
             position: 'relative',
             overflow: 'hidden',
+        },
+        description: {
+            marginBottom: '48px',
+            alignSelf: 'flex-start'
+        },
+        descriptionH2: {
+            fontSize: '32px',
+            lineHeight: '25px',
+            fontWeight: '600',
+            position: 'relative',
+            display: 'block',
+            letterSpacing: '-1px',
+            padding: '0',
+            marginBottom: '1.8px',
+            textAlign: 'start'
+        },
+        descriptionHr: {
+            display: 'block',
+            height: '1px',
+            width: '50%',
+            backgroundColor: '#484848',
+            position: 'relative',
+            border: 0,
+            margin: '8px 0 16px',
+        },
+        descriptionP: {
+            marginBottom: '20px',
+            fontSize: '20px',
+            lineHeight: '30px'
         }
 
     }
@@ -207,12 +259,12 @@ const Projects = () => {
         <React.Fragment>
             <section style={styles.container}>
 
-                <div style={styles.description}>
+                <div style={styles.mainImage}>
                     <GithubLabel />
                 </div>
 
 
-                <SlideOnLoad direction={(trigger && select !== 'a') ? 'custom' : 'up'} initial={'600px'} end={'0px'}>
+                {/* <SlideOnLoad direction={(trigger && select !== 'a') ? 'custom' : 'up'} initial={'600px'} end={'0px'}>
                     <ProjectPin onClick={() => handleClick('a')} style={{ ...styles.smallArea, gridArea: 'a' }} />
                 </SlideOnLoad>
 
@@ -234,7 +286,7 @@ const Projects = () => {
                 </SlideOnLoad>
                 <SlideOnLoad direction={(trigger && select !== 'l') ? 'custom' : 'down'} initial={'0px, -600px'} end={'0px'}>
                     <ProjectPin onClick={() => handleClick('l')} style={{ ...styles.smallArea, gridArea: 'l' }} />
-                </SlideOnLoad>
+                </SlideOnLoad> */}
 
                 <div style={{ ...styles.stackArea, gridArea: 'stack' }}>
                     <span style={{ color: '#544f4f' }}> Technologies I got involved with while working in this project:</span>
@@ -260,9 +312,14 @@ const Projects = () => {
                         </li>
                     </ul>
                 </div>
-                <h1>About this Project: asd as da sd </h1>
-            </section >
-        </React.Fragment >
+                <div style={{ ...styles.description, gridArea: 'description' }}>
+                    <h2 style={styles.descriptionH2}>Testing Text</h2>
+                    <hr style={styles.descriptionHr} />
+                    <p style={styles.descriptionP}></p>
+                    <p style={styles.descriptionP}></p>
+                </div>
+            </section>
+        </React.Fragment>
     )
 }
 

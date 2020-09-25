@@ -16,9 +16,12 @@ const Description = ({ loading }) => {
             marginTop: '15px',
             marginBottom: 0,
             fontSize: '30px',
+            fontWeight: 300,
             lineHeight: '30px',
             marginLeft: '-1px',
             color: '#525252',
+            marginRight: '35px',
+            textAlign: 'center'
         },
         h2: {
             marginTop: '10px',
@@ -26,14 +29,18 @@ const Description = ({ loading }) => {
             letterSpacing: '.3px',
             fontSize: '13px',
             lineHeight: '16px',
-            fontWeight: 900,
+            fontWeight: 400,
             color: '#000',
             fontFamily: 'freight-sans-pro,helvetica,sans-serif',
+            marginRight: '35px',
+            textAlign: 'center'
         },
         h3: {
             fontWeight: 300,
             fontSize: '13px',
             WebkitFontSmoothing: 'antialiased',
+            marginRight: '35px',
+            textAlign: 'center'
         }
     }
 

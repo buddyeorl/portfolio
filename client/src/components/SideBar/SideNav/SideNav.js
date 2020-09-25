@@ -18,7 +18,7 @@ const SideNav = () => {
     }
 
     return (
-        <nav style={{ margin: '10px 0px', fontSize: '16px' }}>
+        <nav style={{ margin: '35px 0px', marginLeft: '60px', fontSize: '16px' }}>
             <Link onClick={(e) => { e.preventDefault(); handleLinkClick('/projects') }} className='sideNavLink' to='/projects'>Projects</Link>
             <Link onClick={(e) => { e.preventDefault(); handleLinkClick('/resume') }} className='sideNavLink' to='/resume'>CV</Link>
             <Link onClick={(e) => { e.preventDefault(); handleLinkClick('/contact') }} className='sideNavLink' to='/contact'>Contact</Link>

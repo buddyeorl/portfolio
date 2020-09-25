@@ -98,11 +98,11 @@ const SocialBar = () => {
     return (
         <div style={styles.container}>
             <ul style={styles.ul}>
-                <li>
+                {/* <li>
                     <small style={styles.small}>
                         Follow Me
                     </small>
-                </li>
+                </li> */}
                 <Item styles={styles} backgroundColor={'#4e545a'} iconColor={'#7a7a7a'} icon={<GitHubIcon style={styles.smallIcons} />} />
                 <Item styles={styles} backgroundColor={'#0077ba'} iconColor={'#7a7a7a'} icon={<LinkedInIcon style={styles.smallIcons} />} />
                 <Item styles={styles} backgroundColor={'#3299ff'} iconColor={'#7a7a7a'} icon={<TwitterIcon style={styles.smallIcons} />} />

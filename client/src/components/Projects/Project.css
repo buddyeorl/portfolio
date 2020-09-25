@@ -1,0 +1,8 @@
+.project{
+    transform: scale(1);
+    transition:transform 250ms
+}
+
+.project:hover {
+    transform: scale(1.05);
+}
