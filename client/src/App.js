@@ -10,6 +10,8 @@ import ProjectPage from './components/Projects/ProjectPage'
 import SideBar from './components/SideBar'
 //import projects data as shortProjects 
 import shortProjects from './components/Projects/ProjectData.js';
+import Resume from './components/Resume'
+import Contact from './components/Contact'
 
 //react router
 import {
@@ -17,11 +19,13 @@ import {
   Switch,
   Route,
   Link,
+  Redirect,
 } from "react-router-dom";
 
 function App() {
   const [isIntroDone, setIsIntroDone] = useState(false);
   const [loading, setLoading] = useState(false);
+
 
   const styles = {
     container: {
@@ -48,7 +52,31 @@ function App() {
     setLoading(true);
     setTimeout(() => {
       history.push(path);
-    }, 1200)
+    }, 1000)
+  }
+
+  const handleProjectUrl = (props) => {
+
+    if (props.match.params.name === undefined) { //if url has no queries, render main project page
+      return (
+        <React.Fragment>
+          <SideBar loading={handleLoading} />
+          <Projects loading={handleLoading} data={Object.keys(shortProjects).map(name => ({ url: shortProjects[name].url, title: shortProjects[name].title, img: shortProjects[name].img[0], description: shortProjects[name].displayDescription }))} />
+        </React.Fragment>
+      )
+    } else if (props.match.params.catchall) { //if catchall parameter is received, redirect to path /projects/{name}
+      return <Redirect to={`/projects/` + props.match.params.name} />
+    } else {
+      if (shortProjects && shortProjects[props.match.params.name]) { // if name received in params match a project
+        return <React.Fragment>
+          <ProjectPage loading={handleLoading} data={shortProjects[props.match.params.name]} />
+        </React.Fragment>
+      } else { //if name doesnt match
+        //project doesnt exist, redirect to /projects
+        return <Redirect to={`/projects`} />
+      }
+    }
+
   }
 
   return (
@@ -57,21 +85,28 @@ function App() {
       <section style={styles.container}>
         <SocialBar />
         <Switch>
-          <Route exact path="/">
+
+          {/* Handle project routes */}
+          <Route path="/projects/:name?/:catchall?" render={handleProjectUrl} />
+
+          {/* handle home path */}
+          <Route exact path="/resume">
+            <SideBar loading={handleLoading} />
+            <Resume />
+          </Route>
+
+          {/* handle home path */}
+          <Route exact path="/contact">
+            <SideBar loading={handleLoading} />
+            <Contact />
+          </Route>
+
+          {/* handle home path */}
+          <Route path="/">
             <Intro effectEnded={handleIsIntroDone} />
             {isIntroDone &&
               <TaskBar loading={handleLoading} />
             }
-          </Route>
-          <Route exact path="/projects" >
-            <SideBar loading={handleLoading} />
-            <Projects loading={handleLoading} />
-          </Route>
-          <Route exact path="/projects/machinerypal" >
-            <ProjectPage loading={handleLoading} data={shortProjects && shortProjects['machinerypal'] && shortProjects['machinerypal']} />
-          </Route>
-          <Route exact path="/projects/katena" >
-            <ProjectPage loading={handleLoading} data={shortProjects && shortProjects['katena'] && shortProjects['katena']} />
           </Route>
 
         </Switch>

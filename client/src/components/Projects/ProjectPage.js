@@ -188,8 +188,8 @@ const ProjectPage = ({ loading, data }) => {
     return (
         <React.Fragment>
             <div style={styles.wrapper}>
-                <NavButton onClick={(e) => { e.preventDefault(); handleClickProject('/projects') }} position='left' />
-                <NavButton position='right' />
+                <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.back) }} position='left' />
+                <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.forward) }} position='right' />
                 <section style={styles.main}>
                     <div style={styles.mainDescription}>
                         <div style={styles.textMain}>
@@ -233,7 +233,7 @@ const ProjectPage = ({ loading, data }) => {
 
                         </div>
                         <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '28px', fontWeight: 300 }}> Resources:</h1>
-                        <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', }}> Check or download the app <a href={data.externalUrl} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }}><strong>here</strong></a></p>
+                        <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', }}> Check or download the app <a href={data.externalUrl} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>here</strong></a></p>
 
                     </div>
 

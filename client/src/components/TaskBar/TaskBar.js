@@ -83,7 +83,7 @@ const TaskBar = ({ loading }) => {
 
                     <Buff>
                         {/* <Link to="/resume" style={{ textDecoration: 'none' }}> */}
-                        <li style={styles.li} onClick={() => { loading(history, "/projects") }}>
+                        <li style={styles.li} onClick={() => { loading(history, "/resume") }}>
 
                             <React.Fragment>
                                 <AssignmentIcon />

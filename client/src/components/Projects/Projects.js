@@ -26,8 +26,8 @@ const shortProjects = [
 
 
 
-const Projects = ({ loading }) => {
-    const [view, setView] = useState(false);
+const Projects = ({ loading, data }) => {
+    const [view, setView] = useState(true); //true for module view, false for list view
     const history = useHistory();
 
     const styles = {
@@ -55,7 +55,6 @@ const Projects = ({ loading }) => {
         },
         ul: {
             width: '100%',
-            height: '100%',
             display: 'grid',
             justifyContent: 'left',
             alignItems: 'center',
@@ -148,7 +147,7 @@ const Projects = ({ loading }) => {
                 </div>
                 <ul style={styles.ul}>
 
-                    {shortProjects.map(item =>
+                    {data.map(item =>
                         <li className='project' onClick={(e) => { e.preventDefault(); handleClickProject(item.url); }} style={styles.li}>
                             <span style={{ ...styles.span, backgroundImage: `url("${item.img}")` }}></span>
                             <div style={styles.description}>
