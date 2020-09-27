@@ -60,7 +60,7 @@ const Description = ({ loading }) => {
         <React.Fragment>
 
             <Link onClick={(e) => { e.preventDefault(); handleLinkClick('/') }} to='/' style={styles.a}>
-                <h1 style={styles.h1}>
+                <h1 className='project' style={styles.h1}>
                     Alex Lizarraga
         </h1>
             </Link>

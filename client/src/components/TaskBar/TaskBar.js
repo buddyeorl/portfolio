@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import ChatButton from '../ChatButton'
+
 //transitions
 import Buff from '../../effects/Buff'
 
@@ -15,6 +17,7 @@ import Loading from '../Loading'
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useEffect } from 'react';
+
 
 const TaskBar = ({ loading }) => {
     const history = useHistory();
@@ -70,33 +73,24 @@ const TaskBar = ({ loading }) => {
 
             <nav style={{ ...styles.container, top: animation1Ended ? '0px' : '-50px' }}>
                 <ul style={styles.ul}>
-                    <Buff>
 
-                        <li style={styles.li} onClick={() => { loading(history, "/projects") }}>
+                    <li style={styles.li} onClick={() => { loading(history, "/projects") }}>
+
+                        <ChatButton label={'Projects'} width={100} direction='right'>
                             <AccountTreeIcon />
-                            <span style={styles.span}>
-                                Projects
-                                    {/* <Typing label={['Projects']} showCursor={false} cb={handleEffectEnded} /> */}
-                            </span>
-                        </li>
-                    </Buff>
+                        </ChatButton>
+                    </li>
 
-                    <Buff>
-                        {/* <Link to="/resume" style={{ textDecoration: 'none' }}> */}
-                        <li style={styles.li} onClick={() => { loading(history, "/resume") }}>
 
-                            <React.Fragment>
-                                <AssignmentIcon />
+                    <li style={styles.li} onClick={() => { loading(history, "/resume") }}>
 
-                                <span style={styles.span}>
-                                    The CV
-                                        {/* <Typing label={['The CV']} showCursor={false} /> */}
-                                </span>
-                            </React.Fragment>
 
-                        </li>
-                        {/* </Link> */}
-                    </Buff>
+                        <ChatButton label={'The CV'} width={100} direction='left'>
+                            <AssignmentIcon />
+                        </ChatButton>
+
+                    </li>
+
 
                 </ul>
             </nav>
