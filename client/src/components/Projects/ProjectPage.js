@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './ProjectPage.css'
+import Contact from '../Contact';
 
 import { useHistory, useLocation, Link } from "react-router-dom";
 
@@ -237,6 +238,9 @@ const ProjectPage = ({ loading, data }) => {
 
                     </div>
 
+                </section>
+                <section style={{ ...styles.general, backgroundColor: '#fafafa' }}>
+                    <Contact />
                 </section>
             </div>
         </React.Fragment>
