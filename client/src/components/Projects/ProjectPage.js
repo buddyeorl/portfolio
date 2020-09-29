@@ -239,7 +239,7 @@ const ProjectPage = ({ loading, data }) => {
                     </div>
 
                 </section>
-                <section style={{ ...styles.general, backgroundColor: '#fafafa' }}>
+                <section style={{ ...styles.general, height: '100%', height: '100%', display: 'inline-flex', justifyContent: 'center' }}>
                     <Contact />
                 </section>
             </div>

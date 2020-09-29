@@ -40,6 +40,17 @@ function App() {
       height: '100vh',
       width: '100%',
       gridTemplateRows: '60% 40%'
+    },
+    contactWrapper: {
+      position: 'fixed',
+      display: 'grid',
+      alignItems: 'center',
+      justifyItems: 'center',
+      left: '300px',
+      width: 'calc(100% - 300px)',
+      padding: '20px',
+      height: '100%',
+      overflow: 'hidden scroll'
     }
   }
 
@@ -98,7 +109,9 @@ function App() {
           {/* handle home path */}
           <Route exact path="/contact">
             <SideBar loading={handleLoading} />
-            <Contact />
+            <div style={styles.contactWrapper}>
+              <Contact />
+            </div>
           </Route>
 
           {/* handle home path */}
