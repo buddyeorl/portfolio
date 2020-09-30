@@ -76,10 +76,14 @@ const ChatButton = ({ children, label = 'Portfolio', onClick = () => { return },
 
     useEffect(() => {
         //send button trigger
-        let timer = setTimeout(() => { setSendAfterDelay(send) }, 550);
+        setSendAfterDelay(send)
         //shadow effect delay
-        let timer2 = setTimeout(() => { setShadowEffect(send) }, 1000);
-        return () => { clearTimeout(timer); clearTimeout(timer2); }
+        setShadowEffect(send)
+        // //send button trigger
+        // let timer = setTimeout(() => { setSendAfterDelay(send) }, 0);
+        // //shadow effect delay
+        // let timer2 = setTimeout(() => { setShadowEffect(send) }, 0);
+        //return () => { clearTimeout(timer); clearTimeout(timer2); }
     }, [send])
 
     const handleClick = (e) => {

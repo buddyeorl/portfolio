@@ -60,9 +60,9 @@ const SlideOnLoad = ({ children, direction = 'right', initial = '0px', end = '20
 const Input = ({ messages = [
     { add: ['Hi, This is Alex, What\'s your name?'], edit: ['Oh Sorry, what was your name again?'] },
     { add: [`Nice too meet you, now tell me your email?`], edit: ['Could you please tell me your email one more time?'] },
-    { add: [`Ok now send me a brief message`], edit: ['Did you forget to tell me something?'] },
+    { add: [`Ok now send me a brief message`], edit: ['Did you forget to tell me something?'], type: 'textarea' },
     [`Ready to send??`],
-    [`Your message has been sent, I'll get back to you soon`]
+    [`Your message has been sent, I'll get back to you soon :)`, `In the meantime, feel free to browse some of my projects`]
 ], labels = ['Name Please', 'Email Please', 'Brief Message'] }) => {
 
 
@@ -74,11 +74,13 @@ const Input = ({ messages = [
 
     // related to typing component cb and messages
     const [isTyping, setIsTyping] = useState(false);
-    const [messageToType, setMessageToType] = useState(messages[0]);
+    const [messageToType, setMessageToType] = useState(messages[0].add);
 
     //initialize with an array of length = labels.length
     const [inputStatus, setInputStatus] = useState(Array(labels.length).fill({}));
 
+    //initialize sending status
+    const [sending, setSending] = useState(false)
 
 
     const handleTyping = () => {
@@ -109,6 +111,7 @@ const Input = ({ messages = [
             fontSize: '20px',
             color: 'rgb(171 169 169)',
             cursor: 'text',
+            marginLeft: '10px'
         },
         input: {
             borderStyle: 'none',
@@ -118,7 +121,7 @@ const Input = ({ messages = [
             fontWeight: 500,
             width: '300px',
             height: '50px',
-            padding: '0px 25px',
+            padding: '0px 35px',
             //borderRadius: '5px',
             marginRight: '10px',
             boxShadow: 'rgb(192 198 204) 0px 2px 1px -1px',
@@ -130,7 +133,7 @@ const Input = ({ messages = [
 
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!input.name || input.name.trim().length === 0 || cur > labels.length - 1) {
@@ -140,6 +143,7 @@ const Input = ({ messages = [
         //typing animation starts
         setIsTyping(true);
 
+        //set all existing status to idle, so list of completed inputs wont render with the slide down effect
         let tempStatus = inputStatus.map(item => {
             if (item.status && (item.status === 'new' || item.status === 'edit')) {
                 item.status = 'idle';
@@ -151,26 +155,36 @@ const Input = ({ messages = [
 
         tempStatus[cur] = { status: 'new', value: input.name.trim() }
 
+        //set new input status with the tempStatus object including new input
         setInputStatus(tempStatus);
-
 
         //reset input
         setInput({ name: '' });
 
         //increase current counter to show next input
         setCur(cur + 1);
-        setMessageToType(messages[cur + 1].add ? messages[cur + 1].add : messages[cur + 1]);
+
 
         //if all itemstatus are filled, then show submit button
         if (inputStatus.every(item => (item.status))) {
             //delay ==true will delay input box render in case user tries to edit any of the inputs before sending, 
             setCur(inputStatus.length)
             setMessageToType(messages[inputStatus.length]);
+        } else {
+            setMessageToType(messages[cur + 1].add ? messages[cur + 1].add : messages[cur + 1]);
         }
     }
 
     useEffect(() => {
-        setEditMode(inputStatus.every(item => (item.status && item.status !== 'edit')))
+        if (!editMode) {
+            setTimeout(() => {
+                setEditMode(inputStatus.every(item => (item.status && item.status !== 'edit')))
+            }, 480)
+        } else {
+            setEditMode(inputStatus.every(item => (item.status && item.status !== 'edit')))
+        }
+
+
     }, [inputStatus])
 
     const handleChange = (e) => {
@@ -202,72 +216,85 @@ const Input = ({ messages = [
 
     }
 
+    const sendForm = (e) => {
+        e.preventDefault();
+        //change state to sending
+        setTimeout(() => {
+            setSending(true);
+            setMessageToType(messages[messages.length - 1])
+        }, 500)
+
+        console.log('fetching something here')
+        //change state to not sending
+        //setSending(false);
+    }
+    console.log('sending', sending)
     return <React.Fragment>
 
         {/* message to be typed */}
         <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', top: 0, left: '55px', width: '60%', height: '70%' }}>
             <span style={{ top: '10px', textAlign: 'left', padding: '10px 0px' }} >
                 <Typing cb={handleTyping} label={messageToType} showCursor={false} />
-                {/* {cur > -1 && messages.filter((item, index) => {
-                    if (index === cur) {
-                        return <Typing cb={handleTyping} label={messages[cur]} showCursor={false} />
-                    }
-                })} */}
             </span>
         </div>
 
+        {!sending ?
+
+            <div style={styles.container}>
+                {/* Icon and Label for this input */}
+                <div style={{ position: 'absolute', left: 0, display: 'inline-flex' }}>
+                    {icons && icons[cur] && icons[cur]}
+                    <label onClick={() => console.log('i was clicked')} style={styles.label} htmlFor='name'> {!input.name && labels[cur]}</label>
+                </div>
 
 
-        <div style={styles.container}>
-            {/* Icon and Label for this input */}
-            <div style={{ position: 'absolute', left: 0, display: 'inline-flex' }}>
-                {icons && icons[cur] && icons[cur]}
-                <label onClick={() => console.log('i was clicked')} style={styles.label} htmlFor='name'> {!input.name && labels[cur]}</label>
-            </div>
+
+                {/* List of completed inputs */}
+                {inputStatus.map((item, index) => {
+                    if (!item.status || item.status === 'edit') {
+                        return
+                    } else {
+                        return (
+                            <SlideOnLoad direction='down' end={(index + 1) * 60}>
+                                <table onClick={(e) => { e.preventDefault(); handleEdit(index) }} style={{ position: 'absolute', left: 0, display: 'inline-flex', top: '32px' }}>
+                                    <td>{icons && icons[index] && icons[index]}</td>
+                                    {/* <td style={{ width: '85px', textAlign: 'left' }}><label onClick={() => console.log('i was clicked')} style={styles.label} for='name'> Name: </label></td> */}
+                                    <td style={{ marginLeft: '10px', textAlign: 'left' }}><span style={{ ...styles.label, marginLeft: '0px', color: 'rgb(77 150 214)', cursor: 'pointer' }}>{item.value}</span></td>
+                                </table>
+                            </SlideOnLoad>
+                        )
+                    }
+
+                })}
 
 
-            {inputStatus.map((item, index) => {
-                if (!item.status || item.status === 'edit') {
-                    return
-                } else {
-                    return (
-                        <SlideOnLoad direction='down' end={(index + 1) * 60}>
-                            <table onClick={(e) => { e.preventDefault(); handleEdit(index) }} style={{ position: 'absolute', left: 0, display: 'inline-flex', top: '32px' }}>
-                                <td>{icons && icons[index] && icons[index]}</td>
-                                {/* <td style={{ width: '85px', textAlign: 'left' }}><label onClick={() => console.log('i was clicked')} style={styles.label} for='name'> Name: </label></td> */}
-                                <td style={{ marginLeft: '10px' }}><span style={{ ...styles.label, cursor: 'pointer' }}>{item.value}</span></td>
-                            </table>
-                        </SlideOnLoad>
-                    )
-                }
-
-            })}
-
-
-            {/* input here */}
-            {!(inputStatus.every(item => (item.status && (item.status !== 'edit')))) && <React.Fragment>
+                {/* input here */}
                 {!editMode &&
                     <React.Fragment>
-                        <input autoFocus onChange={handleChange} className='contactInput' id='name' name='name' value={input.name} style={styles.input} />
-
-                        <ChatButton onClick={handleSubmit} label='send' shadow={true} send={inputStatus.every(item => (item.status && (item.status !== 'edit')))} />
+                        {messages[cur].type === 'textarea' ?
+                            <textarea onChange={handleChange} style={{ ...styles.input, fontFamily: 'inherit', fontWeight: 'inherit', resize: 'none', paddingTop: '15px' }} className='contactInput' id='name' name='name' value={input.name} rows='5' />
+                            :
+                            <input onChange={handleChange} className='contactInput' id='name' name='name' value={input.name} style={styles.input} />
+                        }
+                        <ChatButton onClick={handleSubmit} label='send' shadow={true} />
                     </React.Fragment>
                 }
+
+
+                {/* submit button will be showing if all status in inputStatus are completed and not in edit mode */}
+                {editMode &&
+                    <ChatButton onClick={sendForm} label='send' shadow={true} send={editMode} />
+                }
+            </div>
+            :
+            <React.Fragment>
+                <div style={styles.container} >
+                    <div style={{ height: '88px' }} />
+                </div>
             </React.Fragment>
-            }
+        }
 
-            {/* send button,submit button will be showing if all status in inputStatus are completed and not in edit mode */}
-            {editMode &&
-                <ChatButton onClick={handleSubmit} label='send' shadow={true} send={inputStatus.every(item => (item.status && (item.status !== 'edit')))} />
-            }
-        </div>
-
-
-
-
-
-
-    </React.Fragment >
+    </React.Fragment>
 }
 
 
