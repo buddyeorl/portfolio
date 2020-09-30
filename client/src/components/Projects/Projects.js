@@ -147,8 +147,8 @@ const Projects = ({ loading, data }) => {
                 </div>
                 <ul style={styles.ul}>
 
-                    {data.map(item =>
-                        <li className='project' onClick={(e) => { e.preventDefault(); handleClickProject(item.url); }} style={styles.li}>
+                    {data.map((item, index) =>
+                        <li key={index} className='project' onClick={(e) => { e.preventDefault(); handleClickProject(item.url); }} style={styles.li}>
                             <span style={{ ...styles.span, backgroundImage: `url("${item.img}")` }}></span>
                             <div style={styles.description}>
                                 <h3 style={styles.title}>{item.title}</h3>

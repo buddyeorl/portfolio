@@ -46,7 +46,7 @@ const Typing = ({ label, showCursor = true, cb = () => { return true } }) => {
             clearTimeout(timer1);
         };
 
-    }, [])
+    }, [label])
 
 
     //interval for cursor
@@ -98,7 +98,7 @@ const Typing = ({ label, showCursor = true, cb = () => { return true } }) => {
     return (
         <React.Fragment>
             {text && text.map((item, index) =>
-                <React.Fragment>
+                <React.Fragment key={index}>
                     <span>{item}</span>
                     {index === (text.length - 1) && text && text.length > 0 && <span style={{ position: 'absolute' }}>{cursor}</span>}
                     <br />

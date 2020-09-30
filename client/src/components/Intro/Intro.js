@@ -92,6 +92,7 @@ const Typing1 = ({ children, label }) => {
 
 
 const Intro = ({ effectEnded }) => {
+    const [typingMessage, setTypingMessage] = useState(['Hi, I\'m Alex Lizarraga', 'I like building things that are functional,simple and easy to use.'])
     const styles = {
         container: {
             width: '100%',
@@ -108,7 +109,7 @@ const Intro = ({ effectEnded }) => {
         <React.Fragment>
             <div style={styles.container}>
                 <h3>
-                    <strong><Typing label={['Hi, I\'m Alex Lizarraga', 'I like building things that are functional,simple and easy to use.']} cb={effectEnded} /></strong>
+                    <strong><Typing label={typingMessage} cb={effectEnded} /></strong>
                     <br />
                 </h3>
                 {/* <Typing><div>this<p>one child</p><p>two child</p></div></Typing> */}

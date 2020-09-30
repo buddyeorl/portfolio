@@ -59,9 +59,9 @@ const ChatButton = ({ children, label = 'Portfolio', onClick = () => { return },
         }
     }
     useEffect(() => {
-        console.log(deg);
+        let timer1;
         if (timer && trigger) {
-            let timer = setTimeout(() => {
+            timer1 = setTimeout(() => {
                 if (deg < 360) {
                     setDeg(deg + 36)
                 } else {
@@ -71,22 +71,22 @@ const ChatButton = ({ children, label = 'Portfolio', onClick = () => { return },
                 }
             }, 50)
         }
+        return () => { clearTimeout(timer1); }
     }, [deg, trigger])
 
     useEffect(() => {
-        console.log('got send here', send)
         //send button trigger
         let timer = setTimeout(() => { setSendAfterDelay(send) }, 550);
         //shadow effect delay
         let timer2 = setTimeout(() => { setShadowEffect(send) }, 1000);
-        return () => { clearTimeout(timer, timer2) }
+        return () => { clearTimeout(timer); clearTimeout(timer2); }
     }, [send])
 
     const handleClick = (e) => {
-        e.preventDefault();
+        e.persist();
         setTrigger(true);
         //received onclick
-        onClick();
+        onClick(e);
     }
 
 
