@@ -101,7 +101,8 @@ const Intro = ({ effectEnded }) => {
             textAlign: 'center',
             position: 'relative',
             height: '150px',
-            alignSelf: 'end'
+            alignSelf: 'end',
+            padding: '0px 50px'
         }
     }
 

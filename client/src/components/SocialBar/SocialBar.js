@@ -9,18 +9,23 @@ import {
     useLocation
 } from "react-router-dom";
 
+//custom hooks
+import useWindowsSize from '../../hooks/Dimms/useWindowSize'
 
-const Item = ({ icon, styles, backgroundColor = 'white', iconColor = '#7a7a7a' }) => {
+
+const Item = ({ onMouseEnter, onMouseLeave, url, icon, styles, backgroundColor = 'white', iconColor = '#7a7a7a' }) => {
 
     const [hover, setHover] = useState(false);
     const [newChild, setNewChild] = useState(icon)
 
     const handleOnMouseEnter = (e) => {
-        setHover(true)
+        setHover(true);
+        onMouseEnter();
     }
 
     const handleOnMouseLeave = (e) => {
-        setHover(false)
+        setHover(false);
+        onMouseLeave();
     }
 
     //use this to clone material icon received and changed color
@@ -41,25 +46,51 @@ const Item = ({ icon, styles, backgroundColor = 'white', iconColor = '#7a7a7a' }
 
 
     return (
-        <li onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave} style={{ ...styles.li, cursor: 'pointer', width: hover ? '75px' : '100%', backgroundColor: hover ? backgroundColor : 'unset', transition: 'width 200ms' }}>
-            <a style={styles.a}>
-                {newChild}
-            </a>
-        </li>)
+        <React.Fragment>
+            <li onMouseEnter={handleOnMouseEnter} onMouseLeave={handleOnMouseLeave} style={{ ...styles.li, cursor: 'pointer', width: hover ? '75px' : '100%', backgroundColor: hover ? backgroundColor : 'unset', transition: 'width 200ms' }}>
+                <a href={url} target='blank' style={styles.a}>
+                    {newChild}
+                </a>
+            </li>
+        </React.Fragment>)
 }
 
-const SocialBar = () => {
+const SocialBar = ({ extend = false }) => {
+    const [width, height] = useWindowsSize();
+
+    const socialAccounts = {
+        github: { label: 'buddyeorl', url: 'https://github.com/buddyeorl' },
+        linkedin: { label: 'alizarraga', url: 'https://www.linkedin.com/in/alizarraga/' },
+        twitter: { label: 'A_Lizar', url: 'https://twitter.com/A_Lizar' },
+        facebook: { label: 'alexander.lizarraga.144', url: 'https://www.facebook.com/alexander.lizarraga.144' }
+    }
     const location = useLocation();
+    const [socialLink, setSocialLink] = useState(null)
 
     const styles = {
         container: {
             zIndex: 1001,
             position: 'fixed',
             left: 0,
-            top: location.pathname === '/' ? 'calc(50% - (275px / 2))' : 'calc(100% - (275px))',
+            top: location.pathname === '/' ? 'calc(50% - (275px / 2))' : (location.pathname === '/contact' ? (width > 500 ? 'calc(90% - (275px))' : 'calc(100vh - 220px)') : 'calc(100% - (230px))'),
             width: '55px',
             height: '275px',
-            transition: 'top 500ms'
+            transition: 'top 500ms, left 500ms, transform 250ms',
+            ...(location.pathname === '/contact' ? {
+                left: width > 980 ? 'calc(50% + 300px - (300px / 2))' : 'calc(50%)',
+                transform: 'rotate(-90deg)'
+            } : {})
+        },
+        textContainer: {
+            zIndex: 1001,
+            position: 'fixed',
+            // left: width > 980 ? 'calc((50% + 300px) - 222px)' : 'calc(50% - 70px)',
+            left: width > 980 ? 'calc((50% + 300px) - 222px)' : 'inherit',
+            top: width > 500 ? 'calc(95% - 275px)' : 'calc(100vh - 170px)',
+            width: width > 980 ? '147px' : '100%',
+            height: '52px',
+            transition: 'top 500ms ease 0s, left 500ms ease 0s, transform 250ms ease 0s',
+            transform: 'rotate(0deg)',
         },
         ul: {
             listStyle: 'none',
@@ -78,6 +109,11 @@ const SocialBar = () => {
             alignItems: 'center',
             justifyContent: 'center',
             height: '55px',
+            ...(location.pathname === '/contact' ? {
+                transform: 'rotate(90deg)'
+            } : {
+                    transform: 'rotate(0deg)'
+                })
         },
         small: {
             left: '-2px',
@@ -93,22 +129,37 @@ const SocialBar = () => {
             width: '100%',
             textAlign: 'right',
             color: '#7a7a7a',
+            transition: 'transform 250ms',
+
+
         }
     }
+
+    const handleOnMouseEnter = (item) => {
+        console.log(item)
+        setSocialLink(item)
+    }
+
     return (
-        <div style={styles.container}>
-            <ul style={styles.ul}>
-                {/* <li>
-                    <small style={styles.small}>
-                        Follow Me
-                    </small>
-                </li> */}
-                <Item styles={styles} backgroundColor={'#4e545a'} iconColor={'#7a7a7a'} icon={<GitHubIcon style={styles.smallIcons} />} />
-                <Item styles={styles} backgroundColor={'#0077ba'} iconColor={'#7a7a7a'} icon={<LinkedInIcon style={styles.smallIcons} />} />
-                <Item styles={styles} backgroundColor={'#3299ff'} iconColor={'#7a7a7a'} icon={<TwitterIcon style={styles.smallIcons} />} />
-                <Item styles={styles} backgroundColor={'#4868ad'} iconColor={'#7a7a7a'} icon={<FacebookIcon style={styles.smallIcons} />} />
-            </ul>
-        </div>)
+        <React.Fragment>
+            <div style={styles.container}>
+                <ul style={styles.ul}>
+                    <Item url={socialAccounts.github.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.github) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#4e545a'} iconColor={'#7a7a7a'} icon={<GitHubIcon style={styles.smallIcons} />} />
+                    <Item url={socialAccounts.linkedin.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.linkedin) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#0077ba'} iconColor={'#7a7a7a'} icon={<LinkedInIcon style={styles.smallIcons} />} />
+                    <Item url={socialAccounts.twitter.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.twitter) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#3299ff'} iconColor={'#7a7a7a'} icon={<TwitterIcon style={styles.smallIcons} />} />
+                    <Item url={socialAccounts.facebook.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.facebook) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#4868ad'} iconColor={'#7a7a7a'} icon={<FacebookIcon style={styles.smallIcons} />} />
+                </ul>
+            </div>
+            {location.pathname === '/contact' &&
+                <div style={styles.textContainer}>
+                    <p style={{ color: 'rgb(82, 82, 82)' }}>Let's get social now</p>
+                    <a target='_blank' style={{ position: 'relative', top: '73px', color: 'rgb(82, 82, 82)' }}>{socialLink && socialLink.label} </a>
+
+                </div>
+            }
+
+        </React.Fragment>
+    )
 }
 
 export default SocialBar;

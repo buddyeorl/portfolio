@@ -7,8 +7,26 @@
     font-size: 16px;
     line-height: 20px;
     font-weight: 400;
+    text-align: right;
 }
 
 .sideNavLink:hover {
 	color: black;
 }
+
+.sideNavLinkMobile{
+    display: block;
+    /* padding: 5px 0px; */
+    cursor: pointer;
+    text-decoration: none;
+    color: rgb(123 123 123);
+    font-size: 16px;
+    line-height: 40px;
+    /* font-weight: 400; */
+    text-align: right;
+}
+
+.sideNavLinkMobile:hover {
+	color: black;
+}
+

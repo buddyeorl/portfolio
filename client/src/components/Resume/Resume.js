@@ -1,5 +1,5 @@
 import React from 'react';
-
+import './Resume.css';
 const Resume = () => {
     const styles = {
         wrapper: {
@@ -13,7 +13,7 @@ const Resume = () => {
     }
     return (
         <React.Fragment>
-            <iframe style={styles.wrapper} name="myiframe" id="myiframe" src="./CV JULY 2020.pdf" />
+            <iframe className='resume' name="myiframe" id="myiframe" src="./CV JULY 2020.pdf" />
         </React.Fragment>
     )
 }

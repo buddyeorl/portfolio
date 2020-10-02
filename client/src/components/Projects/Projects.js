@@ -7,6 +7,8 @@ import Projects2 from './Projects2';
 
 import { useHistory, useLocation, Link } from "react-router-dom";
 
+//custom hooks
+import useWindowsSize from '../../hooks/Dimms/useWindowSize'
 
 const shortProjects = [
     { url: '/projects/machinerypal', title: 'Machinery Pal', img: 'machinerypal.png', description: 'Fleet Ecommerce Site' },
@@ -27,14 +29,16 @@ const shortProjects = [
 
 
 const Projects = ({ loading, data }) => {
+    const [width, height] = useWindowsSize();
+    console.log(width, height)
     const [view, setView] = useState(true); //true for module view, false for list view
     const history = useHistory();
 
     const styles = {
         wrapper: {
             position: 'fixed',
-            left: '300px',
-            width: 'calc(100% - 300px)',
+            left: width > 980 ? '300px' : '0px',
+            width: width > 980 ? 'calc(100% - 300px)' : '100%',
             height: '100%',
             //color: '#464646',
             overflow: 'hidden scroll'
@@ -66,14 +70,14 @@ const Projects = ({ loading, data }) => {
             padding: 0,
             paddingLeft: '50px',
             //boxShadow: 'rgb(225, 228, 232) 0px -1px 0px inset'
-            ...(view ? { gridTemplateColumns: '25% 25% 25% 25%', marginTop: '36px', paddingLeft: '0px', } : {})
+            ...(view ? { gridTemplateColumns: width > 1400 ? '20% 20% 20% 20% 20%' : (width > 1200 ? '25% 25% 25% 25%' : (width > 980 ? '33% 34% 33%' : (width > 600 ? '50% 50%' : '100%'))), marginTop: '0px', paddingLeft: '0px', } : {})
         },
         li: {
             display: 'flex',
             position: 'relative',
             padding: '20px 0px',
             width: '100%',
-            height: '110px',
+            height: '120px',
             cursor: 'pointer',
             //backgroundColor: 'aliceblue'
             ...(view ? { display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' } : {})
@@ -142,8 +146,12 @@ const Projects = ({ loading, data }) => {
         <React.Fragment>
             <section style={styles.wrapper}>
                 <div style={styles.top}>
-                    <ViewListIcon onClick={(e) => { e.preventDefault(); handleViewChange('list'); }} style={styles.listIcon} />
-                    <ViewModuleIcon onClick={(e) => { e.preventDefault(); handleViewChange('module'); }} style={{ ...styles.listIcon, marginRight: '25px' }} />
+                    {width > 500 &&
+                        <React.Fragment>
+                            <ViewListIcon onClick={(e) => { e.preventDefault(); handleViewChange('list'); }} style={styles.listIcon} />
+                            <ViewModuleIcon onClick={(e) => { e.preventDefault(); handleViewChange('module'); }} style={{ ...styles.listIcon, marginRight: '25px' }} />
+                        </React.Fragment>
+                    }
                 </div>
                 <ul style={styles.ul}>
 

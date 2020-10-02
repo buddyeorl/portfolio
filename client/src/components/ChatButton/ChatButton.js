@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import './ChatButton.css'
+import './ChatButton.css';
 
 const ChatButton = ({ children, label = 'Portfolio', onClick = () => { return }, size = 50, width = 60, direction = 'left', shadow = false, send = false }) => {
+
+
     const [deg, setDeg] = useState(0);
     const [timer, setTimer] = useState(shadow);
     const [trigger, setTrigger] = useState(false);
@@ -12,7 +14,7 @@ const ChatButton = ({ children, label = 'Portfolio', onClick = () => { return },
         button: {
             borderStyle: 'none',
             height: (size / 50) * 50 + 'px',
-            width: width + 'px',
+            width: send ? '100%' : width + 'px',
             padding: '0px 5px',
             fontSize: '14px',
             fontWeight: 200,
@@ -23,13 +25,15 @@ const ChatButton = ({ children, label = 'Portfolio', onClick = () => { return },
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            zIndex: 1
+            zIndex: 1,
+            position: 'absolute',
         },
         shadow: {
             borderStyle: 'none',
             zIndex: 'unset',
             borderRadius: direction === 'left' ? '30px 28px 28px 7px' : '30px 28px 7px 28px',
-            padding: '0px 5px',
+            padding: '0px 0px',
+            margin: '0',
             fontSize: '14px',
             display: 'flex',
             alignItems: 'center',
@@ -38,12 +42,12 @@ const ChatButton = ({ children, label = 'Portfolio', onClick = () => { return },
             boxShadow: 'none',
             height: (size) * 1.2 + 'px',
             width: width * 1.2 + 'px',
-            left: '-94px',
-            marginRight: '-94px',
+            //left: '-94px',
+            //marginRight: '-94px',
             transition: 'background 50ms'
         },
         send: {
-            width: '375px',
+            width: 'calc(100% - 10px)',
             borderRadius: '5px',
             color: 'black',
             position: 'absolute',
@@ -51,8 +55,8 @@ const ChatButton = ({ children, label = 'Portfolio', onClick = () => { return },
         },
         sendShadow: {
             width: 'calc(100%)',
-            //position: 'absolute',
-            left: -100 + 'px',
+            position: 'relative',
+            //left: -100 + 'px',
             //marginRight: -441 + 'px',
             borderRadius: '5px',
             //marginRight: '-176px'
@@ -96,11 +100,13 @@ const ChatButton = ({ children, label = 'Portfolio', onClick = () => { return },
 
     return (
         <React.Fragment>
-            <button onClick={handleClick} className={(!sendAfterDelay) ? 'chatButton' : 'sendButton'} style={{ ...styles.button, ...(sendAfterDelay && styles.send) }}>{children}<span>{label}</span></button>
-            {/* {shadow && <button style={{ ...styles.button, zIndex: 'unset', background: `conic-gradient(#5aea36 ${deg}deg, white 0deg 360deg )`, boxShadow: 'none', height: '60px', width: '72px', left: '-94px', marginRight: '-94px', transition: 'background 50ms' }}></button>} */}
-            {shadow && <button style={{
-                ...styles.shadow, ...shadowEffect && styles.sendShadow
-            }}></button>}
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: send ? '100%' : 'unset' }}>
+                <button onClick={handleClick} className={(!sendAfterDelay) ? 'chatButton' : 'sendButton'} style={{ ...styles.button, ...(sendAfterDelay && styles.send) }}>{children}<span>{label}</span></button>
+                {/* {shadow && <button style={{ ...styles.button, zIndex: 'unset', background: `conic-gradient(#5aea36 ${deg}deg, white 0deg 360deg )`, boxShadow: 'none', height: '60px', width: '72px', left: '-94px', marginRight: '-94px', transition: 'background 50ms' }}></button>} */}
+                {shadow && <button style={{
+                    ...styles.shadow, ...shadowEffect && styles.sendShadow
+                }}></button>}
+            </div>
 
         </React.Fragment>
     )

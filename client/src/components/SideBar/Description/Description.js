@@ -20,7 +20,7 @@ const Description = ({ loading }) => {
             lineHeight: '30px',
             marginLeft: '-1px',
             color: '#525252',
-            marginRight: '35px',
+            marginRight: '0px',
             textAlign: 'center'
         },
         h2: {
@@ -32,15 +32,15 @@ const Description = ({ loading }) => {
             fontWeight: 400,
             color: '#000',
             fontFamily: 'freight-sans-pro,helvetica,sans-serif',
-            marginRight: '35px',
+            marginRight: '0px',
             textAlign: 'center'
         },
         h3: {
             fontWeight: 300,
             fontSize: '13px',
             WebkitFontSmoothing: 'antialiased',
-            marginRight: '35px',
-            textAlign: 'center'
+            marginRight: '0px',
+            textAlign: 'justify'
         }
     }
 

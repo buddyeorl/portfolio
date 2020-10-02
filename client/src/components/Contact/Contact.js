@@ -7,6 +7,9 @@ import FaceIcon from '@material-ui/icons/Face';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import CommentIcon from '@material-ui/icons/Comment';
 
+//custom hook
+import useWindowsSize from '../../hooks/Dimms/useWindowSize'
+
 
 const SlideOnLoad = ({ children, direction = 'right', initial = '0px', end = '20px' }) => {
     const [trigger, setTrigger] = useState(false)
@@ -59,18 +62,19 @@ const SlideOnLoad = ({ children, direction = 'right', initial = '0px', end = '20
 
 const Input = ({ messages = [
     { add: ['Hi, This is Alex, What\'s your name?'], edit: ['Oh Sorry, what was your name again?'] },
-    { add: [`Nice too meet you, now tell me your email?`], edit: ['Could you please tell me your email one more time?'] },
+    { add: [`Nice too meet you, now tell me your email?`], edit: ['Could you please tell me your email one more time?'], type: 'email' },
     { add: [`Ok now send me a brief message`], edit: ['Did you forget to tell me something?'], type: 'textarea' },
     [`Ready to send??`],
-    [`Your message has been sent, I'll get back to you soon :)`, `In the meantime, feel free to browse some of my projects`]
+    [`Thanks for your message, I'll get back to you soon`]
 ], labels = ['Name Please', 'Email Please', 'Brief Message'] }) => {
 
-
+    const [width, height] = useWindowsSize();
 
     const [cur, setCur] = useState(0);
     const [input, setInput] = useState({});
     const [inputArray, setInputArray] = useState([]);
     const [editMode, setEditMode] = useState(false);
+    const [error, setError] = useState(false)
 
     // related to typing component cb and messages
     const [isTyping, setIsTyping] = useState(false);
@@ -93,9 +97,9 @@ const Input = ({ messages = [
         container: {
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'flex-end',
+            justifyContent: editMode ? 'center' : 'flex-end',
             position: 'relative',
-            width: '390px'
+            width: width > 500 ? '390px' : 'calc(100% - 45px)'
         },
         icon: {
             //zIndex: 1,
@@ -119,9 +123,9 @@ const Input = ({ messages = [
             color: '#2b2b2b',
             fontSize: '20px',
             fontWeight: 500,
-            width: '300px',
+            width: width > 500 ? '300px' : '100%',
             height: '50px',
-            padding: '0px 35px',
+            padding: width > 500 ? '0px 27px' : '0px 35px',
             //borderRadius: '5px',
             marginRight: '10px',
             boxShadow: 'rgb(192 198 204) 0px 2px 1px -1px',
@@ -131,17 +135,43 @@ const Input = ({ messages = [
 
     const icons = [<FaceIcon style={styles.icon} />, <AlternateEmailIcon style={styles.icon} />, <CommentIcon style={styles.icon} />]
 
+    const validateInput = (data, type) => {
+        const validateEmail = (email) => {
+            let re = /^(([^<>()[\]\\.,;:\s@"]+(.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            if (!re.test(email)) {
+                return false
+            }
+            return true
+        }
+
+        if (type === 'email') {
+            return validateEmail(data)
+        }
+
+        return true
+    }
 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
         if (!input.name || input.name.trim().length === 0 || cur > labels.length - 1) {
+            setMessageToType(['oh I forgot to tell you, no empty fields are allowed, please try again']);
             return
         }
 
+
+        if (messages[cur].type && messages[cur].type === 'email') {
+            setError(validateInput(input.name.trim()));
+            if (!validateInput(input.name.trim(), 'email')) {
+                setMessageToType(['hmmm this doesn\'t look like an email, please try again']);
+                return
+            }
+        }
+
+
         //typing animation starts
         setIsTyping(true);
+        setError(false);
 
         //set all existing status to idle, so list of completed inputs wont render with the slide down effect
         let tempStatus = inputStatus.map(item => {
@@ -232,9 +262,9 @@ const Input = ({ messages = [
     return <React.Fragment>
 
         {/* message to be typed */}
-        <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', top: 0, left: '55px', width: '60%', height: '70%' }}>
-            <span style={{ top: '10px', textAlign: 'left', padding: '10px 0px' }} >
-                <Typing cb={handleTyping} label={messageToType} showCursor={false} />
+        <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', top: 0, left: width > 500 ? '55px' : '0px', width: width > 500 ? '60%' : '100%', height: width > 500 ? '77%' : '77%', marginTop: '10px', }}>
+            <span style={{ top: '10px', textAlign: 'left', padding: '10px 0px', ...(width <= 500 && { padding: '10px 25px' }) }} >
+                <Typing cb={handleTyping} error={error} label={messageToType} showCursor={false} />
             </span>
         </div>
 
@@ -255,10 +285,9 @@ const Input = ({ messages = [
                         return
                     } else {
                         return (
-                            <SlideOnLoad direction='down' end={(index + 1) * 60}>
-                                <table onClick={(e) => { e.preventDefault(); handleEdit(index) }} style={{ position: 'absolute', left: 0, display: 'inline-flex', top: '32px' }}>
+                            <SlideOnLoad direction='down' end={(index + 1) * (width > 500 ? 40 : 30)}>
+                                <table onClick={(e) => { e.preventDefault(); handleEdit(index) }} style={{ position: 'absolute', left: 0, display: 'inline-flex', top: '20px' }}>
                                     <td>{icons && icons[index] && icons[index]}</td>
-                                    {/* <td style={{ width: '85px', textAlign: 'left' }}><label onClick={() => console.log('i was clicked')} style={styles.label} for='name'> Name: </label></td> */}
                                     <td style={{ marginLeft: '10px', textAlign: 'left' }}><span style={{ ...styles.label, marginLeft: '0px', color: 'rgb(77 150 214)', cursor: 'pointer' }}>{item.value}</span></td>
                                 </table>
                             </SlideOnLoad>
@@ -272,13 +301,17 @@ const Input = ({ messages = [
                 {!editMode &&
                     <React.Fragment>
                         {messages[cur].type === 'textarea' ?
-                            <textarea onChange={handleChange} style={{ ...styles.input, fontFamily: 'inherit', fontWeight: 'inherit', resize: 'none', paddingTop: '15px' }} className='contactInput' id='name' name='name' value={input.name} rows='5' />
+                            <textarea maxlength="150" onChange={handleChange} style={{ ...styles.input, fontFamily: 'inherit', fontWeight: 'inherit', resize: 'none', paddingTop: '15px' }} className='contactInput' id='name' name='name' value={input.name} rows='5' />
                             :
                             <input onChange={handleChange} className='contactInput' id='name' name='name' value={input.name} style={styles.input} />
                         }
                         <ChatButton onClick={handleSubmit} label='send' shadow={true} />
                     </React.Fragment>
                 }
+
+
+
+
 
 
                 {/* submit button will be showing if all status in inputStatus are completed and not in edit mode */}
@@ -298,11 +331,60 @@ const Input = ({ messages = [
 }
 
 
-const Contact = () => {
+const Contact = ({ standAlone = false }) => {
+    const [width, height] = useWindowsSize();
+    const styles = {
+        contactWrapper: {
+            position: !standAlone ? 'fixed' : 'inherit',
+            display: !standAlone ? 'grid' : 'contents',
+            alignItems: 'center',
+            justifyItems: 'center',
+            left: width > 980 ? '300px' : '0px',
+            width: width > 980 ? 'calc(100% - 300px)' : '100%',
+            padding: '20px',
+            height: '100%',
+            overflow: 'hidden scroll'
+        },
+        container: {
+            backgroundColor: 'white',
+            height: '300px',
+            width: width > 500 ? '500px' : '100%',
+            display: 'grid',
+            justifyItems: 'center',
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            alignSelf: 'flex-start',
+            position: 'absolute'
+        },
+        h1: {
+            justifySelf: 'center',
+            fontWeight: 400,
+            color: 'rgb(82, 82, 82)'
+        },
+        h2: {
+            justifySelf: 'center',
+            lineHeight: '20px',
+            fontWeight: 300,
+            fontSize: '20px',
+            textAlign: 'left',
+            color: 'rgb(82, 82, 82)',
+            ...(width <= 980 && {
+                //padding: '5px 10px',
+                textAlign: 'justify',
+                fontSize: '16px',
+            })
+        }
+    }
+
     return (
-        <div style={{ backgroundColor: 'white', height: '300px', width: '500px', display: 'inline-grid', justifyContent: 'center', alignItems: 'flex-end', alignSelf: 'flex-start', position: 'absolute' }}>
-            <h1 style={{ justifySelf: 'flex-start' }}>Use this to Contact me.</h1>
-            <Input />
+        <div style={styles.contactWrapper}>
+            <div style={styles.container}>
+                <div style={{ width: width > 980 ? '390px' : '100%', padding: width > 980 ? 'unset' : '25px' }}>
+                    <h1 style={styles.h1}>Contact me</h1>
+                    <h2 style={styles.h2}>Want to talk about a project you need help with, want to talk about this portfolio, or simply want to say hi? </h2>
+                </div>
+                <Input />
+            </div>
         </div>
     )
 

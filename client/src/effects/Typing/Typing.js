@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-const Typing = ({ label, showCursor = true, cb = () => { return true } }) => {
+const Typing = ({ label, showCursor = true, error = false, cb = () => { return true } }) => {
     const [text, setText] = useState([''])
     const [cursor, setCursor] = useState([''])
 
@@ -99,8 +99,8 @@ const Typing = ({ label, showCursor = true, cb = () => { return true } }) => {
         <React.Fragment>
             {text && text.map((item, index) =>
                 <React.Fragment key={index}>
-                    <span>{item}</span>
-                    {index === (text.length - 1) && text && text.length > 0 && <span style={{ position: 'absolute' }}>{cursor}</span>}
+                    <span style={{ color: error ? 'crimson' : 'inherit' }}>{item}</span>
+                    {index === (text.length - 1) && text && text.length > 0 && <span style={{ position: 'absolute', color: error ? 'crimson' : 'inherit' }}>{cursor}</span>}
                     <br />
                 </React.Fragment>)}
         </React.Fragment>
