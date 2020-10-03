@@ -53,7 +53,7 @@ const SlideOnLoad = ({ children, direction = 'right', initial = '0px', end = '20
 
 
     return (
-        <span style={{ width: '100%', position: 'absolute', margin: 0, padding: 0, display: 'grid', gridArea: children.props.style.gridArea, alignContent: 'center', justifyContent: 'center', transform: transform, transition: 'transform 700ms' }}>
+        <span style={{ width: '100%', position: 'absolute', margin: 0, padding: 0, display: 'grid', gridArea: children.props.style.gridArea, alignContent: 'center', justifyContent: 'center', transform: transform, transition: 'transform 700ms', overflow: 'initial' }}>
             {children}
         </span>
     )
@@ -99,7 +99,8 @@ const Input = ({ messages = [
             alignItems: 'center',
             justifyContent: editMode ? 'center' : 'flex-end',
             position: 'relative',
-            width: width > 500 ? '390px' : 'calc(100% - 45px)'
+            width: width > 500 ? '390px' : 'calc(100% - 45px)',
+            overflow: 'visible'
         },
         icon: {
             //zIndex: 1,
@@ -126,9 +127,10 @@ const Input = ({ messages = [
             width: width > 500 ? '300px' : '100%',
             height: '50px',
             padding: width > 500 ? '0px 27px' : '0px 35px',
-            //borderRadius: '5px',
+            borderRadius: '0px',
             marginRight: '10px',
-            boxShadow: 'rgb(192 198 204) 0px 2px 1px -1px',
+            boxShadow: 'rgb(192 198 204) 0px 2px 2px -2px',
+            WebkitAppearance: 'none'
         }
     }
 
@@ -354,7 +356,8 @@ const Contact = ({ standAlone = false }) => {
             justifyContent: 'center',
             alignItems: 'flex-end',
             alignSelf: 'flex-start',
-            position: 'absolute'
+            position: 'absolute',
+            overflow: 'visible'
         },
         h1: {
             justifySelf: 'center',

@@ -10,3 +10,14 @@
 .project:active{
     transform:scale(0.95);
 }
+
+
+/* @media only screen and (max-width: 500px) {
+    .project:hover {
+        transform: scale(1.0);
+    }
+    
+    .project:active{
+        transform:scale(1.0);
+    }
+} */

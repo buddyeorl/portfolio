@@ -13,6 +13,10 @@ import shortProjects from './components/Projects/ProjectData.js';
 import Resume from './components/Resume'
 import Contact from './components/Contact'
 
+//custom hooks
+import useWindowsSize from './hooks/Dimms/useWindowSize'
+
+
 //react router
 import {
   BrowserRouter as Router,
@@ -23,36 +27,48 @@ import {
 } from "react-router-dom";
 
 function App() {
+  const [width, height] = useWindowsSize();
   const [isIntroDone, setIsIntroDone] = useState(false);
   const [loading, setLoading] = useState(false);
+
+  //move social bar to the middle when clicking menu button on mobile
+  const [moveSocial, setMoveSocial] = useState(false);
 
 
   const styles = {
     container: {
       //display: 'flex',
+      position: 'fixed',
       display: 'inline-grid',
       alignItems: 'center',
       justifyContent: 'center',
-      overflow: 'hidden',
+      //overflow: 'hidden',
       textAlign: 'center',
       fontSize: '1em',
-      zIndex: 10,
-      height: '100vh',
+      height: '100%',
+      //minHeight: '-webkit-fill-available',
       width: '100%',
-      gridTemplateRows: '60% 40%'
+      gridTemplateRows: '60% 40%',
     },
   }
 
 
   const handleIsIntroDone = () => {
     setIsIntroDone(true)
+
   }
 
   const handleLoading = (history, path) => {
+    //reset social bar location
+    setMoveSocial(false)
     setLoading(true);
     setTimeout(() => {
       history.push(path);
     }, 1000)
+  }
+
+  const moveSocialBarMobile = () => {
+    setMoveSocial(!moveSocial)
   }
 
   const handleProjectUrl = (props) => {
@@ -60,7 +76,7 @@ function App() {
     if (props.match.params.name === undefined) { //if url has no queries, render main project page
       return (
         <React.Fragment>
-          <SideBar loading={handleLoading} />
+          <SideBar loading={handleLoading} moveSocial={moveSocialBarMobile} />
           <Projects loading={handleLoading} data={Object.keys(shortProjects).map(name => ({ url: shortProjects[name].url, title: shortProjects[name].title, img: shortProjects[name].img[0], description: shortProjects[name].displayDescription }))} />
         </React.Fragment>
       )
@@ -70,6 +86,10 @@ function App() {
       if (shortProjects && shortProjects[props.match.params.name]) { // if name received in params match a project
         return <React.Fragment>
           <ProjectPage loading={handleLoading} data={shortProjects[props.match.params.name]} />
+          {/* show mobile menu button on project page when  width is less than 980*/}
+          {width <= 980 &&
+            <SideBar loading={handleLoading} moveSocial={moveSocialBarMobile} />
+          }
         </React.Fragment>
       } else { //if name doesnt match
         //project doesnt exist, redirect to /projects
@@ -83,7 +103,7 @@ function App() {
     <Router >
       {loading && <Loading onEnd={() => { setLoading(false) }} />}
       <section style={styles.container}>
-        <SocialBar />
+        <SocialBar trigger={moveSocial} />
         <Switch>
 
           {/* Handle project routes */}
@@ -91,13 +111,13 @@ function App() {
 
           {/* handle home path */}
           <Route exact path="/resume">
-            <SideBar loading={handleLoading} />
+            <SideBar loading={handleLoading} moveSocial={moveSocialBarMobile} />
             <Resume />
           </Route>
 
           {/* handle home path */}
           <Route exact path="/contact">
-            <SideBar loading={handleLoading} />
+            <SideBar loading={handleLoading} moveSocial={moveSocialBarMobile} />
             <Contact />
           </Route>
 

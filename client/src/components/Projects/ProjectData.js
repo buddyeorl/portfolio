@@ -10,6 +10,50 @@ const shortProjects = {
         longDescription2: '',
         externalUrl: 'https://www.machinerypal.com',
         technologies: ['JS', 'NodeJS', 'ReactJS', 'Redux', 'ExpressJS', 'PassportJS', 'Google Oauth', 'MongoDB']
+    }, machinerypal1: {
+        url: '/projects/machinerypal',
+        title: 'Machinery Pal',
+        name: 'Full Stack Developer',
+        img: ['machinerypal.png', 'machinerypalß.png'],
+        displayDescription: 'Fleet Ecommerce  and Management app',
+        shortDescription: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+        longDescription1: '',
+        longDescription2: '',
+        externalUrl: 'https://www.machinerypal.com',
+        technologies: ['JS', 'NodeJS', 'ReactJS', 'Redux', 'ExpressJS', 'PassportJS', 'Google Oauth', 'MongoDB']
+    }, machinerypa2l: {
+        url: '/projects/machinerypal',
+        title: 'Machinery Pal',
+        name: 'Full Stack Developer',
+        img: ['machinerypal.png', 'machinerypal.png'],
+        displayDescription: 'Fleet Ecommerce  and Management app',
+        shortDescription: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+        longDescription1: '',
+        longDescription2: '',
+        externalUrl: 'https://www.machinerypal.com',
+        technologies: ['JS', 'NodeJS', 'ReactJS', 'Redux', 'ExpressJS', 'PassportJS', 'Google Oauth', 'MongoDB']
+    }, machineryp4al: {
+        url: '/projects/machinerypal',
+        title: 'Machinery Pal',
+        name: 'Full Stack Developer',
+        img: ['machinerypal.png', 'machinerypal.png'],
+        displayDescription: 'Fleet Ecommerce  and Management app',
+        shortDescription: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+        longDescription1: '',
+        longDescription2: '',
+        externalUrl: 'https://www.machinerypal.com',
+        technologies: ['JS', 'NodeJS', 'ReactJS', 'Redux', 'ExpressJS', 'PassportJS', 'Google Oauth', 'MongoDB']
+    }, machin5erypal: {
+        url: '/projects/machinerypal',
+        title: 'Machinery Pal',
+        name: 'Full Stack Developer',
+        img: ['machinerypal.png', 'machinerypal.png'],
+        displayDescription: 'Fleet Ecommerce  and Management app',
+        shortDescription: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+        longDescription1: '',
+        longDescription2: '',
+        externalUrl: 'https://www.machinerypal.com',
+        technologies: ['JS', 'NodeJS', 'ReactJS', 'Redux', 'ExpressJS', 'PassportJS', 'Google Oauth', 'MongoDB']
     },
     katena: {
         url: '/projects/katena',

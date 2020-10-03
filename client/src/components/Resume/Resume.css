@@ -4,6 +4,7 @@
     width: calc(100% - 300px);
     height: 100%;
     overflow: hidden scroll;
+    
 }
 
 @media only screen and (max-width: 980px) {

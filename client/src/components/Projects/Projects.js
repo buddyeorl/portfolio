@@ -36,12 +36,15 @@ const Projects = ({ loading, data }) => {
 
     const styles = {
         wrapper: {
-            position: 'fixed',
+            //position: 'fixed',
             left: width > 980 ? '300px' : '0px',
             width: width > 980 ? 'calc(100% - 300px)' : '100%',
             height: '100%',
+            position: 'fixed',
+            overflow: 'auto',
+            padding: '5px'
             //color: '#464646',
-            overflow: 'hidden scroll'
+            //overflow: 'hidden scroll'
         },
         top: {
             width: '100%',

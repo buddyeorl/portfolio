@@ -95,7 +95,8 @@ const Intro = ({ effectEnded }) => {
     const [typingMessage, setTypingMessage] = useState(['Hi, I\'m Alex Lizarraga', 'I like building things that are functional,simple and easy to use.'])
     const styles = {
         container: {
-            width: '100%',
+            //width: '600px',
+            //maxWidth: 'calc(100% - 50px)',
             color: '#7a7a7a',
             textShadow: '1px 1px 0 #0b8be7 inset',
             textAlign: 'center',
@@ -109,8 +110,8 @@ const Intro = ({ effectEnded }) => {
     return (
         <React.Fragment>
             <div style={styles.container}>
-                <h3>
-                    <strong><Typing label={typingMessage} cb={effectEnded} /></strong>
+                <h3 style={{ fontWeight: 400 }}>
+                    <Typing label={typingMessage} cb={effectEnded} />
                     <br />
                 </h3>
                 {/* <Typing><div>this<p>one child</p><p>two child</p></div></Typing> */}

@@ -99,7 +99,7 @@ const Typing = ({ label, showCursor = true, error = false, cb = () => { return t
         <React.Fragment>
             {text && text.map((item, index) =>
                 <React.Fragment key={index}>
-                    <span style={{ color: error ? 'crimson' : 'inherit' }}>{item}</span>
+                    <span style={{ color: error ? 'crimson' : 'inherit', zIndex: 100 }}>{item}</span>
                     {index === (text.length - 1) && text && text.length > 0 && <span style={{ position: 'absolute', color: error ? 'crimson' : 'inherit' }}>{cursor}</span>}
                     <br />
                 </React.Fragment>)}

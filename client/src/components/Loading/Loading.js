@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import zIndex from '@material-ui/core/styles/zIndex'
 
 const SlideIn = ({ children }) => {
     const [newChild, setNewChild] = useState(children)
@@ -31,19 +32,20 @@ const Loading = ({ onEnd = () => { return true } }) => {
     const [top, setTop] = useState('100%');
     const [showLoadingText, setShowLoadingText] = useState(false);
     const [translate, setTranslate] = useState('100%');
+    const [transition, setTransition] = useState(false)
 
     useEffect(() => {
         setTimeout(() => {
             setTop('50%');
-        }, 100)
+        }, 250)
 
         setTimeout(() => {
             setShowLoadingText(true);
-        }, 500)
+        }, 250)
 
         setTimeout(() => {
             setTranslate('0%')
-        }, 600)
+        }, 250)
 
     }, [])
 
@@ -57,12 +59,12 @@ const Loading = ({ onEnd = () => { return true } }) => {
             overflow: 'hidden',
             textAlign: 'center',
             fontSize: '1em',
-            zIndex: 10,
+            zIndex: 3,
             height: '100vh',
             width: '100%',
             //gridTemplateRows: '50% 50%',
             flexDirection: 'column',
-            position: 'absolute'
+            position: 'absolute',
         },
         upper: {
             backgroundColor: '#353333',
@@ -70,7 +72,7 @@ const Loading = ({ onEnd = () => { return true } }) => {
             height: '100%',
             position: 'absolute',
             top: '50%',
-            transition: 'top 1s'
+            transition: 'top 250ms'
         },
         lower: {
             backgroundColor: 'rgb(72 71 71)',
@@ -78,7 +80,7 @@ const Loading = ({ onEnd = () => { return true } }) => {
             height: '100%',
             position: 'absolute',
             bottom: '50%',
-            transition: 'bottom 1s'
+            transition: 'bottom 250ms'
         },
         loadinText: {
             position: 'absolute',
@@ -89,26 +91,33 @@ const Loading = ({ onEnd = () => { return true } }) => {
             textTransform: 'uppercase',
             top: '48%',
             transform: `translateX(100%)`,
-            transition: 'transform 1s'
+            transition: 'transform 250ms'
         }
     }
 
     const handleTransitionEnd = () => {
+        if (!transition) {
+            console.log('passing here loading')
+            setTimeout(() => {
+                setTop('150%');
+                if (!loading) {
+                    onEnd();
+                }
+                console.log('end')
+                setLoading(false);
 
-        setTimeout(() => {
-            setTop('150%');
-            if (!loading) {
-                onEnd();
-            }
-            setLoading(false)
-
-        }, loading ? 800 : 0);
+            }, loading ? 500 : 0);
 
 
-        //hide loading text
-        setTimeout(() => {
-            setShowLoadingText(false);
-        }, 800);
+            //hide loading text
+            setTimeout(() => {
+                setShowLoadingText(false);
+            }, 250);
+            setTransition(true)
+
+        } else {
+            onEnd();
+        }
     }
 
     return (

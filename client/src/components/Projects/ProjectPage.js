@@ -20,8 +20,8 @@ const NavButton = ({ onClick = () => null, position = 'left' }) => {
             cursor: 'pointer',
             fontWeight: 900,
             textAlign: 'initial',
-            transition: 'padding 250ms, background-color 250ms, transform 250ms',
-            zIndex: 1001,
+            transition: 'padding 100ms, background-color 100ms, transform 100ms',
+            zIndex: 1,
             ...(position === 'left' ? { left: 0 } : { right: 0, })
         }
     }
@@ -34,7 +34,7 @@ const NavButton = ({ onClick = () => null, position = 'left' }) => {
 const ProjectPageMobile = ({ loading, data, handleClickProject }) => {
     const styles = {
         container: {
-            position: 'fixed',
+            position: 'absolute',
             overflow: 'auto',
             height: '100%',
             padding: '0px 25px',
@@ -47,17 +47,17 @@ const ProjectPageMobile = ({ loading, data, handleClickProject }) => {
             fontWeight: 500,
             color: '#3e3d3d',
         },
-        p1: {
-            fontSize: '12px',
-            marginTop: '0px',
-            textAlign: 'left',
-            color: '#989898',
-        },
-        p2: {
-            fontSize: '12px',
-            textAlign: 'justify',
-            color: '#404040f2 '
-        },
+        // p1: {
+        //     fontSize: '12px',
+        //     marginTop: '0px',
+        //     textAlign: 'left',
+        //     color: '#989898',
+        // },
+        // p2: {
+        //     fontSize: '12px',
+        //     textAlign: 'justify',
+        //     color: '#404040f2 '
+        // },
         imgContainer: {
             display: 'contents'
         },
@@ -113,24 +113,24 @@ const ProjectPageMobile = ({ loading, data, handleClickProject }) => {
             <section style={styles.container}>
                 <div>
                     <h1 style={styles.h1}> {data.title}</h1>
-                    <p style={styles.p1}>{data.name}</p>
-                    <p style={styles.p2}> {data.shortDescription}</p>
+                    <p className='projectPageMobileP1' >{data.name}</p>
+                    <p className='projectPageMobileP2'> {data.shortDescription}</p>
                 </div>
-                <div style={styles.imgContainer}>
-                    <div style={{ ...styles.img, backgroundImage: `url("../${data.img[0]}")` }}>
+                <div className='projectPageMobileImgContainer'>
+                    <div className='projectPageMobileImg1' style={{ backgroundImage: `url("../${data.img[0]}")` }}>
                     </div>
                 </div>
                 <div>
                     <h1 style={styles.h1}> Test Project</h1>
-                    <p style={styles.p2}>
+                    <p className='projectPageMobileP2'>
                         ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione asperiores quibusdam enim fuga iure, a veniam quaerat repellendus nisi esse similique placeat officiis culpa! Placeat officia sint ducimus quibusdam non.
                     </p>
-                    <p style={styles.p2}>
+                    <p className='projectPageMobileP2'>
                         ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione asperiores quibusdam enim fuga iure, a veniam quaerat repellendus nisi esse similique placeat officiis culpa! Placeat officia sint ducimus quibusdam non.
                     </p>
                 </div>
-                <div style={styles.imgContainer}>
-                    <div style={{ ...styles.img, backgroundImage: `url("../${data.img[0]}")` }}>
+                <div className='projectPageMobileImgContainer'>
+                    <div className='projectPageMobileImg1' style={{ backgroundImage: `url("../${data.img[0]}")` }}>
                     </div>
                 </div>
 
@@ -157,7 +157,7 @@ const ProjectPageMobile = ({ loading, data, handleClickProject }) => {
 
                 {/* Resources */}
                 <h1 style={styles.h1}> Resources:</h1>
-                <p style={{ ...styles.p2, paddingBottom: '25px', boxShadow: 'rgb(225, 228, 232) 0px -1px 0px inset' }}> Check or download the app <a href={data.externalUrl} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>here</strong></a></p>
+                <p className='projectPageMobileP2' style={{ paddingBottom: '25px', boxShadow: 'rgb(225, 228, 232) 0px -1px 0px inset' }}> Check or download the app <a href={data.externalUrl} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>here</strong></a></p>
 
 
                 <div style={styles.contact}>
@@ -280,7 +280,7 @@ const ProjectPage = ({ loading, data }) => {
 
     return (
         <React.Fragment>
-            {width > 800 ?
+            {width > 980 ?
                 <div style={styles.wrapper}>
                     <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.back) }} position='left' />
                     <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.forward) }} position='right' />

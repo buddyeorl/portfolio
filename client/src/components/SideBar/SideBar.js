@@ -7,10 +7,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Intro from '../Intro'
 import TaskBar from '../TaskBar';
 
+
 //custom hooks
 import useWindowsSize from '../../hooks/Dimms/useWindowSize';
 
-const SlideOnLoad = ({ children, direction = 'right', initial = 0, end = 20, zIndex = 1 }) => {
+const SlideOnLoad = ({ children, direction = 'right', initial = 0, end = 20, styles = { zIndex: 1 } }) => {
     const [trigger, setTrigger] = useState(false)
     const [transform, setTransform] = useState()
 
@@ -72,13 +73,13 @@ const SlideOnLoad = ({ children, direction = 'right', initial = 0, end = 20, zIn
 
 
     return (
-        <span style={{ top: initial, zIndex: zIndex, width: '100%', position: 'absolute', margin: 0, padding: 0, display: 'grid', gridArea: children.props.style.gridArea, alignContent: 'center', justifyContent: 'center', transform: transform, transition: 'transform 700ms' }}>
+        <span style={{ ...styles, top: initial, width: '100%', margin: 0, padding: 0, display: 'grid', gridArea: children.props.style.gridArea, alignContent: 'center', justifyContent: 'center', transform: transform, transition: 'transform 700ms' }}>
             {children}
         </span>
     )
 }
 
-const SideBarMobile = ({ loading }) => {
+const SideBarMobile = ({ loading, moveSocial }) => {
     const [open, setOpen] = useState(false);
     const [isIntroDone, setIsIntroDone] = useState(false);
     const handleIsIntroDone = () => {
@@ -87,7 +88,7 @@ const SideBarMobile = ({ loading }) => {
     const styles = {
         sideBarButton: {
             position: 'fixed',
-            zIndex: 1,
+            zIndex: 2,
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
@@ -104,34 +105,35 @@ const SideBarMobile = ({ loading }) => {
     }
 
     const handleClick = () => {
-        setOpen(!open)
+        setOpen(!open);
+        moveSocial();
     }
 
     return (
         <React.Fragment>
 
-            <SlideOnLoad direction={open ? 'down' : 'up'} initial='-100vh' end={'100vh'} zIndex={1}>
-                <div style={{ width: '100vw', height: '100vh', backgroundColor: 'rgb(236 236 236)', boxShadow: '0px 0px 10px -1px', padding: '75px 40px' }}>
-                    <Description loading={loading} />
-                    <SideNav onClick={handleClick} />
-                    {/* <Intro effectEnded={handleIsIntroDone} />
+            <SlideOnLoad direction={open ? 'down' : 'up'} initial='-100vh' end={'100vh'} styles={{ position: 'fixed', zIndex: 2 }}>
+                <div style={{ width: '100vw', height: '100vh', backgroundColor: 'rgb(236 236 236)', boxShadow: '0px 0px 10px -1px', padding: '40px 20px' }}>
+                    {/* <Description loading={loading} />
+                    <SideNav onClick={handleClick} /> */}
+                    <Intro effectEnded={handleIsIntroDone} />
                     {isIntroDone &&
-                        <TaskBar loading={() => { handleClick(); loading(); }} />
-                    } */}
+                        <TaskBar loading={(history, path) => { history.push(path); handleClick(); }} />
+                    }
                 </div>
             </SlideOnLoad>
 
-            <SlideOnLoad direction={'down'} initial='90vh' end={'10vh'} zIndex={1}>
-                <div onClick={handleClick} style={styles.sideBarButton}>
-                    {/* <Description loading={loading} /> */}
-                    {/* <SideNav /> */}
-                    <MenuIcon style={{ color: 'white' }} />
-                </div>
-            </SlideOnLoad>
-        </React.Fragment >)
+            {/* <SlideOnLoad direction={'down'} initial='90vh' end={'10vh'} zIndex={1}> */}
+            <div onClick={handleClick} style={styles.sideBarButton}>
+                {/* <Description loading={loading} /> */}
+                {/* <SideNav /> */}
+                <MenuIcon style={{ color: 'white' }} />
+            </div>
+            {/* </SlideOnLoad> */}
+        </React.Fragment>)
 }
 
-const SideBar = ({ loading }) => {
+const SideBar = ({ loading, moveSocial }) => {
     const [width, height] = useWindowsSize();
 
     const styles = {
@@ -139,7 +141,7 @@ const SideBar = ({ loading }) => {
             position: 'fixed',
             display: 'flex',
             flexDirection: 'column',
-            height: '100vh',
+            height: '100%',
             width: '300px',
             minWidth: '300px',
             justify: 'space-between',
@@ -162,7 +164,7 @@ const SideBar = ({ loading }) => {
                 </div>
             </div>
             :
-            <React.Fragment><SideBarMobile loading={loading} /></React.Fragment>
+            <React.Fragment><SideBarMobile loading={loading} moveSocial={moveSocial} /></React.Fragment>
     )
 }
 

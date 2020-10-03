@@ -44,7 +44,7 @@ const TaskBar = ({ loading }) => {
             justifyContent: 'center',
         },
         li: {
-            margin: '0px 10px',
+            margin: '0px 5px',
             padding: '0px 15px',
             cursor: 'pointer',
             minWidth: '100px',
@@ -76,7 +76,7 @@ const TaskBar = ({ loading }) => {
 
                     <li style={styles.li} onClick={() => { loading(history, "/projects") }}>
 
-                        <ChatButton label={'Projects'} width={100} direction='right'>
+                        <ChatButton label={'Projects'} width={100} direction='right' iconPosition='right'>
                             <AccountTreeIcon />
                         </ChatButton>
                     </li>
@@ -86,6 +86,27 @@ const TaskBar = ({ loading }) => {
 
 
                         <ChatButton label={'The CV'} width={100} direction='left'>
+                            <AssignmentIcon />
+                        </ChatButton>
+
+                    </li>
+
+
+                </ul>
+                <ul style={{ ...styles.ul, padding: '5px' }}>
+
+                    <li style={styles.li} onClick={() => { loading(history, "/contact") }}>
+
+                        <ChatButton label={'Contact'} width={100} direction='left-reversed' iconPosition='right'>
+                            <AccountTreeIcon />
+                        </ChatButton>
+                    </li>
+
+
+                    <li style={styles.li} onClick={() => { loading(history, "/resume") }}>
+
+
+                        <ChatButton label={'The CV'} width={100} direction='right-reversed'>
                             <AssignmentIcon />
                         </ChatButton>
 
