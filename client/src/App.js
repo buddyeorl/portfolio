@@ -99,6 +99,7 @@ function App() {
 
   }
 
+
   return (
     <Router >
       {loading && <Loading onEnd={() => { setLoading(false) }} />}
@@ -111,6 +112,7 @@ function App() {
 
           {/* handle home path */}
           <Route exact path="/resume">
+            {/* <Redirect to={`/CV%20JULY%202020.pdf`} /> */}
             <SideBar loading={handleLoading} moveSocial={moveSocialBarMobile} />
             <Resume />
           </Route>

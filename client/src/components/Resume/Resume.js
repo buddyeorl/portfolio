@@ -1,19 +1,26 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import './Resume.css';
 const Resume = () => {
+    const something = useRef(null);
+
+    console.log(something)
     const styles = {
         wrapper: {
             position: 'fixed',
             left: '300px',
             width: 'calc(100% - 300px)',
             height: '100%',
+            // maxWidth: '800px',
             //color: '#464646',
             overflow: 'hidden scroll'
         }
     }
     return (
         <React.Fragment>
-            <iframe className='resume' name="myiframe" id="myiframe" src="./CV JULY 2020.pdf" />
+            {/* <iframe ref={something} width="400" height="500" className='resume' name="myiframe" id="myiframe" src="./CV JULY 2020.pdf" /> */}
+            <object ref={something} className='resume' type="application/pdf" data="/CV JULY 2020.pdf#zoom=100" id="pdf_content">
+                <p>Insert your error message here, if the PDF cannot be displayed.</p>
+            </object>
         </React.Fragment>
     )
 }
