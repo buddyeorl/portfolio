@@ -202,16 +202,28 @@ const ProjectPage = ({ loading, data }) => {
             position: 'relative'
         },
         imgMain: {
-            width: '50%',
-            height: '100%',
+            // width: '50%',
+            // height: '100%',
+            // right: '0%',
+            // opacity: '1',
+            // float: 'left',
+            // position: 'relative',
+            // backgroundSize: '100% 70%',
+            // backgroundRepeat: 'no-repeat',
+            // backgroundPosition: 'center',
+            // backgroundImage: 'url("../machinerypal.png")'
+            width: '400px',
+            height: '300px',
+            top: 'calc(50% - (300px / 2))',
             right: '0%',
-            opacity: '1',
+            opacity: 1,
             float: 'left',
             position: 'relative',
-            backgroundSize: '100% 70%',
+            backgroundSize: '100% 100%',
             backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            backgroundImage: 'url("../machinerypal.png")'
+            backgroundPosition: 'center center',
+            boxShadow: '-1px 2px 4px -2px',
+            borderRadius: '10px',
         },
         mainH1: {
             width: '100%',
@@ -239,11 +251,10 @@ const ProjectPage = ({ loading, data }) => {
             lineHeight: '32px',
         },
         secondaryDescription: {
-            display: 'inline-block',
+            display: 'contents',
             width: '100%',
             height: '500px',
             maxWidth: '1040px',
-
         },
         secondaryPara: {
             maxWidth: '720px',
@@ -271,7 +282,14 @@ const ProjectPage = ({ loading, data }) => {
             overflow: 'hidden',
             textAlign: 'center'
         },
-
+        nav: {
+            width: '100%',
+            height: '60px',
+            position: 'absolute',
+            top: '0px',
+            background: 'white',
+            boxShadow: '0px 0px 16px -10px',
+        }
     }
 
     const handleClickProject = (url) => {
@@ -284,6 +302,7 @@ const ProjectPage = ({ loading, data }) => {
                 <div style={styles.wrapper}>
                     <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.back) }} position='left' />
                     <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.forward) }} position='right' />
+                    <nav style={styles.nav}> </nav>
                     <section style={styles.main}>
                         <div style={styles.mainDescription}>
                             <div style={styles.textMain}>
@@ -295,12 +314,15 @@ const ProjectPage = ({ loading, data }) => {
                             </div>
                         </div>
                     </section>
-                    <section style={{ ...styles.general, backgroundColor: '#fafafa' }}>
+                    <section style={{ ...styles.general, backgroundColor: '#fafafa', boxShadow: 'rgb(225, 228, 232) 0px 1px' }}>
                         <div style={{
                             ...styles.mainDescription, backgroundSize: '100% 100%',
                             backgroundRepeat: 'no-repeat',
                             backgroundPosition: 'center',
-                            backgroundImage: `url("../${data.img[1]}")`
+                            backgroundImage: `url("../${data.img[1]}")`,
+                            marginTop: '30px',
+                            borderRadius: '35px 25px 25px 100px',
+                            boxShadow: '-1px 2px 4px -2px',
                         }}>
 
                         </div>
@@ -327,12 +349,12 @@ const ProjectPage = ({ loading, data }) => {
 
                             </div>
                             <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '28px', fontWeight: 300 }}> Resources:</h1>
-                            <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', }}> Check or download the app <a href={data.externalUrl} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>here</strong></a></p>
+                            <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', marginBottom: '30px' }}> Check or download the app <a href={data.externalUrl} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>here</strong></a></p>
 
                         </div>
 
                     </section>
-                    <section style={{ ...styles.general, height: '100%', height: '100%', display: 'inline-flex', justifyContent: 'center' }}>
+                    <section style={{ ...styles.general, height: '100%', height: '100%', display: 'inline-flex', justifyContent: 'center', marginTop: '35px' }}>
                         <Contact standAlone={true} />
                     </section>
                 </div>

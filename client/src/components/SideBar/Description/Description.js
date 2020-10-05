@@ -14,7 +14,8 @@ const Description = ({ loading }) => {
         },
         h1: {
             marginTop: '15px',
-            marginBottom: 0,
+            marginBottom: '3px',
+            paddingBottom: '3px',
             fontSize: '30px',
             fontWeight: 300,
             lineHeight: '30px',
@@ -24,7 +25,7 @@ const Description = ({ loading }) => {
             textAlign: 'center'
         },
         h2: {
-            marginTop: '10px',
+            marginTop: '0px',
             marginBottom: 0,
             letterSpacing: '.3px',
             fontSize: '13px',

@@ -80,7 +80,7 @@ const Projects = ({ loading, data }) => {
             position: 'relative',
             padding: '20px 0px',
             width: '100%',
-            height: '120px',
+            height: '150px',
             cursor: 'pointer',
             //backgroundColor: 'aliceblue'
             ...(view ? { display: 'flex', flexDirection: 'column', alignItems: 'center', height: '100%' } : {})
