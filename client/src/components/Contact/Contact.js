@@ -289,7 +289,7 @@ const Input = ({ messages = [
                         return (
                             <SlideOnLoad direction='down' end={(index + 1) * (width > 500 ? 40 : 30)}>
                                 <table onClick={(e) => { e.preventDefault(); handleEdit(index) }} style={{ position: 'absolute', left: 0, display: 'inline-flex', top: '20px' }}>
-                                    <td>{icons && icons[index] && icons[index]}</td>
+                                    <td style={{ overflow: 'initial' }}>{icons && icons[index] && icons[index]}</td>
                                     <td style={{ marginLeft: '10px', textAlign: 'left' }}><span style={{ ...styles.label, marginLeft: '0px', color: 'rgb(77 150 214)', cursor: 'pointer' }}>{item.value}</span></td>
                                 </table>
                             </SlideOnLoad>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './ProjectPage.css'
 import Contact from '../Contact';
 
@@ -6,6 +6,12 @@ import { useHistory, useLocation, Link } from "react-router-dom";
 
 //custom hooks
 import useWindowsSize from '../../hooks/Dimms/useWindowSize'
+
+//icons
+import HomeIcon from '@material-ui/icons/Home';
+import AccountTreeIcon from '@material-ui/icons/AccountTree';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 
 const NavButton = ({ onClick = () => null, position = 'left' }) => {
     const styles = {
@@ -31,7 +37,13 @@ const NavButton = ({ onClick = () => null, position = 'left' }) => {
 }
 
 
-const ProjectPageMobile = ({ loading, data, handleClickProject }) => {
+const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
+    const myRef = useRef(null)
+    useEffect(() => {
+        myRef.current.scrollTo(0, 0);
+    }, [data])
+
+
     const styles = {
         container: {
             position: 'absolute',
@@ -96,7 +108,7 @@ const ProjectPageMobile = ({ loading, data, handleClickProject }) => {
         contact: {
             padding: '0px 0px',
             width: '100%',
-            height: '600px',
+            height: '710px',
             display: 'inline-flex',
             justifyContent: 'center'
         },
@@ -110,7 +122,7 @@ const ProjectPageMobile = ({ loading, data, handleClickProject }) => {
         <React.Fragment>
             <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.back) }} position='left' />
             <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.forward) }} position='right' />
-            <section style={styles.container}>
+            <section ref={myRef} style={styles.container} onScroll={onScroll}>
                 <div>
                     <h1 style={styles.h1}> {data.title}</h1>
                     <p className='projectPageMobileP1' >{data.name}</p>
@@ -170,11 +182,23 @@ const ProjectPageMobile = ({ loading, data, handleClickProject }) => {
     )
 }
 
-const ProjectPage = ({ loading, data }) => {
-    const [width, height] = useWindowsSize();
+const ProjectPage = ({ loading, data, centerSocialBar }) => {
+    const myRef = useRef(null)
+    const [width, height, top] = useWindowsSize();
 
     const history = useHistory();
-    console.log(data);
+
+    //handle whether the social bar has been activated to move. if active ===true and scroll is 200px to the bottom, the social bar will move to the center, other wise will stay in its original position
+    const [active, setActive] = useState(false)
+
+    useEffect(() => {
+        if (myRef.current && myRef.current.scrollTo) {
+            myRef.current.scrollTo(0, 0);
+        }
+        centerSocialBar(false);
+    }, [data])
+
+
     const styles = {
         wrapper: {
             height: '100vh',
@@ -186,7 +210,10 @@ const ProjectPage = ({ loading, data }) => {
             //paddingTop: '54px',
             padding: '54px 90px',
             boxShadow: 'rgb(225, 228, 232) 0px -1px 0px inset',
-            width: '100vw'
+            width: '100vw',
+            display: 'flex',
+            justifyContent: 'center',
+
         },
         mainDescription: {
             display: 'inline-block',
@@ -214,7 +241,7 @@ const ProjectPage = ({ loading, data }) => {
             // backgroundImage: 'url("../machinerypal.png")'
             width: '400px',
             height: '300px',
-            top: 'calc(50% - (300px / 2))',
+            //top: 'calc(50% - (300px / 2))',
             right: '0%',
             opacity: 1,
             float: 'left',
@@ -232,7 +259,7 @@ const ProjectPage = ({ loading, data }) => {
             fontWeight: 320,
             fontFamily: '"proxima nova light", "Helvetica Neue", Helvetica, Arial, Sans-serif',
             textAlign: 'left',
-            marginTop: '54px',
+            marginTop: '0px',
             marginBottom: '0px',
             boxShadow: 'rgb(225, 228, 232) 0px -1px 0px inset'
         },
@@ -284,11 +311,29 @@ const ProjectPage = ({ loading, data }) => {
         },
         nav: {
             width: '100%',
-            height: '60px',
-            position: 'absolute',
+            height: '70px',
+            position: 'fixed',
             top: '0px',
             background: 'white',
             boxShadow: '0px 0px 16px -10px',
+            display: 'flex',
+            justifyContent: 'center',
+            zIndex: 2
+        },
+        navUl: {
+            display: 'flex',
+            width: '720px',
+            paddingLeft: '0px',
+            alignContent: 'center',
+            justifyContent: 'space-between',
+            fontSize: '18px',
+            color: 'rgb(102, 102, 102)',
+        },
+        navLi: {
+            margin: '0px 5px',
+            cursor: 'pointer',
+            display: 'flex',
+            alignItems: 'center'
         }
     }
 
@@ -296,15 +341,39 @@ const ProjectPage = ({ loading, data }) => {
         loading(history, url);
     }
 
+    const handleScroll = (e) => {
+        e.preventDefault();
+        if (e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight <= 60 && !active) {
+            centerSocialBar(true);
+            setActive(true);
+        }
+        if (e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight >= 60 && active) {
+            centerSocialBar(false);
+            setActive(false);
+        }
+    }
+
     return (
         <React.Fragment>
             {width > 980 ?
-                <div style={styles.wrapper}>
+                <div ref={myRef} onScroll={handleScroll} style={styles.wrapper}>
                     <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.back) }} position='left' />
                     <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.forward) }} position='right' />
-                    <nav style={styles.nav}> </nav>
+
+                    {/* top navigation bar */}
+                    <nav style={styles.nav}>
+
+                        <ul style={styles.navUl}>
+                            <li onClick={(e) => { e.preventDefault(); handleClickProject('/') }} className='navLi' style={styles.navLi}> <HomeIcon style={{ color: 'lightgray', fontSize: '14px', marginRight: '5px' }} />Alex Lizarraga</li>
+                            <li onClick={(e) => { e.preventDefault(); handleClickProject('/projects') }} className='navLi' style={styles.navLi}><AccountTreeIcon style={{ color: 'lightgray', fontSize: '14px', marginRight: '5px' }} /> <span>Projects</span></li>
+                            <li onClick={(e) => { e.preventDefault(); handleClickProject('/resume') }} className='navLi' style={styles.navLi}><AssignmentIcon style={{ color: 'lightgray', fontSize: '14px', marginRight: '5px' }} /> <span>CV</span></li>
+                            <li onClick={(e) => { e.preventDefault(); handleClickProject('/contact') }} className='navLi' style={styles.navLi}> <QuestionAnswerIcon style={{ color: 'lightgray', fontSize: '14px', marginRight: '5px' }} /> <span>Contact</span></li>
+                        </ul>
+                    </nav>
+
+                    {/* Short project name and description and main image */}
                     <section style={styles.main}>
-                        <div style={styles.mainDescription}>
+                        <div style={{ ...styles.mainDescription, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <div style={styles.textMain}>
                                 <h1 style={styles.mainH1}> {data.title}</h1>
                                 <p style={styles.mainName}>{data.name}</p>
@@ -314,9 +383,12 @@ const ProjectPage = ({ loading, data }) => {
                             </div>
                         </div>
                     </section>
+
+                    {/* Long project description and secondary image, skills and resources */}
                     <section style={{ ...styles.general, backgroundColor: '#fafafa', boxShadow: 'rgb(225, 228, 232) 0px 1px' }}>
                         <div style={{
                             ...styles.mainDescription, backgroundSize: '100% 100%',
+                            maxWidth: '720px',
                             backgroundRepeat: 'no-repeat',
                             backgroundPosition: 'center',
                             backgroundImage: `url("../${data.img[1]}")`,
@@ -352,17 +424,21 @@ const ProjectPage = ({ loading, data }) => {
                             <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', marginBottom: '30px' }}> Check or download the app <a href={data.externalUrl} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>here</strong></a></p>
 
                         </div>
-
                     </section>
-                    <section style={{ ...styles.general, height: '100%', height: '100%', display: 'inline-flex', justifyContent: 'center', marginTop: '35px' }}>
+
+
+                    {/* Contact form */}
+                    <section style={{ ...styles.general, height: width > 980 ? '770px' : '100%', display: 'inline-flex', justifyContent: 'center', marginTop: '100px' }}>
                         <Contact standAlone={true} />
                     </section>
                 </div>
                 :
-                <ProjectPageMobile loading={loading} data={data} handleClickProject={handleClickProject} />
+                <ProjectPageMobile onScroll={handleScroll} loading={loading} data={data} handleClickProject={handleClickProject} />
             }
         </React.Fragment>
     )
 }
 
 export default ProjectPage;
+
+

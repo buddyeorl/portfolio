@@ -33,6 +33,7 @@ function App() {
 
   //move social bar to the middle when clicking menu button on mobile
   const [moveSocial, setMoveSocial] = useState(false);
+  const [centerSocial, setCenterSocial] = useState(false);
 
 
   const styles = {
@@ -49,6 +50,7 @@ function App() {
       //minHeight: '-webkit-fill-available',
       width: '100%',
       gridTemplateRows: '60% 40%',
+      zIndex: 1,
     },
   }
 
@@ -60,15 +62,22 @@ function App() {
 
   const handleLoading = (history, path) => {
     //reset social bar location
-    setMoveSocial(false)
+    setMoveSocial(false);
+    setCenterSocial(false);
     setLoading(true);
     setTimeout(() => {
       history.push(path);
     }, 1000)
   }
 
+  //move social will move socialbar base on the current page view
   const moveSocialBarMobile = () => {
-    setMoveSocial(!moveSocial)
+    setMoveSocial(!moveSocial);
+  }
+
+  //center social will center the social bar when scroll down to contact section on the project page 
+  const centerSocialBar = (option = false) => {
+    setCenterSocial(option);
   }
 
   const handleProjectUrl = (props) => {
@@ -85,7 +94,7 @@ function App() {
     } else {
       if (shortProjects && shortProjects[props.match.params.name]) { // if name received in params match a project
         return <React.Fragment>
-          <ProjectPage loading={handleLoading} data={shortProjects[props.match.params.name]} />
+          <ProjectPage loading={handleLoading} data={shortProjects[props.match.params.name]} centerSocialBar={centerSocialBar} />
           {/* show mobile menu button on project page when  width is less than 980*/}
           {width <= 980 &&
             <SideBar loading={handleLoading} moveSocial={moveSocialBarMobile} />
@@ -102,9 +111,9 @@ function App() {
 
   return (
     <Router >
-      {loading && <Loading onEnd={() => { setLoading(false) }} />}
       <section style={styles.container}>
-        <SocialBar trigger={moveSocial} />
+        {loading && <Loading onEnd={() => { setLoading(false) }} />}
+        <SocialBar trigger={moveSocial} center={centerSocial} />
         <Switch>
 
           {/* Handle project routes */}

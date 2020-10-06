@@ -12,6 +12,7 @@ function useWindowSize() {
         window.addEventListener('resize', updateSize);
         window.addEventListener('scroll', updateScroll);
         updateSize();
+        updateScroll();
         return () => { window.removeEventListener('resize', updateSize); window.removeEventListener('scroll', updateScroll); };
     }, []);
     return size;

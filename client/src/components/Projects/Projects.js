@@ -42,7 +42,7 @@ const Projects = ({ loading, data }) => {
             height: '100%',
             position: 'fixed',
             overflow: 'auto',
-            padding: '5px'
+            padding: '5px',
             //color: '#464646',
             //overflow: 'hidden scroll'
         },

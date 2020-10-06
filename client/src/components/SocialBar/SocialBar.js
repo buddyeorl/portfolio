@@ -55,7 +55,7 @@ const Item = ({ onMouseEnter, onMouseLeave, url, icon, styles, initialColor = 'w
         </React.Fragment>)
 }
 
-const SocialBar = ({ extend = false, trigger = false }) => {
+const SocialBar = ({ extend = false, trigger = false, center = false, hide = false }) => {
     const [width, height] = useWindowsSize();
 
     const socialAccounts = {
@@ -69,6 +69,7 @@ const SocialBar = ({ extend = false, trigger = false }) => {
 
     const styles = {
         container: {
+            display: (width <= 980 && !center && !trigger && location.pathname !== '/contact' && location.pathname !== '/projects' && location.pathname !== '/resume' && location.pathname !== '/') && 'none',
             zIndex: 3,
             position: 'fixed',
             left: 0,
@@ -79,6 +80,10 @@ const SocialBar = ({ extend = false, trigger = false }) => {
             transition: 'top 500ms, left 500ms, transform 250ms',
             ...((trigger || location.pathname === '/contact') ? {
                 left: width > 980 ? 'calc(50% + 300px - (300px / 2))' : 'calc(50%)',
+                transform: 'rotate(-90deg)'
+            } : {}),
+            ...((center && location.pathname !== '/contact' && location.pathname !== '/projects' && location.pathname !== '/resume' && location.pathname !== '/') ? {
+                left: 'calc(50%)',
                 transform: 'rotate(-90deg)'
             } : {})
         },
@@ -92,6 +97,11 @@ const SocialBar = ({ extend = false, trigger = false }) => {
             height: '52px',
             transition: 'top 500ms ease 0s, left 500ms ease 0s, transform 250ms ease 0s',
             transform: 'rotate(0deg)',
+            ...((center && !trigger && location.pathname !== '/contact' && location.pathname !== '/projects' && location.pathname !== '/resume' && location.pathname !== '/') ? {
+                top: 'calc(100% - 170px)',
+                left: 'unset',
+                width: '100%',
+            } : {})
         },
         ul: {
             listStyle: 'none',
@@ -120,7 +130,10 @@ const SocialBar = ({ extend = false, trigger = false }) => {
                 transform: 'rotate(90deg)'
             } : {
                     transform: 'rotate(0deg)'
-                })
+                }),
+            ...((center && location.pathname !== '/contact' && location.pathname !== '/projects' && location.pathname !== '/resume' && location.pathname !== '/') ? {
+                transform: 'rotate(90deg)'
+            } : {})
         },
         small: {
             left: '-2px',
@@ -143,7 +156,6 @@ const SocialBar = ({ extend = false, trigger = false }) => {
     }
 
     const handleOnMouseEnter = (item) => {
-        console.log(item)
         setSocialLink(item)
     }
 
@@ -157,13 +169,14 @@ const SocialBar = ({ extend = false, trigger = false }) => {
                     <Item url={socialAccounts.facebook.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.facebook) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#4868ad'} initialColor={'unset'} iconColor={'#7a7a7a'} icon={<FacebookIcon style={styles.smallIcons} />} />
                 </ul>
             </div>
-            {(trigger || location.pathname === '/contact') &&
+            {(trigger || location.pathname === '/contact' || (center && location.pathname !== '/contact' && location.pathname !== '/projects' && location.pathname !== '/resume' && location.pathname !== '/')) &&
                 <div style={styles.textContainer}>
                     <p style={{ color: 'rgb(82, 82, 82)' }}>Let's get social now</p>
                     <a target='_blank' style={{ position: 'relative', top: '73px', color: 'rgb(82, 82, 82)' }}>{socialLink && socialLink.label} </a>
 
                 </div>
             }
+
 
         </React.Fragment>
     )
