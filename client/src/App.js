@@ -26,6 +26,7 @@ import {
   Redirect,
 } from "react-router-dom";
 
+
 function App() {
   const [width, height] = useWindowsSize();
   const [isIntroDone, setIsIntroDone] = useState(false);
@@ -86,7 +87,7 @@ function App() {
       return (
         <React.Fragment>
           <SideBar loading={handleLoading} moveSocial={moveSocialBarMobile} />
-          <Projects loading={handleLoading} data={Object.keys(shortProjects).map(name => ({ url: shortProjects[name].url, title: shortProjects[name].title, img: shortProjects[name].img[0], description: shortProjects[name].displayDescription }))} />
+          <Projects loading={handleLoading} data={Object.keys(shortProjects).map(name => ({ url: shortProjects[name].url, title: shortProjects[name].main.title, img: shortProjects[name].main.image, description: shortProjects[name].main.description }))} />
         </React.Fragment>
       )
     } else if (props.match.params.catchall) { //if catchall parameter is received, redirect to path /projects/{name}

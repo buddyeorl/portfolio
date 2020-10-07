@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, ReactDOM } from 'react';
 import './ProjectPage.css'
 import Contact from '../Contact';
 
@@ -13,9 +13,26 @@ import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 
+
+
+
 const NavButton = ({ onClick = () => null, position = 'left' }) => {
+    const [width] = useWindowsSize();
+    const [buttonStyle, setButtonStyle] = useState({
+        paddingLeft: '10px',
+        backgroundColor: 'rgb(206 206 206 / 25%)',
+        ...(position === 'left' ? { transform: 'scale(1)' } : { right: 0, transform: 'scale(1) rotateY(180deg)' })
+    })
+
     const styles = {
         span: {
+            MozBoxSizing: 'unset',
+            webkitBoxSizing: 'unset',
+            boxSizing: 'unset',
+            width: width > 980 ? '50px' : '25px',
+            height: width > 980 ? '100px' : '50px',
+            fontSize: width > 980 ? '35px' : '20px',
+
             position: 'fixed',
             top: 'calc(50% - 50px)',
             color: 'white',
@@ -28,17 +45,47 @@ const NavButton = ({ onClick = () => null, position = 'left' }) => {
             textAlign: 'initial',
             transition: 'padding 100ms, background-color 100ms, transform 100ms',
             zIndex: 1,
-            ...(position === 'left' ? { left: 0 } : { right: 0, })
+            ...(position === 'left' ? { left: 0 } : { right: 0 })
         }
     }
+
+    const handleMouseEnter = (e, enter) => {
+        e.preventDefault();
+        if (!enter) {
+            setButtonStyle({
+
+                paddingLeft: '10px',
+                backgroundColor: 'rgb(206 206 206 / 25%)',
+                ...(position === 'left' ? { transform: 'scale(1)' } : { right: 0, transform: 'scale(1) rotateY(180deg)' })
+            })
+        } else {
+            setButtonStyle({
+                paddingLeft: '50px',
+                backgroundColor: 'rgb(150 150 150 / 80%)',
+                ...(position === 'left' ? { transform: 'scale(1.3)' } : { right: 0, transform: 'scale(1.3) rotateY(180deg)' })
+            });
+
+        }
+    }
+
     return (
-        <span onClick={onClick} className={position === 'left' ? 'navButton' : 'navButtonRight'} style={styles.span}> {`<`}</span>
+        <span
+            onTouchStart={(e) => { handleMouseEnter(e, true) }}
+            onTouchEnd={(e) => { handleMouseEnter(e, false); onClick(e); }}
+            onMouseEnter={(e) => { handleMouseEnter(e, true) }}
+            onMouseLeave={(e) => { handleMouseEnter(e, false) }}
+            onClick={onClick} style={{ ...buttonStyle, ...styles.span }}>
+            {`<`}
+        </span>
     )
 }
 
 
 const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
-    const myRef = useRef(null)
+    const myRef = useRef(null);
+    const myRef1 = useRef(null);
+    const [frameHeight, setFrameHeight] = useState('500px');
+
     useEffect(() => {
         myRef.current.scrollTo(0, 0);
     }, [data])
@@ -115,39 +162,65 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
 
     }
 
-
-
-
-    return (
-        <React.Fragment>
-            <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.back) }} position='left' />
-            <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.forward) }} position='right' />
-            <section ref={myRef} style={styles.container} onScroll={onScroll}>
+    const main = () => {
+        return (
+            <React.Fragment>
                 <div>
-                    <h1 style={styles.h1}> {data.title}</h1>
-                    <p className='projectPageMobileP1' >{data.name}</p>
-                    <p className='projectPageMobileP2'> {data.shortDescription}</p>
+                    <h1 style={styles.h1}> {data.main.title}</h1>
+                    <p className='projectPageMobileP1' >{data.main.duty}</p>
+                    <p className='projectPageMobileP2'> {data.main.description}</p>
                 </div>
-                <div className='projectPageMobileImgContainer'>
-                    <div className='projectPageMobileImg1' style={{ backgroundImage: `url("../${data.img[0]}")` }}>
-                    </div>
+                <div className='projectPageMobileImg1' style={{ backgroundImage: `url("../${data.main.image}")`, display: 'inline-block' }}>
                 </div>
+            </React.Fragment>
+        )
+    }
+
+    //iFrame with the github gist to show code fragments if needed
+    const code = (index) => {
+        console.log(data.code[index])
+        let srcdoc =
+            '<html> <style type="text/css">body {margin:5px 0px; padding-top:20px;}.blob-wrapper {padding-bottom:20px; padding-top:20px; overflow-x:auto;overflow-y:hidden;}</style><body><script src="' + data.code[index].url + '"></script><body></html>'
+        console.log(srcdoc)
+
+        return (
+            <iframe ref={myRef1} onLoad={() => setFrameHeight(myRef1 && myRef1.current && myRef1.current.contentDocument && myRef1.current.contentDocument.body.clientHeight)} frameBorder={0} style={{ minWidth: '200px', width: '100%', maxWidth: '720px', height: `${frameHeight - 33 + 'px'}` }} scrolling="no" seamless="seamless"
+                srcDoc={srcdoc}
+            />
+        )
+    }
+
+
+
+    const largeImage = (index) => {
+        return (<div className='projectPageMobileImgContainer'>
+            <div className='projectPageMobileImg1' style={{ backgroundImage: `url("../${data.images[index]}")` }}>
+            </div>
+        </div>
+        )
+    }
+
+    const paragraph = (index) => {
+        return (
+            <React.Fragment>
                 <div>
-                    <h1 style={styles.h1}> Test Project</h1>
+                    {data.paragraph[index].title !== '' &&
+                        <h1 style={styles.h1}> {data.paragraph[index].title}</h1>
+                    }
+
+
+
                     <p className='projectPageMobileP2'>
-                        ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione asperiores quibusdam enim fuga iure, a veniam quaerat repellendus nisi esse similique placeat officiis culpa! Placeat officia sint ducimus quibusdam non.
-                    </p>
-                    <p className='projectPageMobileP2'>
-                        ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione asperiores quibusdam enim fuga iure, a veniam quaerat repellendus nisi esse similique placeat officiis culpa! Placeat officia sint ducimus quibusdam non.
+                        {data.paragraph[index].content}
                     </p>
                 </div>
-                <div className='projectPageMobileImgContainer'>
-                    <div className='projectPageMobileImg1' style={{ backgroundImage: `url("../${data.img[0]}")` }}>
-                    </div>
-                </div>
+            </React.Fragment>
+        )
+    }
 
-
-
+    const technologies = () => {
+        return (
+            <React.Fragment>
                 {/* Tech */}
                 <h1 style={styles.h1}> Technologies I got involved with while working on this project:</h1>
                 <div style={{ marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', }}>
@@ -166,10 +239,49 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
 
                     </ul>
                 </div>
+            </React.Fragment>
+        )
+    }
 
+    const referenceLinks = () => {
+        return (
+            <React.Fragment>
                 {/* Resources */}
                 <h1 style={styles.h1}> Resources:</h1>
                 <p className='projectPageMobileP2' style={{ paddingBottom: '25px', boxShadow: 'rgb(225, 228, 232) 0px -1px 0px inset' }}> Check or download the app <a href={data.externalUrl} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>here</strong></a></p>
+            </React.Fragment>
+        )
+    }
+
+
+
+    return (
+        <React.Fragment>
+            <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.back) }} position='left' />
+            <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.forward) }} position='right' />
+            <section ref={myRef} style={styles.container} onScroll={onScroll}>
+                {main()}
+                {data.order.map((item) => {
+                    switch (item.type) {
+                        case 'code':
+                            return code(item.index);
+                            break;
+                        case 'image':
+                            return largeImage(item.index);
+                            break;
+                        case 'link':
+                            return referenceLinks();
+                            break;
+                        case 'technologies':
+                            return technologies();
+                            break;
+                        case 'paragraph':
+                            return paragraph(item.index);
+                            break;
+                        default:
+                            return null
+                    }
+                })}
 
 
                 <div style={styles.contact}>
@@ -183,20 +295,27 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
 }
 
 const ProjectPage = ({ loading, data, centerSocialBar }) => {
-    const myRef = useRef(null)
+    const myRef = useRef(null);
+    const myRef1 = useRef(null);
     const [width, height, top] = useWindowsSize();
+    const [frameHeight, setFrameHeight] = useState('500px');
 
     const history = useHistory();
 
     //handle whether the social bar has been activated to move. if active ===true and scroll is 200px to the bottom, the social bar will move to the center, other wise will stay in its original position
     const [active, setActive] = useState(false)
 
+
+    console.log(myRef1)
+    // && myRef1.current.contentDocument.body
     useEffect(() => {
         if (myRef.current && myRef.current.scrollTo) {
             myRef.current.scrollTo(0, 0);
         }
         centerSocialBar(false);
     }, [data])
+
+
 
 
     const styles = {
@@ -353,6 +472,95 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
         }
     }
 
+    const main = () => {
+        return (
+            <section style={styles.main}>
+                <div style={{ ...styles.mainDescription, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                    <div style={styles.textMain}>
+                        <h1 style={styles.mainH1}> {data.main.title}</h1>
+                        <p style={styles.mainName}>{data.main.duty}</p>
+                        <p style={styles.mainP}> {data.main.description}</p>
+                    </div>
+                    <div style={{ ...styles.imgMain, backgroundImage: `url("../${data.main.image}")` }}>
+                    </div>
+                </div>
+            </section>
+        )
+    }
+
+    //iFrame with the github gist to show code fragments if needed
+    const code = (index) => {
+        console.log(data.code[index])
+        let srcdoc =
+            '<html><style type="text/css"> .blob-wrapper' + '{padding-bottom:20px; padding-top:20px; overflow-x:auto; overflow-y:hidden;}</style><body><script src="' + data.code[index].url + '"></script><body></html>'
+        console.log(srcdoc)
+
+        return (
+            <iframe ref={myRef1} onLoad={() => setFrameHeight(myRef1 && myRef1.current && myRef1.current.contentDocument && myRef1.current.contentDocument.body.clientHeight)} frameBorder={0} style={{ minWidth: '200px', width: '100%', maxWidth: '720px', height: `${frameHeight - 33 + 'px'}` }} scrolling="no" seamless="seamless"
+                srcDoc={srcdoc}
+            />
+        )
+    }
+
+    const largeImage = (index) => {
+        return (<div style={{
+            ...styles.mainDescription, backgroundSize: '100% 100%',
+            maxWidth: '720px',
+            backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
+            backgroundImage: `url("../${data.images[index]}")`,
+            marginTop: '30px',
+            borderRadius: '35px 25px 25px 100px',
+            boxShadow: '-1px 2px 4px -2px',
+        }}></div>
+        )
+    }
+
+    const paragraph = (index) => {
+        return (
+            <React.Fragment>
+                {data.paragraph[index].title !== '' &&
+                    <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '28px', fontWeight: 300 }}> {data.paragraph[index].title}</h1>
+                }
+
+                <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', }}>{data.paragraph[index].content}</p>
+            </React.Fragment>
+        )
+    }
+
+    const technologies = () => {
+        return (
+            <React.Fragment>
+                <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '20px', fontWeight: 300 }}> Technologies I got involved with while working on this project:</h1>
+                <div style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', }}>
+                    <ul style={{
+                        listStyle: 'none', padding: 0, margin: 0, display: 'inline-grid',
+                        gridTemplateColumns: '25% 25% 25% 25%',
+                        justifyContent: 'center',
+                        width: '100%',
+                        padding: '0px'
+                    }}>
+                        {data.technologies.map((tech, index) =>
+                            <li key={index} style={styles.li}>
+                                {tech}
+                            </li>)}
+
+                    </ul>
+
+                </div>
+            </React.Fragment>
+        )
+    }
+
+    const referenceLinks = () => {
+        return (
+            <React.Fragment>
+                <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '28px', fontWeight: 300 }}> Resources:</h1>
+                <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', marginBottom: '30px' }}> Check or download the app <a href={data.link} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>here</strong></a></p>
+            </React.Fragment>
+        )
+    }
+
     return (
         <React.Fragment>
             {width > 980 ?
@@ -372,7 +580,7 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
                     </nav>
 
                     {/* Short project name and description and main image */}
-                    <section style={styles.main}>
+                    {/* <section style={styles.main}>
                         <div style={{ ...styles.mainDescription, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                             <div style={styles.textMain}>
                                 <h1 style={styles.mainH1}> {data.title}</h1>
@@ -382,48 +590,36 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
                             <div style={{ ...styles.imgMain, backgroundImage: `url("../${data.img[0]}")` }}>
                             </div>
                         </div>
-                    </section>
+                    </section> */}
+
+                    {main()}
 
                     {/* Long project description and secondary image, skills and resources */}
                     <section style={{ ...styles.general, backgroundColor: '#fafafa', boxShadow: 'rgb(225, 228, 232) 0px 1px' }}>
-                        <div style={{
-                            ...styles.mainDescription, backgroundSize: '100% 100%',
-                            maxWidth: '720px',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundPosition: 'center',
-                            backgroundImage: `url("../${data.img[1]}")`,
-                            marginTop: '30px',
-                            borderRadius: '35px 25px 25px 100px',
-                            boxShadow: '-1px 2px 4px -2px',
-                        }}>
 
-                        </div>
-                        <div style={{ ...styles.secondaryDescription, marginTop: '70px' }}>
-                            <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '28px', fontWeight: 300 }}> Test Project</h1>
-                            <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', }}>ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione asperiores quibusdam enim fuga iure, a veniam quaerat repellendus nisi esse similique placeat officiis culpa! Placeat officia sint ducimus quibusdam non.</p>
-                            <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '28px', fontWeight: 300 }}> Test Project</h1>
-                            <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', }}>ipsum Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione asperiores quibusdam enim fuga iure, a veniam quaerat repellendus nisi esse similique placeat officiis culpa! Placeat officia sint ducimus quibusdam non.</p>
-                            <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '20px', fontWeight: 300 }}> Technologies I got involved with while working on this project:</h1>
-                            <div style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', }}>
-                                <ul style={{
-                                    listStyle: 'none', padding: 0, margin: 0, display: 'inline-grid',
-                                    gridTemplateColumns: '25% 25% 25% 25%',
-                                    justifyContent: 'center',
-                                    width: '100%',
-                                    padding: '0px'
-                                }}>
-                                    {data.technologies.map((tech, index) =>
-                                        <li key={index} style={styles.li}>
-                                            {tech}
-                                        </li>)}
 
-                                </ul>
+                        {data.order.map((item) => {
+                            switch (item.type) {
+                                case 'code':
+                                    return code(item.index);
+                                    break;
+                                case 'image':
+                                    return largeImage(item.index);
+                                    break;
+                                case 'link':
+                                    return referenceLinks();
+                                    break;
+                                case 'technologies':
+                                    return technologies();
+                                    break;
+                                case 'paragraph':
+                                    return paragraph(item.index);
+                                    break;
+                                default:
+                                    return null
+                            }
+                        })}
 
-                            </div>
-                            <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '28px', fontWeight: 300 }}> Resources:</h1>
-                            <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', marginBottom: '30px' }}> Check or download the app <a href={data.externalUrl} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>here</strong></a></p>
-
-                        </div>
                     </section>
 
 
@@ -433,12 +629,15 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
                     </section>
                 </div>
                 :
+
                 <ProjectPageMobile onScroll={handleScroll} loading={loading} data={data} handleClickProject={handleClickProject} />
             }
-        </React.Fragment>
+        </React.Fragment >
     )
 }
 
 export default ProjectPage;
+
+
 
 

@@ -1,4 +1,4 @@
-.navButton{
+/* .navButton{
     -moz-box-sizing: unset; 
     -webkit-box-sizing: unset; 
     width: 50px;
@@ -16,9 +16,9 @@
     padding-left:50px;
     background-color: rgb(150 150 150 / 80%);
     transform:scale(1.3);
-    }
+    } */
 
-.navButtonRight{
+/* .navButtonRight{
     -moz-box-sizing: unset; 
     -webkit-box-sizing: unset; 
     width: 50px;
@@ -37,7 +37,7 @@
     transform:scale(1.3) rotateY(180deg);
     padding-left:50px;
     background-color: rgb(150 150 150 / 80%);
-}
+} */
 
 /* Project Page Mobile */
 .projectPageMobileH1 {
@@ -117,7 +117,7 @@
 
 @media only screen and (max-width: 500px) {
 
-    .navButton{
+    /* .navButton{
         width: 25px;
         height: 50px;
         font-size:20px
@@ -127,7 +127,7 @@
         height: 50px;
         font-size:20px
 
-    }
+    } */
 
     .projectPageMobileP1 {
         font-size: 15px;
