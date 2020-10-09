@@ -81,10 +81,31 @@ const NavButton = ({ onClick = () => null, position = 'left' }) => {
 }
 
 
-const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
-    const myRef = useRef(null);
+//iFrame with the github gist to show code fragments if needed
+const Code = ({ children, url, title = '' }) => {
     const myRef1 = useRef(null);
     const [frameHeight, setFrameHeight] = useState('500px');
+
+
+    //console.log(data.code[index])
+    let srcdoc =
+        '<html> <style type="text/css">body {margin:5px 0px; padding-top:20px;}.blob-wrapper {padding-bottom:20px; padding-top:20px; overflow-x:auto;overflow-y:hidden;}</style><body><script src="' + url + '"></script><body></html>'
+
+    return (
+        <React.Fragment>
+            {children && children}
+            <iframe ref={myRef1} onLoad={() => setFrameHeight(myRef1 && myRef1.current && myRef1.current.contentDocument && myRef1.current.contentDocument.body.clientHeight)} frameBorder={0} style={{ minWidth: '200px', width: '100%', maxWidth: '720px', height: `${frameHeight - 36 + 'px'}` }} scrolling="no" seamless="seamless"
+                srcDoc={srcdoc}
+            />
+        </React.Fragment>
+    )
+}
+
+
+const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
+    const myRef = useRef(null);
+
+
 
     useEffect(() => {
         myRef.current.scrollTo(0, 0);
@@ -118,7 +139,7 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
         //     color: '#404040f2 '
         // },
         imgContainer: {
-            display: 'contents'
+            display: 'contents',
         },
         img: {
             backgroundSize: '100% 100%',
@@ -129,7 +150,7 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
             boxShadow: '-1px 2px 4px -2px',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            borderRadius: '5px'
+            borderRadius: '5px',
         },
         li: {
             display: 'inline-block',
@@ -168,33 +189,33 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
                 <div>
                     <h1 style={styles.h1}> {data.main.title}</h1>
                     <p className='projectPageMobileP1' >{data.main.duty}</p>
-                    <p className='projectPageMobileP2'> {data.main.description}</p>
+                    <p className='projectPageMobileP2'> {data.main.content}</p>
                 </div>
-                <div className='projectPageMobileImg1' style={{ backgroundImage: `url("../${data.main.image}")`, display: 'inline-block' }}>
+                <div className='projectPageMobileImg1' style={{ backgroundImage: `url("${data.main.image}")`, display: 'inline-block' }}>
                 </div>
             </React.Fragment>
         )
     }
 
     //iFrame with the github gist to show code fragments if needed
-    const code = (index) => {
-        console.log(data.code[index])
-        let srcdoc =
-            '<html> <style type="text/css">body {margin:5px 0px; padding-top:20px;}.blob-wrapper {padding-bottom:20px; padding-top:20px; overflow-x:auto;overflow-y:hidden;}</style><body><script src="' + data.code[index].url + '"></script><body></html>'
-        console.log(srcdoc)
+    // const code = (index) => {
+    //     console.log(data.code[index])
+    //     let srcdoc =
+    //         '<html> <style type="text/css">body {margin:5px 0px; padding-top:20px;}.blob-wrapper {padding-bottom:20px; padding-top:20px; overflow-x:auto;overflow-y:hidden;}</style><body><script src="' + data.code[index].url + '"></script><body></html>'
+    //     console.log(srcdoc)
 
-        return (
-            <iframe ref={myRef1} onLoad={() => setFrameHeight(myRef1 && myRef1.current && myRef1.current.contentDocument && myRef1.current.contentDocument.body.clientHeight)} frameBorder={0} style={{ minWidth: '200px', width: '100%', maxWidth: '720px', height: `${frameHeight - 33 + 'px'}` }} scrolling="no" seamless="seamless"
-                srcDoc={srcdoc}
-            />
-        )
-    }
+    //     return (
+    //         <iframe ref={myRef1} onLoad={() => setFrameHeight(myRef1 && myRef1.current && myRef1.current.contentDocument && myRef1.current.contentDocument.body.scrollHeight)} frameBorder={0} style={{ minWidth: '200px', width: '100%', maxWidth: '720px', height: `${frameHeight - 33 + 'px'}` }} scrolling="no" seamless="seamless"
+    //             srcDoc={srcdoc}
+    //         />
+    //     )
+    // }
 
 
 
     const largeImage = (index) => {
         return (<div className='projectPageMobileImgContainer'>
-            <div className='projectPageMobileImg1' style={{ backgroundImage: `url("../${data.images[index]}")` }}>
+            <div className='projectPageMobileImg1' style={{ backgroundImage: `url("${data.images[index]}")` }}>
             </div>
         </div>
         )
@@ -264,7 +285,12 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
                 {data.order.map((item) => {
                     switch (item.type) {
                         case 'code':
-                            return code(item.index);
+                            return <Code url={data.code[item.index].url} title={data.code[item.index].title === '' ? '' : data.code[item.index].title} >
+                                {data.code[item.index].title !== '' &&
+                                    <h1 style={styles.h1}> {data.code[item.index].title}</h1>
+                                }
+                            </Code>
+                                ;
                             break;
                         case 'image':
                             return largeImage(item.index);
@@ -277,6 +303,18 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
                             break;
                         case 'paragraph':
                             return paragraph(item.index);
+                            break;
+                        case 'component':
+                            console.log('type of', (typeof data.component[item.index]))
+
+                            let Comp = data.component[item.index];
+
+
+                            return <div style={{ display: 'flex', width: '100%', justifyContent: 'center', margin: '30px 5px' }}>
+                                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: '720px', }}>
+                                    {typeof data.component[item.index] === 'object' ? data.component[item.index] : <Comp />}
+                                </span>
+                            </div>
                             break;
                         default:
                             return null
@@ -405,7 +443,7 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
         secondaryPara: {
             maxWidth: '720px',
             margin: '0 auto 0 auto',
-            marginTop: '50px'
+            marginTop: '50px',
         },
         li: {
             display: 'inline-block',
@@ -479,28 +517,15 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
                     <div style={styles.textMain}>
                         <h1 style={styles.mainH1}> {data.main.title}</h1>
                         <p style={styles.mainName}>{data.main.duty}</p>
-                        <p style={styles.mainP}> {data.main.description}</p>
+                        <p style={styles.mainP}> {data.main.content}</p>
                     </div>
-                    <div style={{ ...styles.imgMain, backgroundImage: `url("../${data.main.image}")` }}>
+                    <div style={{ ...styles.imgMain, backgroundImage: `url("${data.main.image}")` }}>
                     </div>
                 </div>
             </section>
         )
     }
 
-    //iFrame with the github gist to show code fragments if needed
-    const code = (index) => {
-        console.log(data.code[index])
-        let srcdoc =
-            '<html><style type="text/css"> .blob-wrapper' + '{padding-bottom:20px; padding-top:20px; overflow-x:auto; overflow-y:hidden;}</style><body><script src="' + data.code[index].url + '"></script><body></html>'
-        console.log(srcdoc)
-
-        return (
-            <iframe ref={myRef1} onLoad={() => setFrameHeight(myRef1 && myRef1.current && myRef1.current.contentDocument && myRef1.current.contentDocument.body.clientHeight)} frameBorder={0} style={{ minWidth: '200px', width: '100%', maxWidth: '720px', height: `${frameHeight - 33 + 'px'}` }} scrolling="no" seamless="seamless"
-                srcDoc={srcdoc}
-            />
-        )
-    }
 
     const largeImage = (index) => {
         return (<div style={{
@@ -508,7 +533,7 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
             maxWidth: '720px',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
-            backgroundImage: `url("../${data.images[index]}")`,
+            backgroundImage: `url("${data.images[index]}")`,
             marginTop: '30px',
             borderRadius: '35px 25px 25px 100px',
             boxShadow: '-1px 2px 4px -2px',
@@ -595,13 +620,18 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
                     {main()}
 
                     {/* Long project description and secondary image, skills and resources */}
-                    <section style={{ ...styles.general, backgroundColor: '#fafafa', boxShadow: 'rgb(225, 228, 232) 0px 1px' }}>
+                    <section style={{ ...styles.general, backgroundColor: '#fafafa', boxShadow: 'rgb(225, 228, 232) 0px 1px', paddingTop: '50px', paddingBottom: '50px' }}>
 
 
                         {data.order.map((item) => {
                             switch (item.type) {
                                 case 'code':
-                                    return code(item.index);
+                                    return <Code url={data.code[item.index].url}>
+                                        {data.code[item.index].title !== '' &&
+                                            <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '20px', fontWeight: 300 }}> {data.code[item.index].title}</h1>
+                                        }
+                                    </Code>
+                                        ;
                                     break;
                                 case 'image':
                                     return largeImage(item.index);
@@ -614,6 +644,18 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
                                     break;
                                 case 'paragraph':
                                     return paragraph(item.index);
+                                    break;
+                                case 'component':
+                                    console.log('type of', (typeof data.component[item.index]))
+
+                                    let Comp = data.component[item.index];
+
+
+                                    return <div style={{ display: 'flex', width: '100%', justifyContent: 'center', margin: '30px 5px' }}>
+                                        <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', overflow: 'auto', maxWidth: '720px', padding: '20px 0px' }}>
+                                            {typeof data.component[item.index] === 'object' ? data.component[item.index] : <Comp />}
+                                        </span>
+                                    </div>
                                     break;
                                 default:
                                     return null
