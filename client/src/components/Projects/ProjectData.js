@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import RangeSlider from '../ProjectComponents/MP Components/RangeSlider';
+import SearchBar from '../ProjectComponents/SearchBar'
 import { GalleryMobile } from '../ProjectComponents/MP Components/Gallery'
 import Buff from '../../effects/Buff'
 
@@ -99,7 +100,6 @@ const shortProjects = {
             </div>
 
         ],
-
         //everything that goes after the main content
         order: [
             { type: 'paragraph', index: 0 },
@@ -142,6 +142,9 @@ const shortProjects = {
             { title: '', url: 'https://gist.github.com/buddyeorl/92126eaef81fe7ce9e8c077e68f39d3b.js' },
             { title: '', url: 'https://gist.github.com/buddyeorl/cf605b42046a243d73859aa291caca3b.js' },
         ],
+        reference: [
+            { content: 'Check the public API readme ', label: 'here', url: 'https://github.com/buddyeorl/zipcode-city-distance-api' },
+        ],
         link: 'https://github.com/buddyeorl/zipcode-city-distance-api',
         //everything that goes after the main content
         order: [
@@ -151,6 +154,7 @@ const shortProjects = {
             { type: 'code', index: 0 },
             { type: 'paragraph', index: 3 },
             { type: 'code', index: 1 },
+            { type: 'reference', index: 0 },
             { type: 'technologies' },
             { type: 'link' }
         ]
@@ -222,21 +226,90 @@ const shortProjects = {
         main: {
             title: 'Brands API',
             duty: 'Back End Developer',
-            description: 'Lightweight API to search for equipment by model, make, type or category',
-            content: 'Developed the data collector tool and the API server using Node and ExpressJS',
-            image: 'https://media.istockphoto.com/photos/raspberry-pi-circuit-board-picture-id458300299?k=6&m=458300299&s=170667a&w=0&h=J2WQEfdKToCUjwEKsttcl4mr6y9yKbyiU74UF0804pc='
+            description: 'NodeJS Lightweight and lightning fast lookup tool',
+            content: 'Developed the data collector tool and the API using Node and ExpressJS to lookup for equipment',
+            image: '../brands-api.png'
         },
-        images: ['https://media.istockphoto.com/photos/raspberry-pi-circuit-board-picture-id458300299?k=6&m=458300299&s=170667a&w=0&h=J2WQEfdKToCUjwEKsttcl4mr6y9yKbyiU74UF0804pc='],
+        images: ['../brands-api.png', '../brands-api-sample.png'],
         technologies: ['JS', 'NodeJS', 'ExpressJS', 'MongoDB'],
         paragraph: [
-            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'Why I built this?', content: 'Search bars, search bars, search bars, I built this tool to improve the way search bars are used in an app, when a user is trying to search for a keyword on a large database or index, there could be >500ms delay between the request and response received, this is detrimental to the UX and adds some additional traffic to the server, so i believe for extremely large apps with extremely large searchable databases(data that any user can retrieve from a searchbar with or without authentication), the search bars should have their own service API and should be handled in a separate server, this to remove the search traffic from the main app server' },
+            { title: '', content: 'In this case separating the search requests for equipment information (over 2,000,000 documents holding data from brands, models,makes,categories or types )from content requests(images, videos, other data) improved the flow and reduced the request-response time for all requests (both content and searchable data) by 100-150ms which is a considerable reduction if you consider services like USHIP or RB that get hundreds of thousands of requests per minute.' },
+            { title: 'How I built it?', content: 'First I created a webcrawling tool to collect equipment information from equipment manufacturers, this to create a reliable database with up to date information, second I used NodeJS and ExpressJS to build the API, this app is packed in less than 150 lines. Below is a sample of the open public-no-authentication needed version:' },
+            { title: 'Simple Routes', content: 'Less code means easier debugging and faster scaling, now the sample code below is for the server routes using a simple middleware for the equipment lookup' },
+            { title: 'Now the actual lookup:', content: 'I created a different middleware to handle the lookpup for each version of the API, there are two versions, one that is public and handles the lookup from a local object file or local db and one private that uses a different architecture and is mostly served from a cloud service, now for the open API middleware, below is the code that powers this lookup:' },
+            { title: 'Try it here', content: 'You can try the lookup api in the search bar below, all the requests to the lookup API are performed while typing, if you want to check the raw API, check the reference section below. For now try searching for equipment, like "excavator", "caterpillar 320", "truck", "transportation" etc and check the console for detailed information:' },
+            { title: '', content: 'below is a sample response while searching for "construction" which enconded would call the api like this "api/equipmentLookup?search=construction":' }
+        ],
+        code: [
+            { title: '', url: 'https://gist.github.com/buddyeorl/b26d1ed91bf75f6b07eb3f95b3092b6f.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/4addccd6eedcabffa12f0e71be2ff348.js' },
+            { title: 'Equipment lookup middleware', url: 'https://gist.github.com/buddyeorl/46f7997907498458a8ab1c04c9b0dd80.js' },
+        ],
+        reference: [
+            { content: 'Search for Cat 320 in the public API, See it in action', label: 'here', url: 'https://api-machinerypal.herokuapp.com/api/equipmentLookup?search=320&search=cat' },
+            { content: 'Or more specific Search for Cat 320 Midi Excavator in the public API, See it in action', label: 'here', url: 'https://api-machinerypal.herokuapp.com/api/equipmentLookup?search=320&search=excavator&search=midi' }
+
+        ],
+        component: [
+            <SearchBar />
+        ],
+        link: 'https://api-machinerypal.herokuapp.com/api/equipmentLookup?search=320&search=cat',
+        //everything that goes after the main content
+        order: [
+            { type: 'paragraph', index: 0 },
+            { type: 'paragraph', index: 1 },
+            { type: 'paragraph', index: 2 },
+            { type: 'code', index: 0 },
+            { type: 'paragraph', index: 3 },
+            { type: 'code', index: 1 },
+            { type: 'paragraph', index: 4 },
+            { type: 'code', index: 2 },
+            { type: 'paragraph', index: 5 },
+            { type: 'component', index: 0 },
+            { type: 'paragraph', index: 6 },
+            { type: 'image', index: 1 },
+            { type: 'technologies' },
+            { type: 'link' }]
+    },
+    fastFleet: {
+        url: '/projects/fastFleet',
+
+        main: {
+            title: 'Fast Fleet',
+            duty: 'Full Stack developer',
+            description: 'React Native app used to internally manage large vehicle fleets',
+            content: 'Fast Fleet is powered by a Nodejs server and React Native for the mobile App ',
+            image: '../fastFleet.png'
+        },
+        images: ['../fastFleet.png', '../fastFleetSample.gif'],
+        technologies: ['JS', 'NodeJS', 'ExpressJS', 'Google Vision', 'AWS S3', 'React Native', 'Redux', 'PassportJS', 'Google Oauth', 'MySQL', 'Sequelize'],
+        paragraph: [
+            { title: 'Why Fast Fleet?', content: 'Fast fleet app was built as a solution for a Penske problem while trying to rent equipment that was down for repairs, rented out or simply not ready due to poor log keeping issues, We replaced the single purpose devices used to log in and out equipment, the main problem with that device was that you need to have it with you to report problems on vehicles, or you should call the fleet manager to write the report for the vehicle  and then send it to the rent managers where equipment is delisted from rental fleets. Also the device was extremely expensive, was failing and support was limited' },
+            { title: 'Framework', content: 'After discussing the main problems with the managers and teams involved in logging data, The team decided to work on a solution easy to implement, fast to develop and mantain. The solution was React Native (SDK 36.0), code once for IOS and Android, one team can handle the mobile development, the server was built with nodejs' },
+            { title: 'The db', content: 'Since most of penske legacy software is built on SQL and MYSQL, we decided to use MYSQL for the db to keep a natural flow between apps without needing to write or use additional plugins and how larget he MYSQL community is and how well supported the mysql node packages are. ' },
+            { title: 'Google Vision', content: 'I was in charge of the main upload and image processing components, to make the process as simple as possible for the users, I incorporated the google vision API to analyze the serial numbers or vin numbers of a vehicle. When given a picture, google vision analyzes any text in the picture and replies with an array of strings, I took this string and look it up in the database to match a possible equipment, if the equipment serial/vin number is found in the db, the user would get feedback with the response to continue or try again or manually add the vin/serial. This process reduced the time to log in/out equipment. Below is the main simplified implementation of google vision API to recognize text from an image uploaded and processed with multer:' },
+            { title: 'The Camera Frame', content: 'Below is a reusable react native component created to handle the camera permissions for this project, along with the picture taking, This component fetches the Fast Fleet API which I won\'t provide here, so if you want to reuse this component you need to set your own API url on line 42, Also this component requires a camera grid to work, I won\'t provide the camera grid here but if you need assistance implementing a camera grid to work with this component, just email me or contact me at the bottom of this page.' },
             { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
         ],
-        code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
+        code: [
+            { title: '', url: 'https://gist.github.com/buddyeorl/0a87ebd836ebb34e0629dcca2f063e92.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/6d2c9517d9727ffdb7439aab4a2fa9a0.js' },
+        ],
         link: 'https://www.katena.com',
         //everything that goes after the main content
-        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
+        order: [
+            { type: 'paragraph', index: 0 },
+            { type: 'paragraph', index: 1 },
+            { type: 'paragraph', index: 2 },
+            { type: 'paragraph', index: 3 },
+            { type: 'code', index: 0 },
+            { type: 'paragraph', index: 4 },
+            { type: 'code', index: 1 },
+            { type: 'image', index: 1 },
+            { type: 'technologies' },
+            { type: 'link' }
+        ]
     },
     tinyMonitor: {
         url: '/projects/tinyMonitor',
@@ -250,28 +323,6 @@ const shortProjects = {
         },
         images: ['https://media.istockphoto.com/photos/raspberry-pi-circuit-board-picture-id458300299?k=6&m=458300299&s=170667a&w=0&h=J2WQEfdKToCUjwEKsttcl4mr6y9yKbyiU74UF0804pc='],
         technologies: ['JS', 'NodeJS', 'React Native', 'Websockets', 'Twilio', 'ExpressJS', 'PassportJS', 'MongoDB'],
-        paragraph: [
-            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-        ],
-        code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
-        link: 'https://www.katena.com',
-        //everything that goes after the main content
-        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
-    },
-    fastFleet: {
-        url: '/projects/fastFleet',
-
-        main: {
-            title: 'Fast Fleet',
-            duty: 'Full Stack developer',
-            description: 'React Native app used to internally manage large vehicle fleets',
-            content: 'Using nodejs I Built the server and Front end for a prototype device called Fast Fleet',
-            image: 'https://media.istockphoto.com/photos/raspberry-pi-circuit-board-picture-id458300299?k=6&m=458300299&s=170667a&w=0&h=J2WQEfdKToCUjwEKsttcl4mr6y9yKbyiU74UF0804pc='
-        },
-        images: ['https://media.istockphoto.com/photos/raspberry-pi-circuit-board-picture-id458300299?k=6&m=458300299&s=170667a&w=0&h=J2WQEfdKToCUjwEKsttcl4mr6y9yKbyiU74UF0804pc='],
-        technologies: ['JS', 'NodeJS', 'ExpressJS', 'Google Vision', 'AWS S3', 'React Native', 'Redux', 'PassportJS', 'Google Oauth', 'MongoDB'],
         paragraph: [
             { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
             { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },

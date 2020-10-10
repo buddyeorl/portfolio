@@ -359,7 +359,7 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
     const styles = {
         wrapper: {
             height: '100vh',
-            overflow: 'scroll',
+            overflow: 'hidden scroll',
             position: 'fixed'
         },
         main: {
@@ -577,6 +577,15 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
         )
     }
 
+    const reference = (index) => {
+        return (
+            <React.Fragment>
+                {/* <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '28px', fontWeight: 300 }}> Resources:</h1> */}
+                <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '32px', marginBottom: '30px' }}> {data.reference[index].content} <a href={data.reference[index].url} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>{data.reference[index].label}</strong></a></p>
+            </React.Fragment>
+        )
+    }
+
     const referenceLinks = () => {
         return (
             <React.Fragment>
@@ -638,6 +647,9 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
                                     break;
                                 case 'link':
                                     return referenceLinks();
+                                    break;
+                                case 'reference':
+                                    return reference(item.index);
                                     break;
                                 case 'technologies':
                                     return technologies();
