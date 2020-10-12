@@ -530,12 +530,13 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
     const largeImage = (index) => {
         return (<div style={{
             ...styles.mainDescription, backgroundSize: '100% 100%',
+            height: '420px',
             maxWidth: '720px',
             backgroundRepeat: 'no-repeat',
             backgroundPosition: 'center',
             backgroundImage: `url("${data.images[index]}")`,
             marginTop: '30px',
-            borderRadius: '35px 25px 25px 100px',
+            borderRadius: '35px 25px 25px 35px',
             boxShadow: '-1px 2px 4px -2px',
         }}></div>
         )

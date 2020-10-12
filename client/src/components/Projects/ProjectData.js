@@ -282,18 +282,20 @@ const shortProjects = {
             content: 'Fast Fleet is powered by a Nodejs server and React Native for the mobile App ',
             image: '../fastFleet.png'
         },
-        images: ['../fastFleet.png', '../fastFleetSample.gif'],
+        images: ['../fastFleetSample.gif'],
         technologies: ['JS', 'NodeJS', 'ExpressJS', 'Google Vision', 'AWS S3', 'React Native', 'Redux', 'PassportJS', 'Google Oauth', 'MySQL', 'Sequelize'],
         paragraph: [
             { title: 'Why Fast Fleet?', content: 'Fast fleet app was built as a solution for a Penske problem while trying to rent equipment that was down for repairs, rented out or simply not ready due to poor log keeping issues, We replaced the single purpose devices used to log in and out equipment, the main problem with that device was that you need to have it with you to report problems on vehicles, or you should call the fleet manager to write the report for the vehicle  and then send it to the rent managers where equipment is delisted from rental fleets. Also the device was extremely expensive, was failing and support was limited' },
             { title: 'Framework', content: 'After discussing the main problems with the managers and teams involved in logging data, The team decided to work on a solution easy to implement, fast to develop and mantain. The solution was React Native (SDK 36.0), code once for IOS and Android, one team can handle the mobile development, the server was built with nodejs' },
             { title: 'The db', content: 'Since most of penske legacy software is built on SQL and MYSQL, we decided to use MYSQL for the db to keep a natural flow between apps without needing to write or use additional plugins and how larget he MYSQL community is and how well supported the mysql node packages are. ' },
             { title: 'Google Vision', content: 'I was in charge of the main upload and image processing components, to make the process as simple as possible for the users, I incorporated the google vision API to analyze the serial numbers or vin numbers of a vehicle. When given a picture, google vision analyzes any text in the picture and replies with an array of strings, I took this string and look it up in the database to match a possible equipment, if the equipment serial/vin number is found in the db, the user would get feedback with the response to continue or try again or manually add the vin/serial. This process reduced the time to log in/out equipment. Below is the main simplified implementation of google vision API to recognize text from an image uploaded and processed with multer:' },
+            { title: 'The Upload', content: 'I handled the images upload and storage  with amazon S3 buckets, S3 buckets are easy to implement and uploads are handle with a simple middleware that uses multer and multerS3:' },
             { title: 'The Camera Frame', content: 'Below is a reusable react native component created to handle the camera permissions for this project, along with the picture taking, This component fetches the Fast Fleet API which I won\'t provide here, so if you want to reuse this component you need to set your own API url on line 42, Also this component requires a camera grid to work, I won\'t provide the camera grid here but if you need assistance implementing a camera grid to work with this component, just email me or contact me at the bottom of this page.' },
-            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: '', content: 'Here is a sample of the google vision functionality, recognizing a serial number from the database' },
         ],
         code: [
             { title: '', url: 'https://gist.github.com/buddyeorl/0a87ebd836ebb34e0629dcca2f063e92.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/d22830f7a09d7612860440cc90464706.js' },
             { title: '', url: 'https://gist.github.com/buddyeorl/6d2c9517d9727ffdb7439aab4a2fa9a0.js' },
         ],
         link: 'https://www.katena.com',
@@ -304,9 +306,12 @@ const shortProjects = {
             { type: 'paragraph', index: 2 },
             { type: 'paragraph', index: 3 },
             { type: 'code', index: 0 },
+            { type: 'paragraph', index: 6 },
+            { type: 'image', index: 0 },
             { type: 'paragraph', index: 4 },
             { type: 'code', index: 1 },
-            { type: 'image', index: 1 },
+            { type: 'paragraph', index: 5 },
+            { type: 'code', index: 2 },
             { type: 'technologies' },
             { type: 'link' }
         ]
@@ -319,31 +324,58 @@ const shortProjects = {
             duty: 'Full Stack developer',
             description: 'Tiny Monitor Raspberry PI prototype powered by nodejs and react native',
             content: 'Using nodejs I Built the server and React Native App for a prototype device called "Tiny Monitor" which monitors baby car seats and alert parents when movement, sound and high temperature is detected inside a vehicle',
-            image: 'https://media.istockphoto.com/photos/raspberry-pi-circuit-board-picture-id458300299?k=6&m=458300299&s=170667a&w=0&h=J2WQEfdKToCUjwEKsttcl4mr6y9yKbyiU74UF0804pc='
+            image: '../tinyMonitor.png'
         },
-        images: ['https://media.istockphoto.com/photos/raspberry-pi-circuit-board-picture-id458300299?k=6&m=458300299&s=170667a&w=0&h=J2WQEfdKToCUjwEKsttcl4mr6y9yKbyiU74UF0804pc='],
-        technologies: ['JS', 'NodeJS', 'React Native', 'Websockets', 'Twilio', 'ExpressJS', 'PassportJS', 'MongoDB'],
+        images: ['../tinyMonitor.png', '../tinyMonitor.gif'],
+        technologies: ['JS', 'NodeJS', 'React Native', 'Websockets', 'Twilio', 'rpi-gpio', 'ds18x20', 'onoff', 'Raspberry Pi', 'ExpressJS', 'PassportJS', 'MongoDB'],
         paragraph: [
-            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'Tiny monitor what?', content: 'Tiny monitor uses temperature, sound and movement sensors to warn parents when posibly a child is in a vehicle or else where and the conditions could be harmful for the child, this is a specially useful device for forgetful parents' },
+            { title: 'What I did', content: 'My main job was to design the system that would power this device, including a way to read sensor data and show a feedback on a mobile app,  I did this by setting up two servers for internal communication, a monitor system for the sensor data, a warning system for the external communication, and finally a client side app' },
+            { title: 'The servers', content: 'When working with raspberry pi prototypes, flexibility is the most important factor as prototypes change a lot during the development. I decided to use nodejs and build two servers. A local server on the RPi that would be able to create new users able to access it\'s data, read the sensors data and send feedback to the main server, the main server would authenticate the rpi device and let the users created by itself access its data from a mobile app, also the main server would handle the warnings' },
+            { title: 'The Communication between servers?', content: 'The  main and local server used websockets to communicate, as soon as any device is turned on, the local node server starts with it and communication through websockets is stablished with the main server, the main server starts receiving sensor and warning data that can be accessed by the mobile app, below is a simplified implementation of the local server websocket connection:' },
+            { title: 'What about the sensors?', content: 'I used rpi-gpio and onoff to access the Rpi gpio interface and gather the data from the sensors (used ds18x20 to read data from the temperature sensor) and send this data to the main server through websockets, check the code below where I set the sensor listeners and open the websocket connection if it has been cut:' },
+            { title: 'The warnings and Twilio API?', content: 'There were two warning systems in place, the local server would trigger a sound alarm if sensor data passed certain threshold (e.g. temperature above certain level when movement or sound was recognized), the main server  would trigger a cancellable alarm, if the alarm was not cancelled within few seconds the server would make phone calls, and send text messages to emergency contacts using the twilio API' },
+            { title: '', content: 'See below a short interaction and how movement, temperature and alarms are triggered on the app' },
+            { title: 'The Mobile App', content: 'I built the mobile app using React Native, most of the components were created from scratch using react native components, the temperature thermostat and temperature indicator was created with react-native-svg, below is the component that will render one section ofr the thermostat and the temperature indicator:' },
+            { title: '', content: 'Send me an email or contact me below if you need help building something similar to this or have any questions about this project' }
         ],
-        code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
+        code: [
+            { title: '', url: 'https://gist.github.com/buddyeorl/ee5ab9d30c2fd135c8936e3f5222d5e9.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/9bd9db82b352892015e8780c7a89babd.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/a76a8673dd9e3602ba0b1a82423d83be.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/38931b8f89ad6f325116aaf3ee2e7b33.js' }
+        ],
         link: 'https://www.katena.com',
         //everything that goes after the main content
-        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
+        order: [
+            { type: 'paragraph', index: 0 },
+            { type: 'paragraph', index: 1 },
+            { type: 'paragraph', index: 2 },
+            { type: 'paragraph', index: 3 },
+            { type: 'code', index: 0 },
+            { type: 'paragraph', index: 4 },
+            { type: 'code', index: 1 },
+            { type: 'paragraph', index: 5 },
+            { type: 'code', index: 2 },
+            { type: 'paragraph', index: 6 },
+            { type: 'image', index: 1 },
+            { type: 'paragraph', index: 7 },
+            { type: 'code', index: 2 },
+            { type: 'paragraph', index: 8 },
+            { type: 'technologies' },
+            { type: 'link' }]
     },
     codeListener: {
-        url: '/projects/code-listener',
+        url: '/projects/codeListener',
 
         main: {
             title: 'Code Listener',
             duty: 'Full Stack developer',
             description: 'App that uses IBM Watson\'s Speech recognition to build websites from speech',
             content: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
-            image: '../katena.png'
+            image: '../theCodeListener.png'
         },
-        images: ['../katena.png'],
+        images: ['../theCodeListener.png'],
         technologies: ['JS', 'NodeJS', 'ReactJS', 'ExpressJS', 'PassportJS', 'MongoDB'],
         paragraph: [
             { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
@@ -351,7 +383,7 @@ const shortProjects = {
             { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
         ],
         code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
-        link: 'https://www.katena.com',
+        link: 'https://thecodelistener.herokuapp.com/',
         //everything that goes after the main content
         order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
     },
@@ -374,6 +406,94 @@ const shortProjects = {
         ],
         code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
         link: 'https://www.katena.com',
+        //everything that goes after the main content
+        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
+    },
+    recipeFinder: {
+        url: '/projects/recipe-finder',
+
+        main: {
+            title: 'Recipe Finder',
+            duty: 'Back End developer',
+            description: 'Continuity of institutional knowledge tool',
+            content: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+            image: '../recipeFinder.png'
+        },
+        images: ['../recipeFinder.png'],
+        technologies: ['JS', 'NodeJS', 'Jquery', 'ExpressJS', 'IBM Watson API', 'Wikipedia API', 'Yummly API'],
+        paragraph: [
+            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+        ],
+        code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
+        link: 'https://whatthefork.herokuapp.com/home.html',
+        //everything that goes after the main content
+        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
+    },
+    firstPortfolio: {
+        url: '/projects/firstPortfolio',
+
+        main: {
+            title: 'First Portfolio - Open Source',
+            duty: 'Back End developer',
+            description: 'Continuity of institutional knowledge tool',
+            content: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+            image: '../firstPortfolio.png'
+        },
+        images: ['../firstPortfolio.png'],
+        technologies: ['JS', 'NodeJS', 'Jquery', 'Giphy API'],
+        paragraph: [
+            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+        ],
+        code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
+        link: 'https://alexdatavault.herokuapp.com/',
+        //everything that goes after the main content
+        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
+    },
+    portfolio: {
+        url: '/projects/portfolio',
+
+        main: {
+            title: 'Improved Portfolio - Open Source',
+            duty: 'Back End developer',
+            description: 'Continuity of institutional knowledge tool',
+            content: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+            image: '../portfolio.png'
+        },
+        images: ['../portfolio.png'],
+        technologies: ['JS', 'NodeJS', 'ReactJS'],
+        paragraph: [
+            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+        ],
+        code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
+        link: 'https://buddyeorl.github.io/GifTastic/',
+        //everything that goes after the main content
+        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
+    },
+    giftastic: {
+        url: '/projects/giftastic',
+
+        main: {
+            title: 'Giftastic',
+            duty: 'Back End developer',
+            description: 'Continuity of institutional knowledge tool',
+            content: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+            image: '../giftastic.png'
+        },
+        images: ['../giftastic.png'],
+        technologies: ['JS', 'NodeJS', 'Jquery', 'Giphy API'],
+        paragraph: [
+            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+        ],
+        code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
+        link: 'https://buddyeorl.github.io/GifTastic/',
         //everything that goes after the main content
         order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
     }
