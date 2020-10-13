@@ -1,8 +1,43 @@
 import React, { useState, useEffect } from 'react';
+import './ProjectPage.css'
 import RangeSlider from '../ProjectComponents/MP Components/RangeSlider';
 import SearchBar from '../ProjectComponents/SearchBar'
 import { GalleryMobile } from '../ProjectComponents/MP Components/Gallery'
 import Buff from '../../effects/Buff'
+import MagneticMouse from '../ProjectComponents/MagneticMouse'
+import MovingLabel from '../ProjectComponents/MovingLabel'
+
+//custom components
+import ChatButton from '../ChatButton';
+
+//effects
+import Typing from '../../effects/Typing';
+import SlideOnLoad from '../../effects/SlideOnLoad'
+
+
+const ActivateOnClickComponent = ({ children }) => {
+    const [active, setActive] = useState(false);
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        setActive(!active);
+
+    }
+    return (
+        <div style={{
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            marginRight: '10px',
+            alignItems: 'center'
+        }}>
+            <span style={{ height: '40px', width: '70px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', background: 'white', borderRadius: '5px', boxShadow: '-1px 2px 4px -2px', margin: '0px 10px' }} className='project' onClick={handleClick}>{active ? 'Reset' : 'Try me'} </span>
+            {active && children}
+        </div>
+    )
+}
+
+
 
 
 
@@ -371,131 +406,282 @@ const shortProjects = {
         main: {
             title: 'Code Listener',
             duty: 'Full Stack developer',
-            description: 'App that uses IBM Watson\'s Speech recognition to build websites from speech',
-            content: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+            description: 'App that uses IBM Watson\'s Speech to text API to build websites from speech',
+            content: 'Fun hackacthon project built over night, using the watson\'s speech recognition API',
             image: '../theCodeListener.png'
         },
         images: ['../theCodeListener.png'],
-        technologies: ['JS', 'NodeJS', 'ReactJS', 'ExpressJS', 'PassportJS', 'MongoDB'],
+        technologies: ['JS', 'NodeJS', 'Jquery', 'ExpressJS', 'IBM Watson API'],
         paragraph: [
-            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'Say what??', content: 'The code listener is a fun project that I built for a hackathon, The main idea behind the code listener was to speak a word and see a change on the website (Basic commands, such as create "box", size "bigger", size "smaller", color "blue" etc) to help kids learn how to code by speaking commands and seeing changes right away, Also to develop a tool to be used by teachers around the world, teachers could go to the codelistener.herokuapp.com, speak some words,see changes and html code. ' },
+            { title: 'How I built it?', content: 'I used my experience with the IBM watson API to implement the text to speech API, the api takes a stream of sound, analyze it and return an array of possible matches, including sentences and number of recognized speakers. The array is then parsed and match with a set of functions that handle the html components built. ' },
+            { title: '', content: 'Each html component built is assigned a unique ID that is shown to the users, the user can "target" the id to manipulate/modify/delete the html component with the basic voice commands.' },
+            { title: '', content: 'the server was built with node and express, and it uses websockets to communicate with the client.' },
+
         ],
         code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
+        reference: [
+            { content: 'Special thanks to Sherwino for helping me with the deployment and readme', label: 'Sherwino', url: 'https://api-machinerypal.herokuapp.com/api/equipmentLookup?search=320&search=cat' },
+            { content: 'Melissa for the Front-end', label: 'Melissa', url: 'https://api-machinerypal.herokuapp.com/api/equipmentLookup?search=320&search=cat' },
+            { content: 'And to Charles for his help and solutions', label: 'Charles', url: 'https://api-machinerypal.herokuapp.com/api/equipmentLookup?search=320&search=cat' },
+        ],
+
         link: 'https://thecodelistener.herokuapp.com/',
         //everything that goes after the main content
-        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
+        order: [
+            { type: 'paragraph', index: 0 },
+            { type: 'image', index: 0 },
+            { type: 'paragraph', index: 1 },
+            { type: 'paragraph', index: 2 },
+            { type: 'paragraph', index: 3 },
+            { type: 'technologies' },
+            { type: 'link' },
+            { type: 'reference', index: 0 },
+            { type: 'reference', index: 1 },
+            { type: 'reference', index: 2 },
+        ],
+
     },
     katena: {
         url: '/projects/katena',
 
         main: {
             title: 'Katena',
-            duty: 'Back End developer',
+            duty: 'Full Stack Developer',
             description: 'Continuity of institutional knowledge tool',
-            content: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+            content: 'A tool for the continuity of institutional knowledge, built with Nodejs, Mongodb, IBM watson API, React and React Native ',
             image: '../katena.png'
         },
         images: ['../katena.png'],
-        technologies: ['JS', 'NodeJS', 'ReactJS', 'ExpressJS', 'PassportJS', 'MongoDB'],
+        technologies: ['JS', 'NodeJS', 'ReactJS', 'ExpressJS', 'Express router', "JSON web tokens", 'PassportJS', 'MongoDB', 'Mongoose'],
         paragraph: [
-            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'So what is Katena?', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'And how it works', content: 'Katena uses a bot to support and train new employees, effectively gathers the employee\'s knowledge and keep the institutional "soul", so when the employee leaves the company, the bot takes over and train the new employees, assigns, recommends and learns the duties in the process.' },
+            { title: 'So how\'s it built', content: 'I was in charge of designing and building the katena API but also worked as a bridge between the back and front end. I built the server using Nodejs, Express, Express router' },
+            { title: 'What about the authentication?', content: 'Because the authentication has to serve both web clients and native mobile app clients I implemented the authentication using passportjs, local strategy only, JSON webtokens, bcrypt and SHA256 for the hashing, below is a sample of one of the authentication middlewares I built for this project:' },
+            { title: 'what about the front end?', content: 'On the front end I implemented the web app framework using reactjs, the authentication workflow and the data/form fetching on the Admin section, below is a simple sample of the code I worked on the front end:' }
+
         ],
-        code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
+        code: [
+            { title: '', url: 'https://gist.github.com/buddyeorl/db3a0af436a5dae9a41390ed355dec74.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/db79661fb2d9529c74c42c76844cf218.js' }
+        ],
         link: 'https://www.katena.com',
         //everything that goes after the main content
-        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
+        order: [
+            { type: 'paragraph', index: 0 },
+            { type: 'image', index: 0 },
+            { type: 'paragraph', index: 1 },
+            { type: 'paragraph', index: 2 },
+            { type: 'code', index: 0 },
+            { type: 'paragraph', index: 3 },
+            { type: 'code', index: 1 },
+            { type: 'technologies' },
+            { type: 'link' }]
     },
     recipeFinder: {
-        url: '/projects/recipe-finder',
+        url: '/projects/recipeFinder',
 
         main: {
             title: 'Recipe Finder',
-            duty: 'Back End developer',
-            description: 'Continuity of institutional knowledge tool',
-            content: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+            duty: 'Full Stack Developer',
+            description: 'Visual Recognition recipe finder using IBM Watson API',
+            content: 'I worked as a full stack developer, specifically on the client/server design',
             image: '../recipeFinder.png'
         },
         images: ['../recipeFinder.png'],
-        technologies: ['JS', 'NodeJS', 'Jquery', 'ExpressJS', 'IBM Watson API', 'Wikipedia API', 'Yummly API'],
+        technologies: ['JS', 'NodeJS', 'Jquery', 'Sequelize', 'Google functions', 'Firebase', 'IBM Watson API', 'Wikipedia API', 'Yummly API'],
         paragraph: [
-            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'So What is this?', content: 'A recipe finder that help you find recipes and food information on the go, just take a picture of an ingredient or food, and you\'ll instantly get information about it, add it to the list and get all the recipes you can cook with that ingredient, that easy' },
+            { title: 'Visual Recognition you said?', content: 'I built this app with the IBM watson visual recognition API, when the server receives a picture, it analyzes it with the watson API, Which then replies with a JSON object, the object is then iterate over to find food or ingredients data, an entry is then created in a firebase database, the fb db is being listen to by the client, so as soon as there\'s an entry update, the client receives immediate feedback to process the changes' },
+            { title: 'Why wikepidia API?', content: 'Sometimes you want to know what that food/ingredient is?, the best way to do it?, take a picture and let the recipe finder tell you what it is, using IBM watson\'s response and wikipedia API to display the ingredient information ' },
+            { title: 'Yumm Yummly?', content: 'After processing the image, parsing the response, feeding it to wikipedia API, we\'re ready for the recipe part of this recipe finder, I used the Yummly API to retrieve all recipes that match the ingredients in the list, you can add more ingredients by taking their pictures' },
+
         ],
         code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
         link: 'https://whatthefork.herokuapp.com/home.html',
         //everything that goes after the main content
-        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
+        order: [
+            { type: 'paragraph', index: 0 },
+            { type: 'paragraph', index: 1 },
+            { type: 'paragraph', index: 2 },
+            { type: 'paragraph', index: 3 },
+            { type: 'technologies' },
+            { type: 'link' }]
     },
     firstPortfolio: {
         url: '/projects/firstPortfolio',
 
         main: {
             title: 'First Portfolio - Open Source',
-            duty: 'Back End developer',
-            description: 'Continuity of institutional knowledge tool',
-            content: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+            duty: 'Full Stack developer',
+            description: 'A ReactJS portfolio easily customizable',
+            content: 'I built this portfolio using Reactjs, fully responsive, and easy to customize',
             image: '../firstPortfolio.png'
         },
         images: ['../firstPortfolio.png'],
-        technologies: ['JS', 'NodeJS', 'Jquery', 'Giphy API'],
+        technologies: ['JS', 'NodeJS', 'ReactJS', 'HTML', 'CSS', 'React Router', 'Firebase', 'IBM Watson',],
+
         paragraph: [
-            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'Portfolio and Framework', content: 'This is the first try at building a full portfolio that showcase my skills, and is easily customizable for other people to clone it with their information. The project was built with Reactjs, all components and transitions were built from scratch' },
+            { title: 'The components', content: 'I built a set of components for this project, All reusable and easy to customize' },
+            { title: 'The Magnetic Mouse', content: 'This component will move base on the mouse location, is built with transforms and perspective, listening to the mouse location on the screen with respect of the parent to move, rotate and change perspective accordingly, below is the sample, move the mouse around the container to see the div follow the mouse as it tries to get closer, if you exit the parent div, the position will reset to it\'s initial position:' },
+            { title: 'The Moving Div', content: 'Similar to the magnetic mouse component, this component is more flexible, it accepts "message" component as a prop, "angle" in deg prop and a "follow" optional prop, this component will follow the mouse movement, always trying to get closer to the mouse, try it below:' },
+            { title: '', content: 'Now let\'s try it with follow={false} and angle={50} with an image as a component' },
+            { title: '', content: 'See below how to use this component' },
+
         ],
-        code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
+        code: [
+            { title: '', url: 'https://gist.github.com/buddyeorl/22c39980872dec8020a2f2ed311048cc.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/091c2d3702b5ca31e4262537b49f1aaf.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/64099863a5b42907a2477cc62bd00c0f.js' },
+        ],
+        component: [
+            <div style={{ height: '500px', width: '100%', boxShadow: '-1px 2px 4px -2px', borderRadius: '10px', margin: '10px', display: 'flex', justifyContent: 'center' }}>
+                <MagneticMouse myBackground={'Hi this is a sample message'} />
+            </div>,
+            <div style={{ height: '500px', width: '100%', boxShadow: '-1px 2px 4px -2px', borderRadius: '10px', margin: '10px', display: 'flex', justifyContent: 'center' }}>
+                <MovingLabel follow={true} angle={5} message={<h1>Hi, I'll follow your mouse, as long as you move it inside this div</h1>} />
+            </div>,
+            <div style={{ height: '500px', width: '100%', boxShadow: '-1px 2px 4px -2px', borderRadius: '10px', margin: '10px', display: 'flex', justifyContent: 'center' }}>
+                <MovingLabel follow={false} angle={50} message={<div style={{ height: '200px', width: '300px', backgroundImage: 'url("../firstPortfolio.png")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', boxShadow: '0px 10px 10px -10px', borderRadius: '8px' }}></div>} />
+            </div>,
+
+        ],
         link: 'https://alexdatavault.herokuapp.com/',
+        reference: [
+            { content: 'For all the components and transitions used in this project, to see how to customize it with your information or to clone the complete project, please visit the portfolio\'s github page ', label: 'React Portfolio', url: 'https://github.com/buddyeorl/3dportfolio' }
+
+        ],
+
         //everything that goes after the main content
-        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
+        order: [
+            { type: 'paragraph', index: 0 },
+            { type: 'paragraph', index: 1 },
+            { type: 'paragraph', index: 2 },
+            { type: 'component', index: 0 },
+            { type: 'paragraph', index: 5 },
+            { type: 'code', index: 0 },
+            { type: 'paragraph', index: 3 },
+            { type: 'component', index: 1 },
+            { type: 'paragraph', index: 5 },
+            { type: 'code', index: 1 },
+            { type: 'paragraph', index: 4 },
+            { type: 'component', index: 2 },
+            { type: 'paragraph', index: 5 },
+            { type: 'code', index: 2 },
+            { type: 'technologies' },
+            { type: 'link' },
+            { type: 'reference', index: 0 }
+        ]
     },
     portfolio: {
         url: '/projects/portfolio',
 
         main: {
-            title: 'Improved Portfolio - Open Source',
-            duty: 'Back End developer',
-            description: 'Continuity of institutional knowledge tool',
-            content: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+            title: 'This Portfolio - Open Source',
+            duty: 'Full Stack developer',
+            description: 'Fully customizable portfolio, built with ReactJS',
+            content: 'I created this portfolio as a way to showcase my skills and help those devs in need of an open source portfolio builder, easy to build, easy to navigate, modern design.',
             image: '../portfolio.png'
         },
         images: ['../portfolio.png'],
-        technologies: ['JS', 'NodeJS', 'ReactJS'],
+        technologies: ['JS', 'NodeJS', 'ReactJS', 'React Router', 'CSS'],
         paragraph: [
-            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'The framework', content: 'I built this portfolio and every component from scratch using Reactjs, Hhoks and functional components for the front end, and NodeJS for the backend. The main objective for this project is to make it easier for devs to present their skills, projects and code in a simple organized and responsive way' },
+            { title: 'The Setup', content: 'I built this portfolio to be easy to setup, a JS object holding all the project information, including images, titles, code etc, see below an example of setup, file located in:' },
+            { title: 'The Routes?', content: 'All the Routes are handled with react-router with client side rendering, and the routes are created dinamically from the project data urls. For the navigation, I used the Array.reduce function to add "back" and "forward" pointers to each project in the project object as follows:' },
+            { title: 'The Hooks', content: 'This project uses almost 100% hooks or functional components, below is the implementation of a hook that returns the screen width, height, and pageYOffset, used for responsiveness purposes:' },
+            { title: 'The Typing Effect', content: 'Among the effect components created for this portfolio, my favorite is the Typing effect, below is the sample:' },
+            { title: '', content: 'To use this component simply send an array of strings, each array item will render as an individual span:' },
+            { title: 'The Sliding On Load Effect', content: 'Another simple effect that transforms up,down,left,right or custom direction a component on Load:' },
+            { title: '', content: 'To use this component simply wrap your component with the SlideOnLoad component:' },
+            { title: 'The Chat Button', content: 'I created this button while looking for ways to make the loading indicator appear on the button perimeter, the main problem with this approach is that buttons can have any shape making it tricky for a loading indicator around the surface. I used a shadow span for the activity indicator and the result is the following: ' },
+            { title: '', content: 'See Below for usage of the chat button:' },
+
         ],
-        code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
+        code: [
+            { title: '', url: 'https://gist.github.com/buddyeorl/372f10c7bd3976b1b677c9451776f343.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/a7c22c1e879e7ca469855a404431016c.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/2e34c7fa16a6f162538c44cf32613901.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/ef1bac2faaf99e39ff21f82f48711afd.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/15c3254d3d92b847b8dcb18e1e81dff0.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/896d2ab5e0411676ebc1eef739805457.js' }
+        ],
+        component: [
+            <ActivateOnClickComponent> <div style={{ width: '200px' }}><Typing label={["Hey Im a react component", " check me out!!"]} /></div></ActivateOnClickComponent>,
+            <ActivateOnClickComponent> <SlideOnLoad direction='left' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClickComponent>,
+            <ActivateOnClickComponent> <SlideOnLoad direction='right' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClickComponent>,
+            <ActivateOnClickComponent> <SlideOnLoad direction='up' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClickComponent>,
+            <ActivateOnClickComponent> <SlideOnLoad direction='down' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClickComponent>,
+            <React.Fragment><ChatButton label={'Try me'} shadow={true} direction='right-reversed' /><ChatButton label={'Try me'} shadow={true} direction='right' /> <ChatButton label={'Try me'} shadow={true} direction='lefts-reversed' /><ChatButton label={'Try me'} shadow={true} /></React.Fragment>,
+            <div style={{ width: '300px', position: 'relative' }}><ChatButton onClick={() => { alert("I\'m the only button here with onClick events") }} label={'Try rectangle button'} shadow={true} send={true} /></div>
+
+
+
+        ],
         link: 'https://buddyeorl.github.io/GifTastic/',
+        reference: [
+            { content: 'You can clone or download the component', label: 'here', url: 'urlhere' },
+            { content: 'You can clone or download the component', label: 'here', url: 'urlhere' },
+            { content: 'You can clone or download the component', label: 'here', url: 'urlhere' }
+        ],
         //everything that goes after the main content
-        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
+        order: [
+            { type: 'paragraph', index: 0 },
+            { type: 'paragraph', index: 1 },
+            { type: 'code', index: 0 },
+            { type: 'paragraph', index: 2 },
+            { type: 'code', index: 1 },
+            { type: 'paragraph', index: 3 },
+            { type: 'code', index: 2 },
+            { type: 'paragraph', index: 4 },
+            { type: 'component', index: 0 },
+            { type: 'paragraph', index: 5 },
+            { type: 'code', index: 3 },
+            { type: 'reference', index: 0 },
+            { type: 'paragraph', index: 6 },
+            { type: 'component', index: 1 },
+            { type: 'component', index: 2 },
+            { type: 'component', index: 3 },
+            { type: 'component', index: 4 },
+            { type: 'paragraph', index: 7 },
+            { type: 'code', index: 4 },
+            { type: 'reference', index: 1 },
+            { type: 'paragraph', index: 8 },
+            { type: 'component', index: 5 },
+            { type: 'component', index: 6 },
+            { type: 'paragraph', index: 9 },
+            { type: 'code', index: 5 },
+            { type: 'reference', index: 2 },
+            { type: 'technologies' },
+            { type: 'link' }
+        ]
     },
     giftastic: {
         url: '/projects/giftastic',
 
         main: {
             title: 'Giftastic',
-            duty: 'Back End developer',
+            duty: 'Front End developer',
             description: 'Continuity of institutional knowledge tool',
-            content: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
+            content: 'Fun Personal project, using the Giphy API to pull fun gifs based on input keywords',
             image: '../giftastic.png'
         },
         images: ['../giftastic.png'],
         technologies: ['JS', 'NodeJS', 'Jquery', 'Giphy API'],
         paragraph: [
-            { title: 'First Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: 'Secondary Title', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-            { title: '', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
+            { title: 'The giphy joy', content: 'I created this project to showcase interaction between a client and an external API, in this case Giphy. In this app the client requests gifs through keywords, the keyword is sent to the Giphy API and response is received as a JSON object with an array of gifs that match the keyword. The user has to click the gifs to start playing it' },
+            { title: 'How I Built it', content: 'This app was built with jquery and html using fetch API for the external API interactions.' },
         ],
-        code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
         link: 'https://buddyeorl.github.io/GifTastic/',
         //everything that goes after the main content
-        order: [{ type: 'paragraph', index: 0 }, { type: 'image', index: 0 }, { type: 'code', index: 0 }, { type: 'paragraph', index: 1 }, { type: 'technologies' }, { type: 'link' }]
+        order: [
+            { type: 'paragraph', index: 0 },
+            { type: 'image', index: 0 },
+            { type: 'paragraph', index: 1 },
+            { type: 'technologies' },
+            { type: 'link' }]
     }
 
 }

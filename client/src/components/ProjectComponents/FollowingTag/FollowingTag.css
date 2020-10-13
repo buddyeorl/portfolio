@@ -1,0 +1,35 @@
+.noFollowingTag{
+  background: linear-gradient(to right, rgba(211, 211, 211, 0.171), rgba(1, 9, 34, 0.972),rgba(246, 246, 246, 0));
+  color: rgb(4, 93, 167);
+  position: relative;
+  font-size: 3em;
+  text-align: center;
+  opacity:0;
+}
+
+.followingTagOnViewport{
+  background: linear-gradient(to right, rgba(211, 211, 211, 0.171), rgba(162, 171, 199, 0.972),rgba(246, 246, 246, 0));
+  color: rgb(4, 93, 167);
+  position: relative;
+  font-size: 3em;
+  text-align: center;
+  font-weight: bolder;
+  animation-name: followingTag; 
+  animation-duration: 2s; 
+}  
+
+
+@keyframes followingTag {
+  0% {opacity:0; } 
+  100% {opacity:1; }
+} 
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .followingTagOnViewport{
+    display:none !important;
+  }
+  .noFollowingTag{
+    display:none !important;
+  }
+}

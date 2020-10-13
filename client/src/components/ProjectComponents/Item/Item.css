@@ -1,0 +1,27 @@
+
+  .portfolioItem {
+    width: 160px;
+    height: 180px;
+    background:rgba(0, 0, 0, 0.219);
+    font-size: 1.1em;
+    color: white;
+    border-radius: 3px;
+    padding: 0px;
+    margin-right: 0px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    -webkit-transition: 0s; /* For Safari 3.1 to 6.0 */
+    transition: 0s;
+    display: grid; 
+    align-items: center;
+  }
+
+  .itemImg {
+    width: 86px;
+    height: auto;
+    border: none;
+    transition: width .2s, height .2s;
+  }
+  
+  .itemImg:hover, itemImg:focus{
+    width: 106px;
+  }

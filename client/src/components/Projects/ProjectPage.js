@@ -310,8 +310,8 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
                             let Comp = data.component[item.index];
 
 
-                            return <div style={{ display: 'flex', width: '100%', justifyContent: 'center', margin: '30px 5px' }}>
-                                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: '720px', }}>
+                            return <div style={{ display: 'flex', width: '100%', justifyContent: 'center', margin: '30px 5px', minHeight: '100px' }}>
+                                <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: '720px' }}>
                                     {typeof data.component[item.index] === 'object' ? data.component[item.index] : <Comp />}
                                 </span>
                             </div>
@@ -664,7 +664,7 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
                                     let Comp = data.component[item.index];
 
 
-                                    return <div style={{ display: 'flex', width: '100%', justifyContent: 'center', margin: '30px 5px' }}>
+                                    return <div style={{ display: 'flex', width: '100%', justifyContent: 'center', margin: '30px 5px', minHeight: '100px' }}>
                                         <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', overflow: 'auto', maxWidth: '720px', padding: '20px 0px' }}>
                                             {typeof data.component[item.index] === 'object' ? data.component[item.index] : <Comp />}
                                         </span>

@@ -1,0 +1,11 @@
+
+  .transition3d {    
+    transition: 0s;
+    position: relative;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .transition3d {    
+      transform: translate(0px,0px) perspective(400px) rotateY(0deg) rotateX(0deg);
+    }
+  }
