@@ -24,11 +24,20 @@ npm install && cd client && npm install
 
 ### `Setup`
 
-To create your own portfolio with your own projects and information, you need to modify the setup file located at %projectRoot/client/setup/ProjectData.js
+To create your own portfolio with your own projects and information, you need to modify the setup file 
 
 ### `Custom components`
 if you want to showcase custom components, you can import them at the top of the `ProjectData.js`,
 see Project information below how to render them in your project page 
+
+### `CV pdf file location`
+You should add your cv file to the following directory : `/%Root/client/public/assets/pdfs` and setup the cvFile variable as follows:
+
+``` javascript
+//=========================================PDF CV============================================//
+const cvFile = '../assets/pdfs/fileName.pdf';
+//===========================================================================================//
+```
 
 ### `Developer's contact and general information`
 

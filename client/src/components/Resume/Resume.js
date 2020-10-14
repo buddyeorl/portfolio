@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import './Resume.css';
+import { cvFile } from '../../setup/ProjectData'
 const Resume = () => {
     const something = useRef(null);
     const styles = {
@@ -16,7 +17,7 @@ const Resume = () => {
     return (
         <React.Fragment>
             {/* <iframe ref={something} width="400" height="500" className='resume' name="myiframe" id="myiframe" src="./CV JULY 2020.pdf" /> */}
-            <object ref={something} className='resume' type="application/pdf" data="/CV JULY 2020.pdf#zoom=100" id="pdf_content">
+            <object ref={something} className='resume' type="application/pdf" data={`${cvFile}#zoom=100`} id="pdf_content">
                 <p>Insert your error message here, if the PDF cannot be displayed.</p>
             </object>
         </React.Fragment>

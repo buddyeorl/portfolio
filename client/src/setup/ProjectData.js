@@ -16,6 +16,10 @@ import Typing from '../effects/Typing';
 import SlideOnLoad from '../effects/SlideOnLoad';
 //===========================================================================================//
 
+//=========================================PDF CV============================================//
+const cvFile = '../assets/pdfs/CV JULY 2020.pdf';
+//===========================================================================================//
+
 //=====================================developer's info======================================//
 const ownerInfo = {
     name: 'Alex Lizarraga',
@@ -42,9 +46,9 @@ const shortProjects = {
             duty: 'Full Stack Web Developer',
             description: 'Fleet Management and Ecommerce app',
             content: 'Served as a bridge between the Back-end and Front-end team, focused on the back-end development',
-            image: '../machinerypal.png'
+            image: '../assets/images/machinerypal.png'
         },
-        images: ['../machinerypal.png'],
+        images: ['../assets/images/machinerypal.png'],
         technologies: ['JS', 'NodeJS', 'AWS S3', 'ExpressJS', 'PassportJS', 'cookie-session', 'Google Oauth', 'MongoDB'],
         paragraph: [
             { title: 'The API', content: 'Designed and Built the API, Express was a great choice for the server when it comes to creating and exposing the API to communicate as a client with the application. Below is a small sample of why I used express for the API:' },
@@ -94,9 +98,9 @@ const shortProjects = {
             duty: 'Front End Developer',
             description: 'Component Library and Design System',
             content: 'I expanded the component library, My goal was to keep things simple and flexible to ensure that it would actually be used',
-            image: '../MP Lib.png'
+            image: '../assets/images/MP Lib.png'
         },
-        images: ['../MP Lib.png'],
+        images: ['../assets/images/MP Lib.png'],
         technologies: ['ReactJS', 'Redux', 'React Router', 'HTML5', 'CSS', 'JS', 'Material-UI'],
         paragraph: [
             { title: 'The Framework', content: 'The MP component library is used by the uship.com corporation and all the siter companies including machinerypal.com, the library hold a set of components that are used by multiple teams. To build the components, I used ReactJS functional components and React hooks because of the flexibility and how easy it is to implement and reuse them' },
@@ -163,9 +167,9 @@ const shortProjects = {
             duty: 'Back End Developer',
             description: 'Open source zipcode information API. ',
             content: 'A non production fast and simple API used by USHIP, MP and other development teams to handle zipcode data used when displaying results by distance, city or location',
-            image: '../zipcode-city-distance.png'
+            image: '../assets/images/zipcode-city-distance.png'
         },
-        images: ['../zipcode-city-distance.png'],
+        images: ['../assets/images/zipcode-city-distance.png'],
         technologies: ['NodeJS', 'JS', 'ExpressJS', 'Express Router', 'CORS', 'Heroku'],
         paragraph: [
             { title: 'The Problem', content: 'When working with location, zipcodes and distances, there are a few options to go with, one is to set a database with all the zipcode data and querying for this data all the time, adding unnecesary traffic to the server. Other option is packing the zipcode data file into the app to handle this process on the client side, getting zipcode info on the client side is faster and removes the unnecessary traffic from the server, the problem is that this can easily add 7-10MBs to the build and usually after images and videos is the biggest size factor in the app. This additional file increases the initial load times between 1.2-2.9s for the average user, as developers we\'re always looking for ways to decrease the loading times, build sizes and server traffic, so in this case, the place to look at is the zipcode data file.' },
@@ -202,9 +206,9 @@ const shortProjects = {
             duty: 'Back End Developer',
             description: 'Open source zipcode information NPM package. ',
             content: 'A fast and simple pkg used by RB auctioneers, Iron planet, Ritchie Specs, MP and other sites to handle zipcode data used when displaying results by distance, city or location handled on the server side',
-            image: '../zipcode-city-distance-pkg.png'
+            image: '../assets/images/zipcode-city-distance-pkg.png'
         },
-        images: ['../zipcode-city-distance-pkg.png'],
+        images: ['../assets/images/zipcode-city-distance-pkg.png'],
         technologies: ['NodeJS', 'JS'],
         paragraph: [
             { title: 'Get all data from a zipcode or city', content: 'Just simple geometry, along with the most recent US geo raw data taken from the US Census website, I created this npm module to solve a problem our dev team had with the USPS API limitations to get radius data and more specific zipcode information, ' },
@@ -267,9 +271,9 @@ const shortProjects = {
             duty: 'Back End Developer',
             description: 'NodeJS Lightweight and lightning fast lookup tool',
             content: 'Developed the data collector tool and the API using Node and ExpressJS to lookup for equipment',
-            image: '../brands-api.png'
+            image: '../assets/images/brands-api.png'
         },
-        images: ['../brands-api.png', '../brands-api-sample.png'],
+        images: ['../assets/images/brands-api.png', '../assets/images/brands-api-sample.png'],
         technologies: ['JS', 'NodeJS', 'ExpressJS', 'MongoDB'],
         paragraph: [
             { title: 'Why I built this?', content: 'Search bars, search bars, search bars, I built this tool to improve the way search bars are used in an app, when a user is trying to search for a keyword on a large database or index, there could be >500ms delay between the request and response received, this is detrimental to the UX and adds some additional traffic to the server, so i believe for extremely large apps with extremely large searchable databases(data that any user can retrieve from a searchbar with or without authentication), the search bars should have their own service API and should be handled in a separate server, this to remove the search traffic from the main app server' },
@@ -319,9 +323,9 @@ const shortProjects = {
             duty: 'Full Stack developer',
             description: 'React Native app used to internally manage large vehicle fleets',
             content: 'Fast Fleet is powered by a Nodejs server and React Native for the mobile App ',
-            image: '../fastFleet.png'
+            image: '../assets/images/fastFleet.png'
         },
-        images: ['../fastFleetSample.gif'],
+        images: ['../assets/images/fastFleetSample.gif'],
         technologies: ['JS', 'NodeJS', 'ExpressJS', 'Google Vision', 'AWS S3', 'React Native', 'Redux', 'PassportJS', 'Google Oauth', 'MySQL', 'Sequelize'],
         paragraph: [
             { title: 'Why Fast Fleet?', content: 'Fast fleet app was built as a solution for a Penske problem while trying to rent equipment that was down for repairs, rented out or simply not ready due to poor log keeping issues, We replaced the single purpose devices used to log in and out equipment, the main problem with that device was that you need to have it with you to report problems on vehicles, or you should call the fleet manager to write the report for the vehicle  and then send it to the rent managers where equipment is delisted from rental fleets. Also the device was extremely expensive, was failing and support was limited' },
@@ -362,9 +366,9 @@ const shortProjects = {
             duty: 'Full Stack developer',
             description: 'Tiny Monitor Raspberry PI prototype powered by nodejs and react native',
             content: 'Using nodejs I Built the server and React Native App for a prototype device called "Tiny Monitor" which monitors baby car seats and alert parents when movement, sound and high temperature is detected inside a vehicle',
-            image: '../tinyMonitor.png'
+            image: '../assets/images/tinyMonitor.png'
         },
-        images: ['../tinyMonitor.png', '../tinyMonitor.gif'],
+        images: ['../assets/images/tinyMonitor.png', '../assets/images/tinyMonitor.gif'],
         technologies: ['JS', 'NodeJS', 'React Native', 'Websockets', 'Twilio', 'rpi-gpio', 'ds18x20', 'onoff', 'Raspberry Pi', 'ExpressJS', 'PassportJS', 'MongoDB'],
         paragraph: [
             { title: 'Tiny monitor what?', content: 'Tiny monitor uses temperature, sound and movement sensors to warn parents when posibly a child is in a vehicle or else where and the conditions could be harmful for the child, this is a specially useful device for forgetful parents' },
@@ -411,9 +415,9 @@ const shortProjects = {
             duty: 'Full Stack developer',
             description: 'App that uses IBM Watson\'s Speech to text API to build websites from speech',
             content: 'Fun hackacthon project built over night, using the watson\'s speech recognition API',
-            image: '../theCodeListener.png'
+            image: '../assets/images/theCodeListener.png'
         },
-        images: ['../theCodeListener.png'],
+        images: ['../assets/images/theCodeListener.png'],
         technologies: ['JS', 'NodeJS', 'Jquery', 'ExpressJS', 'IBM Watson API'],
         paragraph: [
             { title: 'Say what??', content: 'The code listener is a fun project that I built for a hackathon, The main idea behind the code listener was to speak a word and see a change on the website (Basic commands, such as create "box", size "bigger", size "smaller", color "blue" etc) to help kids learn how to code by speaking commands and seeing changes right away, Also to develop a tool to be used by teachers around the world, teachers could go to the codelistener.herokuapp.com, speak some words,see changes and html code. ' },
@@ -453,9 +457,9 @@ const shortProjects = {
             duty: 'Full Stack Developer',
             description: 'Continuity of institutional knowledge tool',
             content: 'A tool for the continuity of institutional knowledge, built with Nodejs, Mongodb, IBM watson API, React and React Native ',
-            image: '../katena.png'
+            image: '../assets/images/katena.png'
         },
-        images: ['../katena.png'],
+        images: ['../assets/images/katena.png'],
         technologies: ['JS', 'NodeJS', 'ReactJS', 'ExpressJS', 'Express router', "JSON web tokens", 'PassportJS', 'MongoDB', 'Mongoose'],
         paragraph: [
             { title: 'So what is Katena?', content: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
@@ -490,9 +494,9 @@ const shortProjects = {
             duty: 'Full Stack Developer',
             description: 'Visual Recognition recipe finder using IBM Watson API',
             content: 'I worked as a full stack developer, specifically on the client/server design',
-            image: '../recipeFinder.png'
+            image: '../assets/images/recipeFinder.png'
         },
-        images: ['../recipeFinder.png'],
+        images: ['../assets/images/recipeFinder.png'],
         technologies: ['JS', 'NodeJS', 'Jquery', 'Sequelize', 'Google functions', 'Firebase', 'IBM Watson API', 'Wikipedia API', 'Yummly API'],
         paragraph: [
             { title: 'So What is this?', content: 'A recipe finder that help you find recipes and food information on the go, just take a picture of an ingredient or food, and you\'ll instantly get information about it, add it to the list and get all the recipes you can cook with that ingredient, that easy' },
@@ -520,9 +524,9 @@ const shortProjects = {
             duty: 'Full Stack developer',
             description: 'A ReactJS portfolio easily customizable',
             content: 'I built this portfolio using Reactjs, fully responsive, and easy to customize',
-            image: '../firstPortfolio.png'
+            image: '../assets/images/firstPortfolio.png'
         },
-        images: ['../firstPortfolio.png'],
+        images: ['../assets/images/firstPortfolio.png'],
         technologies: ['JS', 'NodeJS', 'ReactJS', 'HTML', 'CSS', 'React Router', 'Firebase', 'IBM Watson',],
 
         paragraph: [
@@ -547,7 +551,7 @@ const shortProjects = {
                 <MovingLabel follow={true} angle={5} message={<h1>Hi, I'll follow your mouse, as long as you move it inside this div</h1>} />
             </div>,
             <div style={{ height: '500px', width: '100%', boxShadow: '-1px 2px 4px -2px', borderRadius: '10px', margin: '10px', display: 'flex', justifyContent: 'center' }}>
-                <MovingLabel follow={false} angle={50} message={<div style={{ height: '200px', width: '300px', backgroundImage: 'url("../firstPortfolio.png")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', boxShadow: '0px 10px 10px -10px', borderRadius: '8px' }}></div>} />
+                <MovingLabel follow={false} angle={50} message={<div style={{ height: '200px', width: '300px', backgroundImage: 'url("../assets/images/firstPortfolio.png")', backgroundSize: '100% 100%', backgroundRepeat: 'no-repeat', backgroundPosition: 'center center', boxShadow: '0px 10px 10px -10px', borderRadius: '8px' }}></div>} />
             </div>,
 
         ],
@@ -590,9 +594,9 @@ const shortProjects = {
             duty: 'Full Stack developer',
             description: 'Fully customizable portfolio, built with ReactJS',
             content: 'I created this portfolio as a way to showcase my skills and help those devs in need of an open source portfolio builder, easy to build, easy to navigate, modern design.',
-            image: '../portfolio.png'
+            image: '../assets/images/portfolio.png'
         },
-        images: ['../portfolio.png'],
+        images: ['../assets/images/portfolio.png'],
         technologies: ['JS', 'NodeJS', 'ReactJS', 'React Router', 'CSS'],
         paragraph: [
             { title: 'The framework', content: 'I built this portfolio and every component from scratch using Reactjs, Hooks and functional components for the front end, and NodeJS for the backend. The main objective for this project is to make it easier for devs to present their skills, projects and code in a simple organized and responsive way' },
@@ -706,9 +710,9 @@ const shortProjects = {
             duty: 'Front End developer',
             description: 'Continuity of institutional knowledge tool',
             content: 'Fun Personal project, using the Giphy API to pull fun gifs based on input keywords',
-            image: '../giftastic.png'
+            image: '../assets/images/giftastic.png'
         },
-        images: ['../giftastic.png'],
+        images: ['../assets/images/giftastic.png'],
         technologies: ['JS', 'NodeJS', 'Jquery', 'Giphy API'],
         paragraph: [
             { title: 'The giphy joy', content: 'I created this project to showcase interaction between a client and an external API, in this case Giphy. In this app the client requests gifs through keywords, the keyword is sent to the Giphy API and response is received as a JSON object with an array of gifs that match the keyword. The user has to click the gifs to start playing it' },
@@ -718,7 +722,6 @@ const shortProjects = {
         //everything that goes after the main content
         order: [
             { type: 'paragraph', index: 0 },
-            { type: 'image', index: 0 },
             { type: 'paragraph', index: 1 },
             { type: 'technologies' },
             { type: 'link' }]
@@ -745,4 +748,4 @@ Object.keys(shortProjects).reduceRight((cur, prev, index) => {
     return prev
 })
 
-export { ownerInfo, shortProjects };
+export { cvFile, ownerInfo, shortProjects };
