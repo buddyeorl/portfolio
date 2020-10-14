@@ -132,7 +132,7 @@ const shortProjects = {
             </div>,
             <React.Fragment><Buff><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100px', height: '50px', margin: '0px 5px', background: 'steelblue', color: 'white', cursor: 'pointer', maxWidth: '20vw' }}> Div </div></Buff><Buff><span style={{ height: '50px', width: '100px', background: 'rgb(53, 53, 53)', color: 'white', borderRadius: '28px 28px 11px 9px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 400, cursor: 'pointer', borderWidth: '1px', maxWidth: '20vw' }} > Span </span></Buff><Buff><button style={{ borderRadius: '15px', height: '50px', width: '100px', outline: 0, color: 'rgb(113, 106, 106)', background: 'white', borderStyle: 'solid', borderColor: 'cornflowerblue', borderWidth: '1px', fontWeight: 100, cursor: 'pointer', margin: '5px', padding: '5px', maxWidth: '20vw' }}>Button</button></Buff></React.Fragment>,
             <div style={{ background: 'white', boxShadow: '-1px 1px 5px -2px', borderRadius: '5px', }}>
-                <GalleryMobile images={['/machinerypal.png', '/katena.png', 'https://images.pexels.com/photos/5533931/pexels-photo-5533931.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500']} />
+                <GalleryMobile images={['/assets/images/machinerypal.png', '/assets/images/katena.png', 'https://images.pexels.com/photos/5533931/pexels-photo-5533931.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500']} />
             </div>
 
         ],
