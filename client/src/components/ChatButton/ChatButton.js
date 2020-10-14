@@ -111,6 +111,7 @@ const ChatButton = ({ children, iconPosition = 'left', label = 'Portfolio', onCl
         }
         setTrigger(true);
         clearInterval(timer1);
+        onClick(e);
     }
 
 

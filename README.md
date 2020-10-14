@@ -24,7 +24,7 @@ npm install && cd client && npm install
 
 ### `Setup`
 
-To create your own portfolio with your own projects and information, you need to modify the setup file located AT %PROJECTROOTDIRECTORY/client/setup/ProjectData.js
+To create your own portfolio with your own projects and information, you need to modify the setup file located at %projectRoot/client/setup/ProjectData.js
 
 ### `Custom components`
 if you want to showcase custom components, you can import them at the top of the `ProjectData.js`,
