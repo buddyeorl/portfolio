@@ -1,12 +1,12 @@
-## Portfolio for All!
+## `Portfolio for All!`
 
-Easily customizable, Click here to see the [Live version](https://www.alexcode.io).
-Check all the components used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/components).
-Check all the effects used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/effects).
-Check all the hooks used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/hooks).
+Easily customizable, Click here to see the [Live version](https://www.alexcode.io).<br/>
+Check all the components used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/components).<br/>
+Check all the effects used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/effects).<br/>
+Check all the hooks used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/hooks).<br/>
 Check the setup file [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/setup).
 
-### Clone
+### `Clone`
 
 you can download this repo [Here](https://github.com/buddyeorl/portfolio/archive/master.zip)
 
@@ -15,22 +15,22 @@ or you can clone it:
 git clone https://github.com/buddyeorl/portfolio.git
 ```
 
-### installing the modules and packages
+### `installing the modules and packages`
 from inside the root directory (i.e. where package.json is located)
 
 ```
 npm install && cd client && npm install
 ```
 
-### Setup
+### `Setup`
 
 To create your own portfolio with your own projects and information, you need to modify the setup file located AT %PROJECTROOTDIRECTORY/client/setup/ProjectData.js
 
-### Custom components
+### `Custom components`
 if you want to showcase custom components, you can import them at the top of the `ProjectData.js`,
 see Project information below how to render them in your project page 
 
-### Developer's contact and general information
+### `Developer's contact and general information`
 
 Modify the object `ownerInfo` with your information, see example:
 
@@ -185,7 +185,7 @@ const shortProjects = {
 
 see the above example [live](https://alexcode.herokuapp.com/projects/brands-api)
 
-### The server
+### `The server`
 
 The server was built with nodejs. it's light and simple. The api has only one entry `api/send` that handles the sending emails functionality using nodemailer, all the setup is done, you just need to setup your own email credentials using the env variables to make it work with your information, this are the three variables you need to setup when you deploy your portfolio, :
 
@@ -206,7 +206,7 @@ The server was built with nodejs. it's light and simple. The api has only one en
 **Note1: see nodemailer's [API]() for more information on how nodemailer handles your credentials.**<br />
 **Note2: it`s always important that you take all the security steps to protect sensitive data specially when handling passwords in plain text. I recommend you use a type of encryption but the explanation of that is beyond the scope of this portfolio site.**<br />
 
-### Test locally /api/send (sending emails)
+### `Test locally /api/send (sending emails)`
 
 To test sending emails locally you need to setup the env variables. If you are on macOS you can setup you enviromental variables to test the email sending functionality, here are the steps to do this:
 * create a text file .env in the project root directory and open it:
@@ -221,7 +221,7 @@ To test sending emails locally you need to setup the env variables. If you are o
 * run your node application 
 
 
-## Learn More
+## `Learn More`
 
 Again check my portfolio here [Alex Lizarraga](https://www.alexcode.io). or if you have any questions  about this project or any other project or just want to say hi, send me an email here hello@alexcode.io
 
