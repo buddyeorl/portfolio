@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef, ReactDOM } from 'react';
 import './ProjectPage.css'
 import Contact from '../Contact';
+import CodeGist from '../CodeGist';
 
 import { useHistory, useLocation, Link } from "react-router-dom";
 
@@ -82,24 +83,24 @@ const NavButton = ({ onClick = () => null, position = 'left' }) => {
 
 
 //iFrame with the github gist to show code fragments if needed
-const Code = ({ children, url, title = '' }) => {
-    const myRef1 = useRef(null);
-    const [frameHeight, setFrameHeight] = useState('500px');
+// const Code = ({ children, url, title = '' }) => {
+//     const myRef1 = useRef(null);
+//     const [frameHeight, setFrameHeight] = useState('500px');
 
 
-    //console.log(data.code[index])
-    let srcdoc =
-        '<html> <style type="text/css">body {margin:5px 0px; padding-top:20px;}.blob-wrapper {padding-bottom:20px; padding-top:20px; overflow-x:auto;overflow-y:hidden;}</style><body><script src="' + url + '"></script><body></html>'
+//     //console.log(data.code[index])
+//     let srcdoc =
+//         '<html> <style type="text/css">body {margin:5px 0px; padding-top:20px;}.blob-wrapper {padding-bottom:20px; padding-top:20px; overflow-x:auto;overflow-y:hidden;}</style><body><script src="' + url + '"></script><body></html>'
 
-    return (
-        <React.Fragment>
-            {children && children}
-            <iframe ref={myRef1} onLoad={() => setFrameHeight(myRef1 && myRef1.current && myRef1.current.contentDocument && myRef1.current.contentDocument.body.clientHeight)} frameBorder={0} style={{ minWidth: '200px', width: '100%', maxWidth: '720px', height: `${frameHeight - 36 + 'px'}` }} scrolling="no" seamless="seamless"
-                srcDoc={srcdoc}
-            />
-        </React.Fragment>
-    )
-}
+//     return (
+//         <React.Fragment>
+//             {children && children}
+//             <iframe ref={myRef1} onLoad={() => setFrameHeight(myRef1 && myRef1.current && myRef1.current.contentDocument && myRef1.current.contentDocument.body.clientHeight)} frameBorder={0} style={{ minWidth: '200px', width: '100%', maxWidth: '720px', height: `${frameHeight - 36 + 'px'}` }} scrolling="no" seamless="seamless"
+//                 srcDoc={srcdoc}
+//             />
+//         </React.Fragment>
+//     )
+// }
 
 
 const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
@@ -285,11 +286,11 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
                 {data.order.map((item) => {
                     switch (item.type) {
                         case 'code':
-                            return <Code url={data.code[item.index].url} title={data.code[item.index].title === '' ? '' : data.code[item.index].title} >
+                            return <CodeGist url={data.code[item.index].url} title={data.code[item.index].title === '' ? '' : data.code[item.index].title} >
                                 {data.code[item.index].title !== '' &&
                                     <h1 style={styles.h1}> {data.code[item.index].title}</h1>
                                 }
-                            </Code>
+                            </CodeGist>
                                 ;
                             break;
                         case 'image':
@@ -344,7 +345,6 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
     const [active, setActive] = useState(false)
 
 
-    console.log(myRef1)
     // && myRef1.current.contentDocument.body
     useEffect(() => {
         if (myRef.current && myRef.current.scrollTo) {
@@ -636,11 +636,11 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
                         {data.order.map((item) => {
                             switch (item.type) {
                                 case 'code':
-                                    return <Code url={data.code[item.index].url}>
+                                    return <CodeGist url={data.code[item.index].url}>
                                         {data.code[item.index].title !== '' &&
                                             <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '20px', fontWeight: 300 }}> {data.code[item.index].title}</h1>
                                         }
-                                    </Code>
+                                    </CodeGist>
                                         ;
                                     break;
                                 case 'image':

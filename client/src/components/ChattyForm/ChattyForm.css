@@ -1,0 +1,26 @@
+.contactInput:focus{
+    outline-style: none;
+}
+
+.outer_circle { 
+    position: relative; 
+    margin: 50px; 
+    width: 100px; 
+    height: 100px; 
+    border-radius: 50%; 
+    background: #ffffff; 
+} 
+  
+.inner_circle { 
+    background-image: linear-gradient( 
+             to bottom, rgb(9, 112, 26) 0%, 
+             rgb(21, 255, 0) 100%); 
+    content: ''; 
+    position: absolute; 
+    top: -20px; 
+    bottom: -20px; 
+    right: -20px; 
+    left: -20px; 
+    z-index: -1; 
+    border-radius: inherit; 
+}

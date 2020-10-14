@@ -9,37 +9,25 @@ import MovingLabel from '../ProjectComponents/MovingLabel'
 
 //custom components
 import ChatButton from '../ChatButton';
+import ChattyForm from '../ChattyForm'
+import ActivateOnClick from '../ActivateOnClick';
 
 //effects
 import Typing from '../../effects/Typing';
-import SlideOnLoad from '../../effects/SlideOnLoad'
+import SlideOnLoad from '../../effects/SlideOnLoad';
 
-
-const ActivateOnClickComponent = ({ children }) => {
-    const [active, setActive] = useState(false);
-
-    const handleClick = (e) => {
-        e.preventDefault();
-        setActive(!active);
-
+const ownerInfo = {
+    name: 'Alex Lizarraga',
+    title: 'Full Stack Developer',
+    description: `Full stack developer & entrepreneur \nReactJS, Native, NodeJS, JS, Python and more`,
+    introMessage: ['Hi, I\'m Alex Lizarraga', 'I like building things that are functional,simple and easy to use.'], // Will type one line per index.
+    socialAccounts: {
+        github: { label: 'buddyeorl', url: 'https://github.com/buddyeorl' },
+        linkedin: { label: 'alizarraga', url: 'https://www.linkedin.com/in/alizarraga/' },
+        twitter: { label: 'A_Lizar', url: 'https://twitter.com/A_Lizar' },
+        facebook: { label: 'alexander.lizarraga.144', url: 'https://www.facebook.com/alexander.lizarraga.144' }
     }
-    return (
-        <div style={{
-            width: '100%',
-            height: '100%',
-            display: 'flex',
-            marginRight: '10px',
-            alignItems: 'center'
-        }}>
-            <span style={{ height: '40px', width: '70px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', background: 'white', borderRadius: '5px', boxShadow: '-1px 2px 4px -2px', margin: '0px 10px' }} className='project' onClick={handleClick}>{active ? 'Reset' : 'Try me'} </span>
-            {active && children}
-        </div>
-    )
 }
-
-
-
-
 
 const shortProjects = {
     machinerypal: {
@@ -122,7 +110,12 @@ const shortProjects = {
             { title: 'To see it in action please try this component on a mobile or touch enabled device, for swipes, pinch gestures, etc to work', url: 'https://gist.github.com/buddyeorl/e17f17aeda790c9105186c7e1b30a37a.js' },
             { title: '', url: 'https://gist.github.com/buddyeorl/779175d3516afdb2a8fc1ec58f9951d0.js' },
         ],
-        link: 'https://www.katena.com',
+        reference: [
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ProjectComponents/MP%20Components/RangeSlider' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/effects/Buff' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ProjectComponents/MP%20Components/Gallery' },
+        ],
+        link: 'https://www.machinerypal.com',
         component: [
             <div style={{ width: 'calc(100% - 15px)' }}>
                 <RangeSlider range={[1980, 2020]} label={'Year'} cb={(startValue, endValue) => { console.log('Start=', startValue, ' End=', endValue); }} />
@@ -142,12 +135,15 @@ const shortProjects = {
             { type: 'paragraph', index: 2 },
             { type: 'component', index: 0 },
             { type: 'code', index: 0 },
+            { type: 'reference', index: 0 },
             { type: 'paragraph', index: 3 },
             { type: 'component', index: 1 },
             { type: 'code', index: 1 },
+            { type: 'reference', index: 1 },
             { type: 'paragraph', index: 4 },
             { type: 'component', index: 2 },
             { type: 'code', index: 2 },
+            { type: 'reference', index: 2 },
             { type: 'paragraph', index: 5 },
             { type: 'code', index: 3 },
             { type: 'paragraph', index: 6 },
@@ -214,6 +210,9 @@ const shortProjects = {
             { tile: '', url: 'https://gist.github.com/buddyeorl/5f005cb18c470b984003526422a44d37.js' },
             { title: '', url: 'https://gist.github.com/buddyeorl/916a02ae66d5aa11cfe78bea11e9c139.js' },
         ],
+        reference: [
+            { content: 'Check the Zipcode-city-distance-pkg Github Repo ', label: 'here', url: 'https://github.com/buddyeorl/zipcode-city-distance-pkg' },
+        ],
         link: 'https://www.npmjs.com/package/zipcode-city-distance',
         //everything that goes after the main content
         order: [
@@ -222,7 +221,8 @@ const shortProjects = {
             { type: 'paragraph', index: 1 },
             { type: 'code', index: 1 },
             { type: 'technologies' },
-            { type: 'link' }
+            { type: 'link' },
+            { type: 'reference', index: 0 }
         ]
     },
     crawlybid: {
@@ -333,7 +333,6 @@ const shortProjects = {
             { title: '', url: 'https://gist.github.com/buddyeorl/d22830f7a09d7612860440cc90464706.js' },
             { title: '', url: 'https://gist.github.com/buddyeorl/6d2c9517d9727ffdb7439aab4a2fa9a0.js' },
         ],
-        link: 'https://www.katena.com',
         //everything that goes after the main content
         order: [
             { type: 'paragraph', index: 0 },
@@ -348,7 +347,7 @@ const shortProjects = {
             { type: 'paragraph', index: 5 },
             { type: 'code', index: 2 },
             { type: 'technologies' },
-            { type: 'link' }
+            // { type: 'link' }
         ]
     },
     tinyMonitor: {
@@ -380,7 +379,6 @@ const shortProjects = {
             { title: '', url: 'https://gist.github.com/buddyeorl/a76a8673dd9e3602ba0b1a82423d83be.js' },
             { title: '', url: 'https://gist.github.com/buddyeorl/38931b8f89ad6f325116aaf3ee2e7b33.js' }
         ],
-        link: 'https://www.katena.com',
         //everything that goes after the main content
         order: [
             { type: 'paragraph', index: 0 },
@@ -398,7 +396,8 @@ const shortProjects = {
             { type: 'code', index: 2 },
             { type: 'paragraph', index: 8 },
             { type: 'technologies' },
-            { type: 'link' }]
+            // { type: 'link' }
+        ]
     },
     codeListener: {
         url: '/projects/codeListener',
@@ -421,9 +420,9 @@ const shortProjects = {
         ],
         code: [{ title: 'this is an example', url: 'https://gist.github.com/buddyeorl/501fa84ff89df13f04af531ed46e8da6.js' }],
         reference: [
-            { content: 'Special thanks to Sherwino for helping me with the deployment and readme', label: 'Sherwino', url: 'https://api-machinerypal.herokuapp.com/api/equipmentLookup?search=320&search=cat' },
-            { content: 'Melissa for the Front-end', label: 'Melissa', url: 'https://api-machinerypal.herokuapp.com/api/equipmentLookup?search=320&search=cat' },
-            { content: 'And to Charles for his help and solutions', label: 'Charles', url: 'https://api-machinerypal.herokuapp.com/api/equipmentLookup?search=320&search=cat' },
+            { content: 'Special thanks to Sherwino for helping me with the deployment and readme', label: 'Sherwino', url: 'https://github.com/sherwino' },
+            { content: 'Melissa for the Front-end', label: 'Melissa', url: 'https://github.com/m-wolowicz' },
+            { content: 'And to Charles for his help and solutions', label: 'Charles', url: 'https://github.com/ThoughtFool' },
         ],
 
         link: 'https://thecodelistener.herokuapp.com/',
@@ -550,6 +549,8 @@ const shortProjects = {
         ],
         link: 'https://alexdatavault.herokuapp.com/',
         reference: [
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ProjectComponents/MagneticMouse' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ProjectComponents/MovingLabel' },
             { content: 'For all the components and transitions used in this project, to see how to customize it with your information or to clone the complete project, please visit the portfolio\'s github page ', label: 'React Portfolio', url: 'https://github.com/buddyeorl/3dportfolio' }
 
         ],
@@ -562,6 +563,7 @@ const shortProjects = {
             { type: 'component', index: 0 },
             { type: 'paragraph', index: 5 },
             { type: 'code', index: 0 },
+            { type: 'reference', index: 0 },
             { type: 'paragraph', index: 3 },
             { type: 'component', index: 1 },
             { type: 'paragraph', index: 5 },
@@ -570,9 +572,10 @@ const shortProjects = {
             { type: 'component', index: 2 },
             { type: 'paragraph', index: 5 },
             { type: 'code', index: 2 },
+            { type: 'reference', index: 1 },
             { type: 'technologies' },
             { type: 'link' },
-            { type: 'reference', index: 0 }
+            { type: 'reference', index: 2 }
         ]
     },
     portfolio: {
@@ -588,7 +591,7 @@ const shortProjects = {
         images: ['../portfolio.png'],
         technologies: ['JS', 'NodeJS', 'ReactJS', 'React Router', 'CSS'],
         paragraph: [
-            { title: 'The framework', content: 'I built this portfolio and every component from scratch using Reactjs, Hhoks and functional components for the front end, and NodeJS for the backend. The main objective for this project is to make it easier for devs to present their skills, projects and code in a simple organized and responsive way' },
+            { title: 'The framework', content: 'I built this portfolio and every component from scratch using Reactjs, Hooks and functional components for the front end, and NodeJS for the backend. The main objective for this project is to make it easier for devs to present their skills, projects and code in a simple organized and responsive way' },
             { title: 'The Setup', content: 'I built this portfolio to be easy to setup, a JS object holding all the project information, including images, titles, code etc, see below an example of setup, file located in:' },
             { title: 'The Routes?', content: 'All the Routes are handled with react-router with client side rendering, and the routes are created dinamically from the project data urls. For the navigation, I used the Array.reduce function to add "back" and "forward" pointers to each project in the project object as follows:' },
             { title: 'The Hooks', content: 'This project uses almost 100% hooks or functional components, below is the implementation of a hook that returns the screen width, height, and pageYOffset, used for responsiveness purposes:' },
@@ -598,7 +601,10 @@ const shortProjects = {
             { title: '', content: 'To use this component simply wrap your component with the SlideOnLoad component:' },
             { title: 'The Chat Button', content: 'I created this button while looking for ways to make the loading indicator appear on the button perimeter, the main problem with this approach is that buttons can have any shape making it tricky for a loading indicator around the surface. I used a shadow span for the activity indicator and the result is the following: ' },
             { title: '', content: 'See Below for usage of the chat button:' },
-
+            { title: 'The Chatty Form', content: 'Forms are plain, tedious, long (or short), and simply boring, they take a lot of space and you need to scroll over them, but they shouldn\'t be like that, that\'s why I built this form based on the typing component and chat button above with some creativity and coding I made a form natural to fill up and less boring, check it out:' },
+            { title: '', content: 'See Below how to use the chatty form:' },
+            { title: 'The CodeGist component', content: 'Show me the code!!!. You probably noticed there\'s a lot of code snippets in this portfolio, but how I did it??, I took advantage of the Github Gists highlighting syntax for code and markdown and implemented a responsive component that renders on full height the github gists just with the gist url' },
+            { title: 'The ActivateOnClick', content: 'This component was used above to show sample components, it works with a trigger button, simply wrap a component/effect you want to show/hide:' }
         ],
         code: [
             { title: '', url: 'https://gist.github.com/buddyeorl/372f10c7bd3976b1b677c9451776f343.js' },
@@ -606,25 +612,37 @@ const shortProjects = {
             { title: '', url: 'https://gist.github.com/buddyeorl/2e34c7fa16a6f162538c44cf32613901.js' },
             { title: '', url: 'https://gist.github.com/buddyeorl/ef1bac2faaf99e39ff21f82f48711afd.js' },
             { title: '', url: 'https://gist.github.com/buddyeorl/15c3254d3d92b847b8dcb18e1e81dff0.js' },
-            { title: '', url: 'https://gist.github.com/buddyeorl/896d2ab5e0411676ebc1eef739805457.js' }
+            { title: '', url: 'https://gist.github.com/buddyeorl/896d2ab5e0411676ebc1eef739805457.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/515f91d7b973c1e1033404c73c8c2b51.js' },
+            { title: 'Example of CodeGist with a MD file syntax', url: 'https://gist.github.com/buddyeorl/298b50ee07c66533b262c1df57cad4f8.js' },
+            { title: 'Example of CodeGist with a JS file syntax', url: 'https://gist.github.com/buddyeorl/fa2bb38aae4ec479b379eaeb7b850926.js' },
+            { title: 'See below how to use CodeGist', url: 'https://gist.github.com/buddyeorl/c78cd9e68a27bad7530dcff818624934.js' },
+            { title: 'See below how to use ActivateOnClick', url: 'https://gist.github.com/buddyeorl/0d01220bae0b2c0d76c81ee6b1b64154.js' }
         ],
         component: [
-            <ActivateOnClickComponent> <div style={{ width: '200px' }}><Typing label={["Hey Im a react component", " check me out!!"]} /></div></ActivateOnClickComponent>,
-            <ActivateOnClickComponent> <SlideOnLoad direction='left' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClickComponent>,
-            <ActivateOnClickComponent> <SlideOnLoad direction='right' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClickComponent>,
-            <ActivateOnClickComponent> <SlideOnLoad direction='up' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClickComponent>,
-            <ActivateOnClickComponent> <SlideOnLoad direction='down' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClickComponent>,
-            <React.Fragment><ChatButton label={'Try me'} shadow={true} direction='right-reversed' /><ChatButton label={'Try me'} shadow={true} direction='right' /> <ChatButton label={'Try me'} shadow={true} direction='lefts-reversed' /><ChatButton label={'Try me'} shadow={true} /></React.Fragment>,
-            <div style={{ width: '300px', position: 'relative' }}><ChatButton onClick={() => { alert("I\'m the only button here with onClick events") }} label={'Try rectangle button'} shadow={true} send={true} /></div>
-
-
+            <ActivateOnClick> <div style={{ width: '200px' }}><Typing label={["Hey Im a react component", " check me out!!"]} /></div></ActivateOnClick>,
+            <ActivateOnClick> <SlideOnLoad direction='left' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClick>,
+            <ActivateOnClick> <SlideOnLoad direction='right' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClick>,
+            <ActivateOnClick> <SlideOnLoad direction='up' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClick>,
+            <ActivateOnClick> <SlideOnLoad direction='down' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClick>,
+            <React.Fragment><ChatButton label={'Try me'} shadow={true} direction='right-reversed' /><ChatButton label={'Try me'} shadow={true} direction='right' /> <ChatButton label={'Try me'} shadow={true} /><ChatButton label={'Try me'} shadow={true} direction='left-reversed' /></React.Fragment>,
+            <div style={{ width: '300px', position: 'relative' }}><ChatButton onClick={() => { alert("I\'m the only button here with onClick events") }} label={'Try rectangle button'} shadow={true} send={true} /></div>,
+            <div style={{ height: '400px', position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', backgroundColor: 'white', borderRadius: '10px', margin: '0px 5px', boxShadow: '-1px 2px 4px -2px' }}><ChattyForm standAlone={true} /></div>,
+            <ActivateOnClick> <p> {`I'm a wrapped component, the button add/remove me from the DOM`} </p></ActivateOnClick>,
 
         ],
-        link: 'https://buddyeorl.github.io/GifTastic/',
+        link: 'https://github.com/buddyeorl/portfolio',
         reference: [
-            { content: 'You can clone or download the component', label: 'here', url: 'urlhere' },
-            { content: 'You can clone or download the component', label: 'here', url: 'urlhere' },
-            { content: 'You can clone or download the component', label: 'here', url: 'urlhere' }
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/effects/Typing' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/blob/master/client/src/effects/SlideOnLoad' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ChatButton' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ChattyForm' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/CodeGist' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ActivateOnClick' },
+            { content: 'To clone this project or check all the components and to see how to customize it with your information check the', label: 'Portfolio Repo', url: 'https://github.com/buddyeorl/portfolio/tree/master/' },
+            { content: 'All the components used in this project', label: 'React Portfolio', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components' },
+            { content: 'All effects in this repo', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/effects' },
+            { content: 'All hooks in this repo', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/hooks' },
         ],
         //everything that goes after the main content
         order: [
@@ -654,8 +672,26 @@ const shortProjects = {
             { type: 'paragraph', index: 9 },
             { type: 'code', index: 5 },
             { type: 'reference', index: 2 },
+            { type: 'paragraph', index: 10 },
+            { type: 'component', index: 7 },
+            { type: 'paragraph', index: 11 },
+            { type: 'code', index: 6 },
+            { type: 'reference', index: 3 },
+            { type: 'paragraph', index: 12 },
+            { type: 'code', index: 7 },
+            { type: 'code', index: 8 },
+            { type: 'code', index: 9 },
+            { type: 'reference', index: 4 },
+            { type: 'paragraph', index: 13 },
+            { type: 'component', index: 8 },
+            { type: 'code', index: 10 },
+            { type: 'reference', index: 5 },
             { type: 'technologies' },
-            { type: 'link' }
+            { type: 'link' },
+            { type: 'reference', index: 6 },
+            { type: 'reference', index: 7 },
+            { type: 'reference', index: 8 },
+            { type: 'reference', index: 9 },
         ]
     },
     giftastic: {
@@ -686,7 +722,7 @@ const shortProjects = {
 
 }
 
-//add navigation:{back, forward} property to shortProjects object, the navigation are the urls to be used on the back and next button in the ProjectPage component, by default the navigation will be added based on the order of project objects above:
+//add navigation:{back, forward} property to shortProjects object, the navigation are the urls to be used on the back and forward button in the ProjectPage component, by default the navigation will be added based on the order of project objects above:
 Object.keys(shortProjects).reduceRight((cur, prev, index) => {
     if (shortProjects[cur].navigation) {
         shortProjects[cur].navigation.back = '/projects/' + prev;
@@ -702,4 +738,4 @@ Object.keys(shortProjects).reduceRight((cur, prev, index) => {
     return prev
 })
 
-export default shortProjects;
+export { ownerInfo, shortProjects };

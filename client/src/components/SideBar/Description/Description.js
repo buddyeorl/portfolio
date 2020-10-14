@@ -1,6 +1,9 @@
 import React from 'react';
 import { useHistory, useLocation, Link } from "react-router-dom";
 
+//import user data
+import { ownerInfo } from '../../../components/Projects/ProjectData.js';
+
 const Description = ({ loading }) => {
     const history = useHistory();
     const location = useLocation();
@@ -41,7 +44,7 @@ const Description = ({ loading }) => {
             fontSize: '13px',
             WebkitFontSmoothing: 'antialiased',
             marginRight: '0px',
-            textAlign: 'justify'
+
         }
     }
 
@@ -66,8 +69,9 @@ const Description = ({ loading }) => {
         </h1>
             </Link>
             <div>
-                <h2 style={styles.h2}> Full Stack Developer</h2>
-                <h3 style={styles.h3}>Full stack developer & entrepreneur <br />ReactJS, Native, NodeJS, JS, Python and more  </h3>
+                <h2 style={styles.h2}> {ownerInfo.title}</h2>
+                <h3 style={styles.h3}>{ownerInfo.description} </h3>
+                {/* <h3 style={styles.h3}>Full stack developer & entrepreneur <br />ReactJS, Native, NodeJS, JS, Python and more  </h3> */}
             </div>
 
         </React.Fragment>

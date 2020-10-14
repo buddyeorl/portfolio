@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+//import user data
+import { ownerInfo } from '../../components/Projects/ProjectData.js';
 //effects
 import Typing from '../../effects/Typing';
 
@@ -92,7 +94,8 @@ const Typing1 = ({ children, label }) => {
 
 
 const Intro = ({ effectEnded }) => {
-    const [typingMessage, setTypingMessage] = useState(['Hi, I\'m Alex Lizarraga', 'I like building things that are functional,simple and easy to use.'])
+    // const [typingMessage, setTypingMessage] = useState(['Hi, I\'m Alex Lizarraga', 'I like building things that are functional,simple and easy to use.'])
+    const [typingMessage, setTypingMessage] = useState(ownerInfo.introMessage)
     const styles = {
         container: {
             //width: '600px',

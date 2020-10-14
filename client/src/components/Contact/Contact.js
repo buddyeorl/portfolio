@@ -352,6 +352,7 @@ const Contact = ({ standAlone = false }) => {
             height: '300px',
             width: width > 500 ? '500px' : '100%',
             display: 'grid',
+            gridTemplateColumns: '100%',
             justifyItems: 'center',
             justifyContent: 'center',
             alignItems: 'flex-end',
