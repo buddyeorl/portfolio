@@ -1,6 +1,10 @@
 ## Portfolio for All!
 
-Click here to see the [Live version](https://www.alexcode.io).
+Easily customizable, Click here to see the [Live version](https://www.alexcode.io).
+Check all the components used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/components).
+Check all the effects used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/effects).
+Check all the hooks used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/hooks).
+Check the setup file [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/setup).
 
 ### Clone
 
