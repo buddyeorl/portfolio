@@ -1,3 +1,5 @@
+## Portfolio for All!
+
 Click here to see the [Live version](https://www.alexcode.io).
 
 ### Clone
@@ -9,7 +11,7 @@ or you can clone it:
 git clone https://github.com/buddyeorl/portfolio.git
 ```
 
-### installing or modules and packages
+### installing the modules and packages
 from inside the root directory (i.e. where package.json is located)
 
 ```
@@ -22,7 +24,7 @@ To create your own portfolio with your own projects and information, you need to
 
 ### Custom components
 if you want to showcase custom components, you can import them at the top of the `ProjectData.js`,
-see below how to render them in your project page 
+see Project information below how to render them in your project page 
 
 ### Developer's contact and general information
 
@@ -42,8 +44,8 @@ const ownerInfo = {
     }
 }
 ```
-**Note1: `introMessage1` uses a custom react component for type style effect, each index will be render as a different line simulating the `enter` keystroke.**
-**Note2: `socialAccounts` is required as the example above. if you have different accounts, you need to modify the component that renders this data at `client/components/SocialBar` to accept other accounts**
+**Note1: `introMessage1` uses a custom react component for type style effect, each index will be render as a different line simulating the `enter` keystroke.**<br />
+**Note2: `socialAccounts` is required as the example above. if you have different accounts, you need to modify the component that renders this data at `client/components/SocialBar` to accept other accounts**<br />
 
 ### `Projects Information`
 
@@ -177,7 +179,7 @@ const shortProjects = {
 ```
 
 
-see the above example live[here](https://alexcode.herokuapp.com/projects/brands-api)
+see the above example [live](https://alexcode.herokuapp.com/projects/brands-api)
 
 ### The server
 
@@ -197,12 +199,12 @@ The server was built with nodejs. it's light and simple. The api has only one en
 * `EMAIL`: Your email address.
 * `ACCESS`: Your email password.
 
-**Note1: see nodemailer's [API]() for more information on how nodemailer handles your credentials.**
-**Note2: it`s always important that you take all take all the security steps to protect sensitive data specially when handling passwords in plain text. I recommend you use a type of encryption but the explanation of that is beyond the scope of this portfolio site.**
+**Note1: see nodemailer's [API]() for more information on how nodemailer handles your credentials.**<br />
+**Note2: it`s always important that you take all the security steps to protect sensitive data specially when handling passwords in plain text. I recommend you use a type of encryption but the explanation of that is beyond the scope of this portfolio site.**<br />
 
-### Test email sending locally
+### Test locally /api/send (sending emails)
 
-If you are on macOS you can setup you enviromental variables to test the email sending functionality, to do this follow this steps:
+To test sending emails locally you need to setup the env variables. If you are on macOS you can setup you enviromental variables to test the email sending functionality, here are the steps to do this:
 * create a text file .env in the project root directory and open it:
 * write each env variable as follows:
     * `export FOO='bar'`
@@ -217,7 +219,7 @@ If you are on macOS you can setup you enviromental variables to test the email s
 
 ## Learn More
 
-Again check the my portfolio here[Alex Lizarraga](https://www.alexcode.io). or if you have any questions  about this project or any other project or just want to say hi, send me an email here hello@alexcode.io
+Again check my portfolio here [Alex Lizarraga](https://www.alexcode.io). or if you have any questions  about this project or any other project or just want to say hi, send me an email here hello@alexcode.io
 
 if you want to contribute with this project please first check the [CODE_OF_CONDUCT](https://github.com/buddyeorl/portfolio/blob/master/CODE_OF_CONDUCT.MD)
 
