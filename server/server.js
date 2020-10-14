@@ -11,7 +11,11 @@ const bodyParser = require('body-parser');
 //initialize app
 const app = express();
 
+// CORS
+let cors = require('cors');
+
 //========================initialize middlewares=========================//
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 //Log all access path and urls
 app.use((req, res, next) => {
@@ -35,6 +39,10 @@ app.use(express.static("../client/build"));
 //set port for server
 app.set('port', (process.env.PORT || 3001));
 
+
+//routes
+const send = require('./api/email')
+app.use('/api', send);
 
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, "../client", "build", "index.html"), function (err) {

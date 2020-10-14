@@ -97,13 +97,11 @@ const Loading = ({ onEnd = () => { return true } }) => {
 
     const handleTransitionEnd = () => {
         if (!transition) {
-            console.log('passing here loading')
             setTimeout(() => {
                 setTop('150%');
                 if (!loading) {
                     onEnd();
                 }
-                console.log('end')
                 setLoading(false);
 
             }, loading ? 500 : 0);

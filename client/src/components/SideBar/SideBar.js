@@ -16,17 +16,6 @@ const SlideOnLoad = ({ children, direction = 'right', initial = 0, end = 20, sty
     const [transform, setTransform] = useState()
 
 
-    console.log('got here again', direction)
-    // useEffect(() => {
-    //     console.log('waiting')
-    //     let timer = setTimeout(() => {
-    //         console.log('triggered')
-    //         setTrigger(true)
-    //     }, 700)
-
-    //     return () => { clearTimeout(timer) }
-    // }, [])
-
     useEffect(() => {
         switch (direction) {
             case 'right':
@@ -42,32 +31,11 @@ const SlideOnLoad = ({ children, direction = 'right', initial = 0, end = 20, sty
                 setTransform(`translateY(${end})`);
                 break;
             case 'custom':
-                console.log('custom')
                 setTransform(trigger ? `translate(${initial})` : `translate(${end})`);
                 break;
             default:
                 setTransform(trigger ? 'translate(0px)' : `translate(-${end})`);
         }
-        // switch (direction) {
-        //     case 'right':
-        //         setTransform(trigger ? `translate(0px)` : `translate(-${end})`);
-        //         break;
-        //     case 'left':
-        //         setTransform(trigger ? `translate(0px)` : `translate(${end})`);
-        //         break;
-        //     case 'up':
-        //         setTransform(trigger ? `translateY(0px)` : `translateY(-${end})`);
-        //         break;
-        //     case 'down':
-        //         setTransform(trigger ? `translateY(0px)` : `translateY(${end})`);
-        //         break;
-        //     case 'custom':
-        //         console.log('custom')
-        //         setTransform(trigger ? `translate(${initial})` : `translate(${end})`);
-        //         break;
-        //     default:
-        //         setTransform(trigger ? 'translate(0px)' : `translate(-${end})`);
-        // }
     }, [direction])
 
 

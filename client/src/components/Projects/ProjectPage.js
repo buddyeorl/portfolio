@@ -3,7 +3,7 @@ import './ProjectPage.css'
 import Contact from '../Contact';
 import CodeGist from '../CodeGist';
 
-import { useHistory, useLocation, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 //custom hooks
 import useWindowsSize from '../../hooks/Dimms/useWindowSize'
@@ -238,13 +238,11 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
         )
     }
 
-
-
     return (
         <React.Fragment>
             <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.back) }} position='left' />
             <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.forward) }} position='right' />
-            <section ref={myRef} style={styles.container} onScroll={onScroll}>
+            <section ref={myRef} style={styles.container} onScroll={(e) => { onScroll(e, myRef) }}>
                 {main()}
                 {data.order.map((item) => {
                     switch (item.type) {
@@ -452,13 +450,13 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
         loading(history, url);
     }
 
-    const handleScroll = (e) => {
+    const handleScroll = (e, reference = myRef) => {
         e.preventDefault();
-        if (myRef.current.scrollHeight - myRef.current.scrollTop - myRef.current.clientHeight <= 60 && !active) {
+        if (reference.current.scrollHeight - reference.current.scrollTop - reference.current.clientHeight <= 60 && !active) {
             centerSocialBar(true);
             setActive(true);
         }
-        if (myRef.current.scrollHeight - myRef.current.scrollTop - myRef.current.clientHeight >= 60 && active) {
+        if (reference.current.scrollHeight - reference.current.scrollTop - reference.current.clientHeight >= 60 && active) {
             centerSocialBar(false);
             setActive(false);
         }

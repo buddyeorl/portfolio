@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 //import user data
-import { ownerInfo } from '../../components/Projects/ProjectData.js';
+import { ownerInfo } from '../../setup/ProjectData.js';
 //effects
 import Typing from '../../effects/Typing';
 

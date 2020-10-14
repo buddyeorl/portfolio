@@ -19,7 +19,6 @@ const SlideOnLoad = ({ children, direction = 'right', initial = 0, end = 20, sty
                 setTransform(`translateY(${end})`);
                 break;
             case 'custom':
-                console.log('custom')
                 setTransform(trigger ? `translate(${initial})` : `translate(${end})`);
                 break;
             default:

@@ -74,7 +74,7 @@ const ZoomableImage = ({ image, onClick }) => {
                         if (tempPinch.length === 2) {
                             setOverflowOnTouch('hidden');
                         }
-                        console.log(midPointPerc)
+
                     }}
                     onPointerMove={(e) => {
                         e.persist()
@@ -163,7 +163,7 @@ const FullScreenGallery = ({ images, onClick }) => {
 
     const handleClick = (e, image) => {
         e.preventDefault();
-        console.log('clicked here')
+
         setZoomableImg(image);
         setZoomable(true);
     }
@@ -191,7 +191,6 @@ const FullScreenGallery = ({ images, onClick }) => {
                     <Button onClick={handleGoBack} style={{ color: 'white', width: '100%', height: '64px' }}> Go Back</Button>
                 </div>
                 {images.map(img => {
-                    console.log(`zoomable is =${zoomable}`)
                     return <div key={img} style={{ backgroundColor: 'black' }}>
                         <img onClick={(e) => { e.preventDefault(); handleClick(e, img) }} style={{ width: '100%' }} src={img} alt='' />
                     </div>
@@ -362,7 +361,6 @@ const Gallery = ({ images }) => {
 
     const handleImgClick = (e, index) => {
         e.preventDefault();
-        console.log(e.target.src)
         setCurImg(index)
 
         //console.log(`offsetLeft - parentScrollLeft ${e.target.offsetLeft - e.target.parentElement.scrollLeft} and parent clientWidth ${e.target.parentElement.clientWidth}`)
@@ -377,7 +375,6 @@ const Gallery = ({ images }) => {
     }
     const handleNextClick = (e, left) => {
         e.preventDefault();
-        console.log(`left : ${left}`)
         {/* if (left && curImg === 0) {
             setCurImg(images.length - 1)
             return

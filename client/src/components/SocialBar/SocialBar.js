@@ -30,7 +30,6 @@ const Item = ({ onMouseEnter, onMouseLeave, url, icon, styles, initialColor = 'w
 
     //use this to clone material icon received and changed color
     useEffect(() => {
-        //console.log('========CLONING CHILDREN HERE ==========', child)
         let newProps = {
             style: {
                 ...icon.props.style && icon.props.style,

@@ -2,8 +2,6 @@ import React, { useRef } from 'react';
 import './Resume.css';
 const Resume = () => {
     const something = useRef(null);
-
-    console.log(something)
     const styles = {
         wrapper: {
             position: 'fixed',

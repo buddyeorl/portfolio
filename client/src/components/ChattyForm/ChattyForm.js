@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './ChattyForm.css';
 import ChatButton from '../ChatButton';
-import InputTimer from '../InputTimer';
 import Typing from '../../effects/Typing'
 import FaceIcon from '@material-ui/icons/Face';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
@@ -224,15 +223,16 @@ const Input = ({ messages }) => {
     }
 
     useEffect(() => {
+        let timer;
         if (!editMode) {
-            setTimeout(() => {
+            timer = setTimeout(() => {
                 setEditMode(inputStatus.every(item => (item.status && item.status !== 'edit')))
             }, 480)
         } else {
             setEditMode(inputStatus.every(item => (item.status && item.status !== 'edit')))
         }
 
-
+        return () => { clearTimeout(timer) }
     }, [inputStatus])
 
     const handleChange = (e) => {

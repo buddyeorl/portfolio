@@ -3,34 +3,13 @@ import './Project.css';
 import ViewListIcon from '@material-ui/icons/ViewList';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 
-import Projects2 from './Projects2';
-
-import { useHistory, useLocation, Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 //custom hooks
 import useWindowsSize from '../../hooks/Dimms/useWindowSize'
 
-const shortProjects = [
-    { url: '/projects/machinerypal', title: 'Machinery Pal', img: 'machinerypal.png', description: 'Fleet Ecommerce Site' },
-    { url: '/projects/katena', title: 'Katena', img: 'katena.png', description: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-    { url: '/projects/zipcodes-pkg', title: 'Zipcode NPM package', img: 'zipcodes-pkg.png', description: 'LightWeight NPM package to lookup for zipcodes, cities, radius distance etc' },
-    { url: '/projects/zipcodees-api', title: 'Zipcode Lookup API', img: 'zipcodes-api.png', description: 'Nodejs API to lookup for zipcode related information, including distances, cities within zip codes etc' },
-    { url: '/projects/machinerypal', title: 'Machinery Pal', img: 'machinerypal.png', description: 'Fleet Ecommerce Site' },
-    { url: '/projects/katena', title: 'Katena', img: 'katena.png', description: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-    { url: '/projects/zipcodes-pkg', title: 'Zipcode NPM package', img: 'zipcodes-pkg.png', description: 'LightWeight NPM package to lookup for zipcodes, cities, radius distance etc' },
-    { url: '/projects/zipcodees-api', title: 'Zipcode Lookup API', img: 'zipcodes-api.png', description: 'Nodejs API to lookup for zipcode related information, including distances, cities within zip codes etc' },
-    { url: '/projects/machinerypal', title: 'Machinery Pal', img: 'machinerypal.png', description: 'Fleet Ecommerce Site' },
-    { url: '/projects/katena', title: 'Katena', img: 'katena.png', description: 'The training and development bot that provides ongoing support to employees, preserves the continuity of institutional knowledge, all while protecting the bottom-line.' },
-    { url: '/projects/zipcodes-pkg', title: 'Zipcode NPM package', img: 'zipcodes-pkg.png', description: 'LightWeight NPM package to lookup for zipcodes, cities, radius distance etc' },
-    { url: '/projects/zipcodees-api', title: 'Zipcode Lookup API', img: 'zipcodes-api.png', description: 'Nodejs API to lookup for zipcode related information, including distances, cities within zip codes etc' },
-]
-
-
-
-
 const Projects = ({ loading, data }) => {
     const [width, height] = useWindowsSize();
-    console.log(width, height)
     const [view, setView] = useState(true); //true for module view, false for list view
     const history = useHistory();
 
@@ -43,8 +22,6 @@ const Projects = ({ loading, data }) => {
             position: 'fixed',
             overflow: 'auto',
             padding: '5px',
-            //color: '#464646',
-            //overflow: 'hidden scroll'
         },
         top: {
             width: '100%',

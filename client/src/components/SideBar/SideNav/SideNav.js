@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './SideNav.css';
 import { useHistory, useLocation, Link } from "react-router-dom";
 
@@ -6,7 +6,6 @@ import { useHistory, useLocation, Link } from "react-router-dom";
 import useWindowsSize from '../../../hooks/Dimms/useWindowSize';
 
 //icons
-import HomeIcon from '@material-ui/icons/Home';
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
@@ -16,8 +15,6 @@ const SideNavMobile = ({ location, history, onClick = () => { return } }) => {
         if (location.pathname !== path) {
             history.push(path);
             onClick();
-        } else {
-            console.log('same path');
         }
 
     }
@@ -38,15 +35,10 @@ const SideNav = ({ onClick = () => { return } }) => {
     const history = useHistory();
     const location = useLocation();
 
-
-    console.log('location', location)
-
     const handleLinkClick = (path) => {
 
         if (location.pathname !== path) {
             history.push(path);
-        } else {
-            console.log('same path');
         }
 
     }

@@ -26,17 +26,11 @@ class Transition3d extends Component {
 		//changing perspective degree between -totalAngle to totalAngle degrees
 		let screenPerspectiveX = ((this.state.width - this.props.x) / this.state.width) * totalAngle * 2; // totalAngle * 2  because im assuming the perspective will change between -totalAngle to totalAngle
 		let screenPerspectiveY = ((this.state.height - this.props.y) / this.state.height) * totalAngle * 2; // totalAngle * 2  because im assuming the perspective will change between -totalAngle to totalAngle
-		//let widthToDegree = screenWidth - 
+
 		// finish changing perspective
 		changeX = (changeX - halfElementWidth) / delay;
 		let halfElementHeight = eleHeight / 2;
 		changeY = (changeY - halfElementHeight) / delay;
-		// this.setState(prevState => ({
-		// 	moveMeRight: this.state.moveMeRight + changeX,
-		// 	moveMeUp: this.state.moveMeUp + changeY,
-		// 	awwPerspectiveX: -1 * (screenPerspectiveX - totalAngle), // Addded -1 to make animation touch ground following the position of the mouse (0 is top and total height is bottom)
-		// 	awwPerspectiveY: screenPerspectiveY - totalAngle
-		// }));
 
 		if (this.props.follow === true) {
 			this.setState(prevState => ({
@@ -51,15 +45,6 @@ class Transition3d extends Component {
 				awwPerspectiveY: screenPerspectiveY - totalAngle
 			}));
 		}
-		// console.log("X " + this.props.x);
-		// console.log("Y " + this.props.y);
-		// console.log("ClientX " + this.state.width);
-		// console.log("ClientY " + this.state.height);
-		// console.log("OffsetTop " + offsetTop);
-		// console.log("OffsetLeft " + offsetLeft);
-		// console.log("Width " + this.instance.getBoundingClientRect().width);
-		// console.log(this.instance.offsetParent);
-		// console.log(this);
 	}
 
 	handleMouseLeave() {

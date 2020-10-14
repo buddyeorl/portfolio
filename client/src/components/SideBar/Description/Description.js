@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory, useLocation, Link } from "react-router-dom";
 
 //import user data
-import { ownerInfo } from '../../../components/Projects/ProjectData.js';
+import { ownerInfo } from '../../../setup/ProjectData.js';
 
 const Description = ({ loading }) => {
     const history = useHistory();
@@ -52,9 +52,6 @@ const Description = ({ loading }) => {
     const handleLinkClick = (path) => {
         if (location.pathname !== path) {
             loading(history, "/");
-            //history.push(path);
-        } else {
-            console.log('same path');
         }
 
     }

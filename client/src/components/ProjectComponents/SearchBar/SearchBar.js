@@ -200,7 +200,7 @@ const SearchBar = ({ width = 400, cbGetResults = () => { } }) => {
 
 
                         }}
-                        autocomplete="off"
+                        autoComplete="off"
                     />
                     <IconButton onClick={sendFormA} style={{ position: 'relative', height: '40px', borderRadius: `${click ? '0px 5px 0px 0px' : '0px 5px 5px 0px'}`, borderWidth: `1px 1px 1px 0px`, borderColor: `${click ? 'lightgray' : 'lightgray'}`, borderStyle: 'solid', fontSize: '12px', backgroundColor: 'ghostwhite', color: 'lightslategray' }}>
                         <SearchIcon style={{ fontSize: '15px' }} />

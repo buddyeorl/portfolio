@@ -9,7 +9,7 @@ import Projects from './components/Projects'
 import ProjectPage from './components/Projects/ProjectPage'
 import SideBar from './components/SideBar'
 //import projects data as shortProjects 
-import { shortProjects } from './components/Projects/ProjectData.js';
+import { shortProjects } from './setup/ProjectData.js';
 import Resume from './components/Resume'
 import Contact from './components/Contact'
 

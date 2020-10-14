@@ -77,13 +77,13 @@ const ChatButton = ({ children, iconPosition = 'left', label = 'Portfolio', onCl
         if (timer && trigger) {
             timer1 = setTimeout(() => {
                 if (deg < 360) {
-                    setDeg(deg + 36)
+                    setDeg(deg + 14.4)
                 } else {
                     //setTimer(false);
                     setTrigger(false);
                     setDeg(0);
                 }
-            }, 50)
+            }, 12)
         }
         return () => { clearTimeout(timer1); }
     }, [deg, trigger])
@@ -100,11 +100,17 @@ const ChatButton = ({ children, iconPosition = 'left', label = 'Portfolio', onCl
         //return () => { clearTimeout(timer); clearTimeout(timer2); }
     }, [send])
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.persist();
-        setTrigger(true);
         //received onclick
-        onClick(e);
+        let timer1
+        if (send) {
+            timer1 = setInterval(() => {
+                setTrigger(true);
+            }, 50)
+        }
+        setTrigger(true);
+        clearInterval(timer1);
     }
 
 

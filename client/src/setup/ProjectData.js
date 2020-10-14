@@ -1,21 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import './ProjectPage.css'
-import RangeSlider from '../ProjectComponents/MP Components/RangeSlider';
-import SearchBar from '../ProjectComponents/SearchBar'
-import { GalleryMobile } from '../ProjectComponents/MP Components/Gallery'
-import Buff from '../../effects/Buff'
-import MagneticMouse from '../ProjectComponents/MagneticMouse'
-import MovingLabel from '../ProjectComponents/MovingLabel'
+import React from 'react';
 
+//===========import all the components and effects you want to showcase(if any)============//
 //custom components
-import ChatButton from '../ChatButton';
-import ChattyForm from '../ChattyForm'
-import ActivateOnClick from '../ActivateOnClick';
-
+import ChatButton from '../components/ChatButton';
+import ChattyForm from '../components/ChattyForm'
+import ActivateOnClick from '../components/ActivateOnClick';
+import RangeSlider from '../components/ProjectComponents/MP Components/RangeSlider';
+import SearchBar from '../components/ProjectComponents/SearchBar';
+import { GalleryMobile } from '../components/ProjectComponents/MP Components/Gallery';
+import MagneticMouse from '../components/ProjectComponents/MagneticMouse';
+import MovingLabel from '../components/ProjectComponents/MovingLabel';
 //effects
-import Typing from '../../effects/Typing';
-import SlideOnLoad from '../../effects/SlideOnLoad';
+import Buff from '../effects/Buff';
+import Typing from '../effects/Typing';
+import SlideOnLoad from '../effects/SlideOnLoad';
+//===========================================================================================//
 
+//=====================================developer's info======================================//
 const ownerInfo = {
     name: 'Alex Lizarraga',
     title: 'Full Stack Developer',
@@ -28,7 +29,10 @@ const ownerInfo = {
         facebook: { label: 'alexander.lizarraga.144', url: 'https://www.facebook.com/alexander.lizarraga.144' }
     }
 }
+//===========================================================================================//
 
+
+//=====================================Portfolio Projects====================================//
 const shortProjects = {
     machinerypal: {
         url: '/projects/machinerypal',
@@ -123,7 +127,7 @@ const shortProjects = {
                 <RangeSlider range={[0, 13]} label='Size' colorButtonLeft='#47a3f5' colorButtonRight='#2e7bbd' colorProgress='black' />
             </div>,
             <React.Fragment><Buff><div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100px', height: '50px', margin: '0px 5px', background: 'steelblue', color: 'white', cursor: 'pointer', maxWidth: '20vw' }}> Div </div></Buff><Buff><span style={{ height: '50px', width: '100px', background: 'rgb(53, 53, 53)', color: 'white', borderRadius: '28px 28px 11px 9px', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontWeight: 400, cursor: 'pointer', borderWidth: '1px', maxWidth: '20vw' }} > Span </span></Buff><Buff><button style={{ borderRadius: '15px', height: '50px', width: '100px', outline: 0, color: 'rgb(113, 106, 106)', background: 'white', borderStyle: 'solid', borderColor: 'cornflowerblue', borderWidth: '1px', fontWeight: 100, cursor: 'pointer', margin: '5px', padding: '5px', maxWidth: '20vw' }}>Button</button></Buff></React.Fragment>,
-            <div style={{ background: 'white', background: 'white', boxShadow: '-1px 1px 5px -2px', borderRadius: '5px', }}>
+            <div style={{ background: 'white', boxShadow: '-1px 1px 5px -2px', borderRadius: '5px', }}>
                 <GalleryMobile images={['/machinerypal.png', '/katena.png', 'https://images.pexels.com/photos/5533931/pexels-photo-5533931.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500']} />
             </div>
 
@@ -721,7 +725,10 @@ const shortProjects = {
     }
 
 }
+//===========================================================================================//
 
+
+//!!!!!!!!!!! DON'T MODIFY ANYTHING BELOW THIS LINE, DYNAMIC NAVIGATION IS SET BELOW!!!!!!!//
 //add navigation:{back, forward} property to shortProjects object, the navigation are the urls to be used on the back and forward button in the ProjectPage component, by default the navigation will be added based on the order of project objects above:
 Object.keys(shortProjects).reduceRight((cur, prev, index) => {
     if (shortProjects[cur].navigation) {
