@@ -208,15 +208,16 @@ const Input = ({ messages = [
     }
 
     useEffect(() => {
+        let timer;
         if (!editMode) {
-            setTimeout(() => {
+            timer = setTimeout(() => {
                 setEditMode(inputStatus.every(item => (item.status && item.status !== 'edit')))
             }, 480)
         } else {
             setEditMode(inputStatus.every(item => (item.status && item.status !== 'edit')))
         }
 
-
+        return () => { clearTimeout(timer) }
     }, [inputStatus])
 
     const handleChange = (e) => {

@@ -28,7 +28,7 @@ const NavButton = ({ onClick = () => null, position = 'left' }) => {
     const styles = {
         span: {
             MozBoxSizing: 'unset',
-            webkitBoxSizing: 'unset',
+            WebkitBoxSizing: 'unset',
             boxSizing: 'unset',
             width: width > 980 ? '50px' : '25px',
             height: width > 980 ? '100px' : '50px',
@@ -80,28 +80,6 @@ const NavButton = ({ onClick = () => null, position = 'left' }) => {
         </span>
     )
 }
-
-
-//iFrame with the github gist to show code fragments if needed
-// const Code = ({ children, url, title = '' }) => {
-//     const myRef1 = useRef(null);
-//     const [frameHeight, setFrameHeight] = useState('500px');
-
-
-//     //console.log(data.code[index])
-//     let srcdoc =
-//         '<html> <style type="text/css">body {margin:5px 0px; padding-top:20px;}.blob-wrapper {padding-bottom:20px; padding-top:20px; overflow-x:auto;overflow-y:hidden;}</style><body><script src="' + url + '"></script><body></html>'
-
-//     return (
-//         <React.Fragment>
-//             {children && children}
-//             <iframe ref={myRef1} onLoad={() => setFrameHeight(myRef1 && myRef1.current && myRef1.current.contentDocument && myRef1.current.contentDocument.body.clientHeight)} frameBorder={0} style={{ minWidth: '200px', width: '100%', maxWidth: '720px', height: `${frameHeight - 36 + 'px'}` }} scrolling="no" seamless="seamless"
-//                 srcDoc={srcdoc}
-//             />
-//         </React.Fragment>
-//     )
-// }
-
 
 const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
     const myRef = useRef(null);
@@ -198,21 +176,6 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
         )
     }
 
-    //iFrame with the github gist to show code fragments if needed
-    // const code = (index) => {
-    //     console.log(data.code[index])
-    //     let srcdoc =
-    //         '<html> <style type="text/css">body {margin:5px 0px; padding-top:20px;}.blob-wrapper {padding-bottom:20px; padding-top:20px; overflow-x:auto;overflow-y:hidden;}</style><body><script src="' + data.code[index].url + '"></script><body></html>'
-    //     console.log(srcdoc)
-
-    //     return (
-    //         <iframe ref={myRef1} onLoad={() => setFrameHeight(myRef1 && myRef1.current && myRef1.current.contentDocument && myRef1.current.contentDocument.body.scrollHeight)} frameBorder={0} style={{ minWidth: '200px', width: '100%', maxWidth: '720px', height: `${frameHeight - 33 + 'px'}` }} scrolling="no" seamless="seamless"
-    //             srcDoc={srcdoc}
-    //         />
-    //     )
-    // }
-
-
 
     const largeImage = (index) => {
         return (<div className='projectPageMobileImgContainer'>
@@ -306,11 +269,7 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
                             return paragraph(item.index);
                             break;
                         case 'component':
-                            console.log('type of', (typeof data.component[item.index]))
-
                             let Comp = data.component[item.index];
-
-
                             return <div style={{ display: 'flex', width: '100%', justifyContent: 'center', margin: '30px 5px', minHeight: '100px' }}>
                                 <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', maxWidth: '720px' }}>
                                     {typeof data.component[item.index] === 'object' ? data.component[item.index] : <Comp />}
@@ -335,15 +294,12 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
 
 const ProjectPage = ({ loading, data, centerSocialBar }) => {
     const myRef = useRef(null);
-    const myRef1 = useRef(null);
     const [width, height, top] = useWindowsSize();
-    const [frameHeight, setFrameHeight] = useState('500px');
 
     const history = useHistory();
 
     //handle whether the social bar has been activated to move. if active ===true and scroll is 200px to the bottom, the social bar will move to the center, other wise will stay in its original position
     const [active, setActive] = useState(false)
-
 
     // && myRef1.current.contentDocument.body
     useEffect(() => {
@@ -352,8 +308,6 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
         }
         centerSocialBar(false);
     }, [data])
-
-
 
 
     const styles = {
@@ -500,11 +454,11 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
 
     const handleScroll = (e) => {
         e.preventDefault();
-        if (e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight <= 60 && !active) {
+        if (myRef.current.scrollHeight - myRef.current.scrollTop - myRef.current.clientHeight <= 60 && !active) {
             centerSocialBar(true);
             setActive(true);
         }
-        if (e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight >= 60 && active) {
+        if (myRef.current.scrollHeight - myRef.current.scrollTop - myRef.current.clientHeight >= 60 && active) {
             centerSocialBar(false);
             setActive(false);
         }
@@ -614,19 +568,7 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
                         </ul>
                     </nav>
 
-                    {/* Short project name and description and main image */}
-                    {/* <section style={styles.main}>
-                        <div style={{ ...styles.mainDescription, display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                            <div style={styles.textMain}>
-                                <h1 style={styles.mainH1}> {data.title}</h1>
-                                <p style={styles.mainName}>{data.name}</p>
-                                <p style={styles.mainP}> {data.shortDescription}</p>
-                            </div>
-                            <div style={{ ...styles.imgMain, backgroundImage: `url("../${data.img[0]}")` }}>
-                            </div>
-                        </div>
-                    </section> */}
-
+                    {/* Main Section goes here */}
                     {main()}
 
                     {/* Long project description and secondary image, skills and resources */}
@@ -659,11 +601,7 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
                                     return paragraph(item.index);
                                     break;
                                 case 'component':
-                                    console.log('type of', (typeof data.component[item.index]))
-
                                     let Comp = data.component[item.index];
-
-
                                     return <div style={{ display: 'flex', width: '100%', justifyContent: 'center', margin: '30px 5px', minHeight: '100px' }}>
                                         <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%', overflow: 'auto', maxWidth: '720px', padding: '20px 0px' }}>
                                             {typeof data.component[item.index] === 'object' ? data.component[item.index] : <Comp />}

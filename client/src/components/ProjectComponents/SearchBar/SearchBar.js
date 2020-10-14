@@ -103,7 +103,6 @@ const SearchBar = ({ width = 400, cbGetResults = () => { } }) => {
                 setPrefill();
                 setClick(false)
                 setLoading(false);
-                console.log(error);
             });
         return
     }
@@ -234,34 +233,6 @@ const SearchBar = ({ width = 400, cbGetResults = () => { } }) => {
                     }}
                 >
 
-                    {/* {prefill && Object.keys(prefill).length > 0 &&
-                        Object.keys(prefill).map((result, index) => (
-                            <li style={{ listStyleType: 'none', textAlign: 'left', padding: '0px', marginBottom: 0, fontWeight: 500 }} key={index}>
-                                <p style={{ paddingLeft: '10px', marginTop: '5px', marginBottom: '5px' }}>{result}</p>
-                                <ul style={{ listStyleType: 'none', padding: 0, marginTop: '5px', marginBottom: '5px' }}>
-                                    {Object.keys(prefill[result]).map(item =>
-                                        <HoveredItem
-                                            item={<React.Fragment>
-                                                <span style={{ verticalAlign: 'middle', fontSize: '13px', lineHeight: '25px' }}>
-                                                    {item}
-                                                </span></React.Fragment>}
-                                            cbGetResults={() => { cbGetResults(prefill[result][item]) }}
-                                            handleInputChange={() => {
-                                                handleInputChange({
-                                                    persist: () => { return }, preventDefault: () => { return },
-                                                    target: {
-                                                        name: 'searchInput',
-                                                        value: prefill[result][item].make + ' ' + prefill[result][item].model
-                                                    }
-                                                })
-                                            }}
-                                        />
-                                    )}
-                                </ul>
-                            </li>
-                        ))
-                    } */}
-
 
                     {/* NEW EQUIPMENT LOOKUPY FROM API */}
                     {prefill && Object.keys(prefill).length > 0 &&
@@ -273,6 +244,7 @@ const SearchBar = ({ width = 400, cbGetResults = () => { } }) => {
                                     {/* ===========ITEMS INSIDE MAKE OBJECT ========= */}
                                     {Object.keys(prefill[make]).map(model =>
                                         <HoveredItem
+                                            key={make + model}
                                             item={<React.Fragment>
                                                 <span style={{ verticalAlign: 'middle', fontSize: '13px', lineHeight: '25px' }}>
                                                     {model}
