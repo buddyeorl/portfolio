@@ -7,16 +7,16 @@ Check all the hooks used in this portfolio [Here](https://github.com/buddyeorl/p
 Check the setup file [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/setup).
 
 ## Contents:
-* [`How to Clone it`](https://github.com/buddyeorl/portfolio#clone)
+* [How to Clone it](https://github.com/buddyeorl/portfolio#clone)
 * [Installation](https://github.com/buddyeorl/portfolio#installation)
 * [Setup] (https://github.com/buddyeorl/portfolio#setup)
-    * [`Custom Components`]((https://github.com/buddyeorl/portfolio#custom-components))
-    * [`CV Location`](https://github.com/buddyeorl/portfolio#cv-pdf-file-location)
-    * [`Developer's information`](https://github.com/buddyeorl/portfolio#sevelopers-contact-and-general-information)
-    * [`Projects Information`](https://github.com/buddyeorl/portfolio#projects-information)
+    * [Custom Components]((https://github.com/buddyeorl/portfolio#custom-components))
+    * [CV Location](https://github.com/buddyeorl/portfolio#cv-pdf-file-location)
+    * [Developer's information](https://github.com/buddyeorl/portfolio#sevelopers-contact-and-general-information)
+    * [Projects Information](https://github.com/buddyeorl/portfolio#projects-information)
     * [Server](https://github.com/buddyeorl/portfolio#server)
-        * [`env variables`](https://github.com/buddyeorl/portfolio#test-locally-apisend-sending-emails)
-* [`Learn More`](https://github.com/buddyeorl/portfolio#learn-more)
+        * [env variables](https://github.com/buddyeorl/portfolio#test-locally-apisend-sending-emails)
+* [Learn More](https://github.com/buddyeorl/portfolio#learn-more)
 
 
 ## Clone
