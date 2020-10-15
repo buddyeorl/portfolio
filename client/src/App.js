@@ -242,11 +242,11 @@ function App() {
     //primary meta tag
     meta.name = 'title';
     meta.content = shortProjects[type] ? shortProjects[type].main.title : 'Projects';
-    document.getElementsByTagName('head')[0].prepend(meta);
+    document.getElementsByTagName('head')[0].append(meta);
     meta = document.createElement('meta');
     meta.name = 'description';
     meta.content = shortProjects[type] ? shortProjects[type].main.description : 'Projects';
-    document.getElementsByTagName('head')[0].prepend(meta);
+    document.getElementsByTagName('head')[0].append(meta);
 
     //OG / FB
 
@@ -262,31 +262,31 @@ function App() {
     meta.name = 'og:type';
     meta.setAttribute('property', 'og:type');
     meta.content = 'website';
-    document.getElementsByTagName('head')[0].prepend(meta);
+    document.getElementsByTagName('head')[0].append(meta);
     //second
     meta = document.createElement('meta');
     meta.name = 'og:url';
     meta.setAttribute('property', 'og:url');
     meta.content = shortProjects[type] ? domain + shortProjects[type].url : 'https://www.alexcode.io';
-    document.getElementsByTagName('head')[0].prepend(meta);
+    document.getElementsByTagName('head')[0].append(meta);
     //third
     meta = document.createElement('meta');
     meta.name = 'og:title';
     meta.setAttribute('property', 'og:title');
     meta.content = shortProjects[type] ? shortProjects[type].main.title : 'Projects';
-    document.getElementsByTagName('head')[0].prepend(meta);
+    document.getElementsByTagName('head')[0].append(meta);
     //fourth
     meta = document.createElement('meta');
     meta.name = 'og:description';
     meta.setAttribute('property', 'og:description');
     meta.content = shortProjects[type] ? shortProjects[type].main.description : 'Check how to build a portfolio like this from https:www.alexcode.io';
-    document.getElementsByTagName('head')[0].prepend(meta);
+    document.getElementsByTagName('head')[0].append(meta);
     //fourth
     meta = document.createElement('meta');
     meta.name = 'og:image';
     meta.setAttribute('property', 'og:image');
     meta.content = shortProjects[type] ? domain + shortProjects[type].main.image.replace('../', '/').replace('./', '/') : 'Check how to build a portfolio like this from https:www.alexcode.io';
-    document.getElementsByTagName('head')[0].prepend(meta);
+    document.getElementsByTagName('head')[0].append(meta);
 
     //TWITTER
 
@@ -302,31 +302,31 @@ function App() {
     meta.name = 'twitter:card';
     meta.setAttribute('property', 'twitter:card');
     meta.content = 'summary_large_image';
-    document.getElementsByTagName('head')[0].prepend(meta);
+    document.getElementsByTagName('head')[0].append(meta);
     //second
     meta = document.createElement('meta');
     meta.name = 'twitter:url';
     meta.setAttribute('property', 'twitter:url');
     meta.content = shortProjects[type] ? domain + shortProjects[type].url : 'https://www.alexcode.io';
-    document.getElementsByTagName('head')[0].prepend(meta);
+    document.getElementsByTagName('head')[0].append(meta);
     //third
     meta = document.createElement('meta');
     meta.name = 'twitter:title';
     meta.setAttribute('property', 'twitter:title');
     meta.content = shortProjects[type] ? shortProjects[type].main.title : 'Projects';
-    document.getElementsByTagName('head')[0].prepend(meta);
+    document.getElementsByTagName('head')[0].append(meta);
     //fourth
     meta = document.createElement('meta');
     meta.name = 'twitter:description';
     meta.setAttribute('property', 'twitter:description');
     meta.content = shortProjects[type] ? shortProjects[type].main.description : 'Check how to build a portfolio like this from https:www.alexcode.io';
-    document.getElementsByTagName('head')[0].prepend(meta);
+    document.getElementsByTagName('head')[0].append(meta);
     //fourth
     meta = document.createElement('meta');
     meta.name = 'twitter:image';
     meta.setAttribute('property', 'twitter:image');
     meta.content = shortProjects[type] ? domain + shortProjects[type].main.image.replace('../', '/').replace('./', '/') : 'Check how to build a portfolio like this from https:www.alexcode.io';
-    document.getElementsByTagName('head')[0].prepend(meta);
+    document.getElementsByTagName('head')[0].append(meta);
 
 
 
