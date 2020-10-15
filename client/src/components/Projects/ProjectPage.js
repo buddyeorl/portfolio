@@ -240,9 +240,12 @@ const ProjectPageMobile = ({ loading, data, handleClickProject, onScroll }) => {
 
     return (
         <React.Fragment>
-            <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.back) }} position='left' />
-            <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.forward) }} position='right' />
+            <span style={{ zIndex: 1 }}>
+                <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.back) }} position='left' />
+                <NavButton onClick={(e) => { e.preventDefault(); handleClickProject(data.navigation.forward) }} position='right' />
+            </span>
             <section ref={myRef} style={styles.container} onScroll={(e) => { onScroll(e, myRef) }}>
+
                 {main()}
                 {data.order.map((item) => {
                     switch (item.type) {
