@@ -36,6 +36,9 @@ const ownerInfo = {
 }
 //===========================================================================================//
 
+//========================================Meta Tag= =========================================//
+const domain = 'https://www.alexcode.io'
+//===========================================================================================//
 
 //=====================================Portfolio Projects====================================//
 const shortProjects = {
@@ -709,7 +712,7 @@ const shortProjects = {
         main: {
             title: 'Giftastic',
             duty: 'Front End developer',
-            description: 'Continuity of institutional knowledge tool',
+            description: 'Fun project to using Giphy API',
             content: 'Fun Personal project, using the Giphy API to pull fun gifs based on input keywords',
             image: '../assets/images/giftastic.png'
         },
@@ -749,4 +752,4 @@ Object.keys(shortProjects).reduceRight((cur, prev, index) => {
     return prev
 })
 
-export { cvFile, ownerInfo, shortProjects };
+export { cvFile, domain, ownerInfo, shortProjects };

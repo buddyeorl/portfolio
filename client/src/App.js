@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './App.css'
 
+
 import Intro from './components/Intro'
 import SocialBar from './components/SocialBar';
 import TaskBar from './components/TaskBar';
@@ -9,7 +10,7 @@ import Projects from './components/Projects'
 import ProjectPage from './components/Projects/ProjectPage'
 import SideBar from './components/SideBar'
 //import projects data as shortProjects 
-import { shortProjects } from './setup/ProjectData.js';
+import { shortProjects, ownerInfo, domain } from './setup/ProjectData.js';
 import Resume from './components/Resume'
 import Contact from './components/Contact'
 
@@ -94,6 +95,9 @@ function App() {
       return <Redirect to={`/projects/` + props.match.params.name} />
     } else {
       if (shortProjects && shortProjects[props.match.params.name]) { // if name received in params match a project
+        console.log('running here once')
+        //set metatags for this project
+        metaTags(props.match.params.name);
         return <React.Fragment>
           <ProjectPage loading={handleLoading} data={shortProjects[props.match.params.name]} centerSocialBar={centerSocialBar} />
           {/* show mobile menu button on project page when  width is less than 980*/}
@@ -107,6 +111,131 @@ function App() {
       }
     }
 
+  }
+
+  const metaTags = (type = 'machinerypal') => {
+
+    // switch(type){
+    //   //for home
+    //   case (type==='/'):
+
+    //   //for contact
+    //   case (type==='/contact'):
+
+    //   //for resume
+    //   case (type==='/resume'):
+
+    //   //for projects page
+    //   case (type==='/projects'):
+
+    //   //for specific projects
+    //   default:
+    // }
+
+    //GENERAL
+
+    //removing old tags
+    document.querySelector("[name='title']") && document.querySelector("[name='title']").remove();
+    document.querySelector("[name='description']") && document.querySelector("[name='description']").remove();
+    document.title = shortProjects[type] ? shortProjects[type].main.title : 'Projects';
+    let meta = document.createElement('meta');
+    //primary meta tag
+    meta.name = 'title';
+    meta.content = shortProjects[type] ? shortProjects[type].main.title : 'Projects';
+    document.getElementsByTagName('head')[0].prepend(meta);
+    meta = document.createElement('meta');
+    meta.name = 'description';
+    meta.content = shortProjects[type] ? shortProjects[type].main.description : 'Projects';
+    document.getElementsByTagName('head')[0].prepend(meta);
+
+    //OG / FB
+
+    //removing old tags
+    document.querySelector("[name='og:type']") && document.querySelector("[name='og:type']").remove();
+    document.querySelector("[name='og:url']") && document.querySelector("[name='og:url']").remove();
+    document.querySelector("[name='og:title']") && document.querySelector("[name='og:title']").remove();
+    document.querySelector("[name='og:description']") && document.querySelector("[name='og:description']").remove();
+    document.querySelector("[name='og:image']") && document.querySelector("[name='og:image']").remove();
+
+    //first
+    meta = document.createElement('meta');
+    meta.name = 'og:type';
+    meta.setAttribute('property', 'og:type');
+    meta.content = 'website';
+    document.getElementsByTagName('head')[0].prepend(meta);
+    //second
+    meta = document.createElement('meta');
+    meta.name = 'og:url';
+    meta.setAttribute('property', 'og:url');
+    meta.content = shortProjects[type] ? domain + shortProjects[type].url : 'https://www.alexcode.io';
+    document.getElementsByTagName('head')[0].prepend(meta);
+    //third
+    meta = document.createElement('meta');
+    meta.name = 'og:title';
+    meta.setAttribute('property', 'og:title');
+    meta.content = shortProjects[type] ? shortProjects[type].main.title : 'Projects';
+    document.getElementsByTagName('head')[0].prepend(meta);
+    //fourth
+    meta = document.createElement('meta');
+    meta.name = 'og:description';
+    meta.setAttribute('property', 'og:description');
+    meta.content = shortProjects[type] ? shortProjects[type].main.description : 'Check how to build a portfolio like this from https:www.alexcode.io';
+    document.getElementsByTagName('head')[0].prepend(meta);
+    //fourth
+    meta = document.createElement('meta');
+    meta.name = 'og:image';
+    meta.setAttribute('property', 'og:image');
+    meta.content = shortProjects[type] ? domain + shortProjects[type].main.image.replace('../', '/').replace('./', '/') : 'Check how to build a portfolio like this from https:www.alexcode.io';
+    document.getElementsByTagName('head')[0].prepend(meta);
+
+    //TWITTER
+
+    //removing old tags
+    document.querySelector("[name='twitter:card']") && document.querySelector("[name='twitter:card']").remove();
+    document.querySelector("[name='twitter:url']") && document.querySelector("[name='twitter:url']").remove();
+    document.querySelector("[name='twitter:title']") && document.querySelector("[name='twitter:title']").remove();
+    document.querySelector("[name='twitter:description']") && document.querySelector("[name='twitter:description']").remove();
+    document.querySelector("[name='twitter:image']") && document.querySelector("[name='twitter:image']").remove();
+
+    //first
+    meta = document.createElement('meta');
+    meta.name = 'twitter:card';
+    meta.setAttribute('property', 'twitter:card');
+    meta.content = 'summary_large_image';
+    document.getElementsByTagName('head')[0].prepend(meta);
+    //second
+    meta = document.createElement('meta');
+    meta.name = 'twitter:url';
+    meta.setAttribute('property', 'twitter:url');
+    meta.content = shortProjects[type] ? domain + shortProjects[type].url : 'https://www.alexcode.io';
+    document.getElementsByTagName('head')[0].prepend(meta);
+    //third
+    meta = document.createElement('meta');
+    meta.name = 'twitter:title';
+    meta.setAttribute('property', 'twitter:title');
+    meta.content = shortProjects[type] ? shortProjects[type].main.title : 'Projects';
+    document.getElementsByTagName('head')[0].prepend(meta);
+    //fourth
+    meta = document.createElement('meta');
+    meta.name = 'twitter:description';
+    meta.setAttribute('property', 'twitter:description');
+    meta.content = shortProjects[type] ? shortProjects[type].main.description : 'Check how to build a portfolio like this from https:www.alexcode.io';
+    document.getElementsByTagName('head')[0].prepend(meta);
+    //fourth
+    meta = document.createElement('meta');
+    meta.name = 'twitter:image';
+    meta.setAttribute('property', 'twitter:image');
+    meta.content = shortProjects[type] ? domain + shortProjects[type].main.image.replace('../', '/').replace('./', '/') : 'Check how to build a portfolio like this from https:www.alexcode.io';
+    document.getElementsByTagName('head')[0].prepend(meta);
+
+
+
+    // <!-- Twitter -->
+    // <meta property="twitter:card" content="summary_large_image">
+    // <meta property="twitter:url" content="https://metatags.io/">
+    // <meta property="twitter:title" content="Meta Tags — Preview, Edit and Generate">
+    // <meta property="twitter:description" content="With Meta Tags you can edit and experiment with your content then preview how your webpage will look on Google, Facebook, Twitter and more!">
+    // <meta property="twitter:image" content="https://metatags.io/assets/meta-tags-16a33a6a8531e519cc0936fbba0ad904e52d35f34a46c97a2c9f6f7dd7d336f2.png"></meta>
   }
 
 
