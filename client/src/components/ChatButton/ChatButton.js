@@ -118,7 +118,7 @@ const ChatButton = ({ children, iconPosition = 'left', label = 'Portfolio', onCl
     return (
         <React.Fragment>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: send ? '100%' : 'unset', overflow: 'initial' }}>
-                <button onClick={handleClick} className={(!sendAfterDelay) ? 'chatButton' : 'sendButton'} style={{ ...styles.button, ...(sendAfterDelay && styles.send) }}>
+                <button onTouchStart='' onClick={handleClick} className={(!sendAfterDelay) ? 'chatButton' : 'sendButton'} style={{ ...styles.button, ...(sendAfterDelay && styles.send) }}>
                     {iconPosition === 'left' ?
                         <React.Fragment>
                             {children}

@@ -60,17 +60,17 @@ const ownerInfo = {
     name: 'Alex Lizarraga',
     title: 'Full Stack Developer',
     description: `Full stack developer & entrepreneur \nReactJS, Native, NodeJS, JS, Python and more`,
-    introMessage: ['Hi, I\'m Alex Lizarraga', 'I like building things that are functional,simple and easy to use.'], // Will type one line per index.
+    introMessage: ['Hi, I\'m Alex Lizarraga', 'I like building FUN things, that are functional, easy to use and mantain.'], // Will type one line per index.
     socialAccounts: {
         github: { label: 'buddyeorl', url: 'https://github.com/buddyeorl' },
         linkedin: { label: 'alizarraga', url: 'https://www.linkedin.com/in/alizarraga/' },
         twitter: { label: 'A_Lizar', url: 'https://twitter.com/A_Lizar' },
-        facebook: { label: 'alexander.lizarraga.144', url: 'https://www.facebook.com/alexander.lizarraga.144' }
+        email: { label: 'hello@alexcode.io', url: 'mailto:hello@alexcode.io?subject=Greetings from your Portfolio&body=Hi Alex, Hope your doing well. I was checking your portfolio and wanted to say Hi.' }
     }
 }
 ```
-**Note1: `introMessage1` uses a custom react component for type style effect, each index will be render as a different line simulating the `enter` keystroke.**<br />
-**Note2: `socialAccounts` is required as the example above. if you have different accounts, you need to modify the component that renders this data at `client/components/SocialBar` to accept other accounts**<br />
+**Note1: `introMessage1` uses a custom react component for the typing style effect, each index will be render as a different line simulating the `enter` keystroke.**<br />
+**Note2: `socialAccounts` is required. see the example above. currently only supporting github, linkedin,twitter and email accounts, if you want to add move accounts, you need to modify the component that renders this data at `client/components/SocialBar` to accept other accounts**<br />
 
 ## Projects
 

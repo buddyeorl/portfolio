@@ -8,6 +8,8 @@ import Buff from '../../effects/Buff'
 //icons
 import AccountTreeIcon from '@material-ui/icons/AccountTree';
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import HomeIcon from '@material-ui/icons/Home';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
 
 //effects
 import Typing from '../../effects/Typing';
@@ -98,16 +100,15 @@ const TaskBar = ({ loading }) => {
                     <li style={styles.li} onClick={() => { loading(history, "/contact") }}>
 
                         <ChatButton label={'Contact'} width={100} direction='left-reversed' iconPosition='right'>
-                            <AccountTreeIcon />
+                            <EmojiPeopleIcon />
                         </ChatButton>
                     </li>
 
 
-                    <li style={styles.li} onClick={() => { loading(history, "/resume") }}>
+                    <li style={styles.li} onClick={() => { loading(history, "/") }}>
 
-
-                        <ChatButton label={'The CV'} width={100} direction='right-reversed'>
-                            <AssignmentIcon />
+                        <ChatButton label={'Home'} width={100} direction='right-reversed'>
+                            <HomeIcon />
                         </ChatButton>
 
                     </li>

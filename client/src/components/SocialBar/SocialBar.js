@@ -3,6 +3,10 @@ import GitHubIcon from '@material-ui/icons/GitHub';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 import TwitterIcon from '@material-ui/icons/Twitter';
 import FacebookIcon from '@material-ui/icons/Facebook';
+import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
+
+//import data
+import { ownerInfo } from '../../setup/ProjectData'
 
 //react router
 import {
@@ -57,12 +61,14 @@ const Item = ({ onMouseEnter, onMouseLeave, url, icon, styles, initialColor = 'w
 const SocialBar = ({ extend = false, trigger = false, center = false, hide = false }) => {
     const [width, height] = useWindowsSize();
 
-    const socialAccounts = {
-        github: { label: 'buddyeorl', url: 'https://github.com/buddyeorl' },
-        linkedin: { label: 'alizarraga', url: 'https://www.linkedin.com/in/alizarraga/' },
-        twitter: { label: 'A_Lizar', url: 'https://twitter.com/A_Lizar' },
-        facebook: { label: 'alexander.lizarraga.144', url: 'https://www.facebook.com/alexander.lizarraga.144' }
-    }
+    // const socialAccounts = {
+    //     github: { label: 'buddyeorl', url: 'https://github.com/buddyeorl' },
+    //     linkedin: { label: 'alizarraga', url: 'https://www.linkedin.com/in/alizarraga/' },
+    //     twitter: { label: 'A_Lizar', url: 'https://twitter.com/A_Lizar' },
+    //     facebook: { label: 'alexander.lizarraga.144', url: 'https://www.facebook.com/alexander.lizarraga.144' }
+    // }
+
+    const socialAccounts = ownerInfo.socialAccounts
     const location = useLocation();
     const [socialLink, setSocialLink] = useState(null)
 
@@ -165,7 +171,10 @@ const SocialBar = ({ extend = false, trigger = false, center = false, hide = fal
                     <Item url={socialAccounts.github.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.github) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#4e545a'} initialColor={'unset'} iconColor={'#7a7a7a'} icon={<GitHubIcon style={styles.smallIcons} />} />
                     <Item url={socialAccounts.linkedin.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.linkedin) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#0077ba'} initialColor={'unset'} iconColor={'#7a7a7a'} icon={<LinkedInIcon style={styles.smallIcons} />} />
                     <Item url={socialAccounts.twitter.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.twitter) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#3299ff'} initialColor={'unset'} iconColor={'#7a7a7a'} icon={<TwitterIcon style={styles.smallIcons} />} />
-                    <Item url={socialAccounts.facebook.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.facebook) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#4868ad'} initialColor={'unset'} iconColor={'#7a7a7a'} icon={<FacebookIcon style={styles.smallIcons} />} />
+                    {/* <Item url={socialAccounts.facebook.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.facebook) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#4868ad'} initialColor={'unset'} iconColor={'#7a7a7a'} icon={<FacebookIcon style={styles.smallIcons} />} /> */}
+
+                    <Item url={socialAccounts.email.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.facebook) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#4868ad'} initialColor={'unset'} iconColor={'#7a7a7a'} icon={<AlternateEmailIcon style={styles.smallIcons} />} />
+
                 </ul>
             </div>
             {(trigger || location.pathname === '/contact' || (center && location.pathname !== '/contact' && location.pathname !== '/projects' && location.pathname !== '/resume' && location.pathname !== '/')) &&
