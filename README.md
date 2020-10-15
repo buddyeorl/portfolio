@@ -9,8 +9,8 @@ Check the setup file [Here](https://github.com/buddyeorl/portfolio/tree/master/c
 ## Contents:
 * [How to Clone it](https://github.com/buddyeorl/portfolio#clone)
 * [Installation](https://github.com/buddyeorl/portfolio#installation)
-* [Setup] (https://github.com/buddyeorl/portfolio#setup)
-    * [Custom Components]((https://github.com/buddyeorl/portfolio#custom-components))
+* [Setup](https://github.com/buddyeorl/portfolio#setup)
+    * [Custom Components](https://github.com/buddyeorl/portfolio#custom-components)
     * [CV Location](https://github.com/buddyeorl/portfolio#cv-pdf-file-location)
     * [Developer's information](https://github.com/buddyeorl/portfolio#sevelopers-contact-and-general-information)
     * [Projects Information](https://github.com/buddyeorl/portfolio#projects-information)
