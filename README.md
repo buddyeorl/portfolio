@@ -1,10 +1,6 @@
 # Portfolio Builder
 
-Easily customizable, Click here to see the [Live version](https://www.alexcode.io).<br/>
-Check all the components used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/components).<br/>
-Check all the effects used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/effects).<br/>
-Check all the hooks used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/hooks).<br/>
-Check the setup file [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/setup).
+Built with Reactjs and node, simple, customizable, dynamic, complete portfolio builder, perfect to showcase your projects and skills, no need to build from scratch when you can clone this project. see it live [alexcode.io](https://www.alexcode.io)
 
 ## Contents
 * [How to Clone it](https://github.com/buddyeorl/portfolio#clone)
@@ -17,6 +13,9 @@ Check the setup file [Here](https://github.com/buddyeorl/portfolio/tree/master/c
     * [Server](https://github.com/buddyeorl/portfolio#server)
         * [Sending Emails](https://github.com/buddyeorl/portfolio#test-sending-emails)
 * [Learn More](https://github.com/buddyeorl/portfolio#learn-more)
+* [All Components](https://github.com/buddyeorl/portfolio/tree/master/client/src/components)
+* [All Effects](https://github.com/buddyeorl/portfolio/tree/master/client/src/effects)
+* [How to use the components in this Repo](https://www.alexcode.io/projects/portfolio)
 
 
 ## Clone
