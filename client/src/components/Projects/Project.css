@@ -4,10 +4,12 @@
 }
 
 .project:hover {
+    -webkit-appearance: none;
     transform: scale(1.02);
 }
 
 .project:active{
+    -webkit-appearance: none;
     transform:scale(0.95);
 }
 
