@@ -402,7 +402,7 @@ const shortProjects = {
             { type: 'paragraph', index: 6 },
             { type: 'image', index: 1 },
             { type: 'paragraph', index: 7 },
-            { type: 'code', index: 2 },
+            { type: 'code', index: 3 },
             { type: 'paragraph', index: 8 },
             { type: 'technologies' },
             // { type: 'link' }
