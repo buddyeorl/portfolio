@@ -8,7 +8,6 @@ Built with Reactjs and node, simple, customizable, dynamic, complete portfolio b
 * [Setup](https://github.com/buddyeorl/portfolio#setup)
     * [Custom Components](https://github.com/buddyeorl/portfolio#custom-components)
     * [CV Location](https://github.com/buddyeorl/portfolio#cv-location)
-    * [Meta Tags](https://github.com/buddyeorl/portfolio#meta-tags)
     * [General information](https://github.com/buddyeorl/portfolio#general-information)
     * [Projects](https://github.com/buddyeorl/portfolio#projects)
     * [Server](https://github.com/buddyeorl/portfolio#server)
@@ -49,16 +48,6 @@ You should add your cv file to the following directory : `/%Root/client/public/a
 ``` javascript
 //=========================================PDF CV============================================//
 const cvFile = '../assets/pdfs/fileName.pdf';
-//===========================================================================================//
-```
-
-## Meta tags
-
-This project automatically set up the general, og: and twitter: meta tags for the search engines, twitter, and open graph, to work you need to add a domain as follows
-
-``` javascript
-//========================================Meta Tag= =========================================//
-const domain = 'https://www.alexcode.io'
 //===========================================================================================//
 ```
 

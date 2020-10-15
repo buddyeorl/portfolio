@@ -36,10 +36,6 @@ const ownerInfo = {
 }
 //===========================================================================================//
 
-//========================================Meta Tag= =========================================//
-const domain = 'https://www.alexcode.io'
-//===========================================================================================//
-
 //=====================================Portfolio Projects====================================//
 const shortProjects = {
     machinerypal: {
@@ -752,4 +748,4 @@ Object.keys(shortProjects).reduceRight((cur, prev, index) => {
     return prev
 })
 
-export { cvFile, domain, ownerInfo, shortProjects };
+export { cvFile, ownerInfo, shortProjects };
