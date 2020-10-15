@@ -6,16 +6,16 @@ Check all the effects used in this portfolio [Here](https://github.com/buddyeorl
 Check all the hooks used in this portfolio [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/hooks).<br/>
 Check the setup file [Here](https://github.com/buddyeorl/portfolio/tree/master/client/src/setup).
 
-## Contents:
+## Contents
 * [How to Clone it](https://github.com/buddyeorl/portfolio#clone)
 * [Installation](https://github.com/buddyeorl/portfolio#installation)
 * [Setup](https://github.com/buddyeorl/portfolio#setup)
     * [Custom Components](https://github.com/buddyeorl/portfolio#custom-components)
-    * [CV Location](https://github.com/buddyeorl/portfolio#cv-pdf-file-location)
-    * [Developer's information](https://github.com/buddyeorl/portfolio#sevelopers-contact-and-general-information)
-    * [Projects Information](https://github.com/buddyeorl/portfolio#projects-information)
+    * [CV Location](https://github.com/buddyeorl/portfolio#cv-location)
+    * [General information](https://github.com/buddyeorl/portfolio#general-information)
+    * [Projects](https://github.com/buddyeorl/portfolio#projects)
     * [Server](https://github.com/buddyeorl/portfolio#server)
-        * [env variables](https://github.com/buddyeorl/portfolio#test-locally-apisend-sending-emails)
+        * [Sending Emails](https://github.com/buddyeorl/portfolio#test-sending-emails)
 * [Learn More](https://github.com/buddyeorl/portfolio#learn-more)
 
 
@@ -39,11 +39,11 @@ npm install && cd client && npm install
 
 To create your own portfolio with your own projects and information, you need to modify the setup file 
 
-## Custom components
+## Custom Components
 if you want to showcase custom components, you can import them at the top of the `ProjectData.js`,
 see Project information below how to render them in your project page 
 
-## CV pdf file location
+## CV location
 You should add your cv file to the following directory : `/%Root/client/public/assets/pdfs` and setup the cvFile variable as follows:
 
 ``` javascript
@@ -52,7 +52,7 @@ const cvFile = '../assets/pdfs/fileName.pdf';
 //===========================================================================================//
 ```
 
-## Developer's contact and general information
+## General Information
 
 Modify the object `ownerInfo` with your information, see example:
 
@@ -73,7 +73,7 @@ const ownerInfo = {
 **Note1: `introMessage1` uses a custom react component for type style effect, each index will be render as a different line simulating the `enter` keystroke.**<br />
 **Note2: `socialAccounts` is required as the example above. if you have different accounts, you need to modify the component that renders this data at `client/components/SocialBar` to accept other accounts**<br />
 
-## Projects Information
+## Projects
 
 This project uses the object `shortProjects` to render the project list and to render each single project, it uses the following properties:
 
@@ -207,7 +207,7 @@ const shortProjects = {
 
 see the above example [live](https://alexcode.herokuapp.com/projects/brands-api)
 
-## The server
+## Server
 
 The server was built with nodejs. it's light and simple. The api has only one entry `api/send` that handles the sending emails functionality using nodemailer, all the setup is done, you just need to setup your own email credentials using the env variables to make it work with your information, this are the three variables you need to setup when you deploy your portfolio, :
 
@@ -228,7 +228,7 @@ The server was built with nodejs. it's light and simple. The api has only one en
 **Note1: see nodemailer's [API]() for more information on how nodemailer handles your credentials.**<br />
 **Note2: it`s always important that you take all the security steps to protect sensitive data specially when handling passwords in plain text. I recommend you use a type of encryption but the explanation of that is beyond the scope of this portfolio site.**<br />
 
-## `Test locally /api/send (sending emails)`
+## Test Sending Emails
 
 To test sending emails locally you need to setup the env variables. If you are on macOS you can setup you enviromental variables to test the email sending functionality, here are the steps to do this:
 * create a text file .env in the project root directory and open it:
