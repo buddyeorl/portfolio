@@ -173,7 +173,7 @@ const SocialBar = ({ extend = false, trigger = false, center = false, hide = fal
                     <Item url={socialAccounts.twitter.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.twitter) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#3299ff'} initialColor={'unset'} iconColor={'#7a7a7a'} icon={<TwitterIcon style={styles.smallIcons} />} />
                     {/* <Item url={socialAccounts.facebook.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.facebook) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#4868ad'} initialColor={'unset'} iconColor={'#7a7a7a'} icon={<FacebookIcon style={styles.smallIcons} />} /> */}
 
-                    <Item url={socialAccounts.email.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.facebook) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#4868ad'} initialColor={'unset'} iconColor={'#7a7a7a'} icon={<AlternateEmailIcon style={styles.smallIcons} />} />
+                    <Item url={socialAccounts.email.url} onMouseEnter={() => { handleOnMouseEnter(socialAccounts.email) }} onMouseLeave={() => { handleOnMouseEnter(null) }} styles={styles} backgroundColor={'#4868ad'} initialColor={'unset'} iconColor={'#7a7a7a'} icon={<AlternateEmailIcon style={styles.smallIcons} />} />
 
                 </ul>
             </div>

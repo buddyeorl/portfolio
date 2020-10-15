@@ -25,7 +25,7 @@ const ownerInfo = {
     name: 'Alex Lizarraga',
     title: 'Full Stack Developer',
     description: `Full stack developer & entrepreneur \nReactJS, Native, NodeJS, JS, Python and more`,
-    introMessage: ['Hi, I\'m Alex Lizarraga', 'I like building simple things, that are functional, easy to use and mantain.'], // Will type one line per index.
+    introMessage: ['Hi, I\'m Alex Lizarraga', 'I like building FUN things that are functional, easy to use and mantain.'], // Will type one line per index.
     socialAccounts: {
         github: { label: 'buddyeorl', url: 'https://github.com/buddyeorl' },
         linkedin: { label: 'alizarraga', url: 'https://www.linkedin.com/in/alizarraga/' },
