@@ -38,6 +38,123 @@ const ownerInfo = {
 
 //=====================================Portfolio Projects====================================//
 const shortProjects = {
+    portfolio: {
+        url: '/projects/portfolio',
+
+        main: {
+            title: 'Portfolio Builder',
+            duty: 'Full Stack developer',
+            description: 'Fully customizable portfolio, built with ReactJS',
+            content: 'I created this portfolio as a way to showcase my skills and help those devs in need of an open source portfolio builder, easy to build, easy to navigate, modern design.',
+            image: '../assets/images/portfolio.png'
+        },
+        images: ['../assets/images/portfolio.png'],
+        technologies: ['JS', 'NodeJS', 'ReactJS', 'React Router', 'CSS'],
+        paragraph: [
+            { title: 'The framework', content: 'I built this portfolio and every component from scratch using Reactjs, Hooks and functional components for the front end, and NodeJS for the backend. The main objective for this project is to make it easier for devs to present their skills, projects and code in a simple organized and responsive way' },
+            { title: 'The Setup', content: 'I built this portfolio to be easy to setup, a JS object holding all the project information, including images, titles, code etc, see below an example of setup, file located in:' },
+            { title: 'The Routes?', content: 'All the Routes are handled with react-router with client side rendering, and the routes are created dinamically from the project data urls. For the navigation, I used the Array.reduce function to add "back" and "forward" pointers to each project in the project object as follows:' },
+            { title: 'The Hooks', content: 'This project uses almost 100% hooks or functional components, below is the implementation of a hook that returns the screen width, height, and pageYOffset, used for responsiveness purposes:' },
+            { title: 'The Typing Effect', content: 'Among the effect components created for this portfolio, my favorite is the Typing effect, below is the sample:' },
+            { title: '', content: 'To use this component simply send an array of strings, each array item will render as an individual span:' },
+            { title: 'The Sliding On Load Effect', content: 'Another simple effect that transforms up,down,left,right or custom direction a component on Load:' },
+            { title: '', content: 'To use this component simply wrap your component with the SlideOnLoad component:' },
+            { title: 'The Chat Button', content: 'I created this button while looking for ways to make the loading indicator appear on the button perimeter, the main problem with this approach is that buttons can have any shape making it tricky for a loading indicator around the surface. I used a shadow span for the activity indicator and the result is the following: ' },
+            { title: '', content: 'See Below for usage of the chat button:' },
+            { title: 'The Chatty Form', content: 'Forms are plain, tedious, long (or short), and simply boring, they take a lot of space and you need to scroll over them, but they shouldn\'t be like that, that\'s why I built this form based on the typing component and chat button above with some creativity and coding I made a form natural to fill up and less boring, check it out:' },
+            { title: '', content: 'See Below how to use the chatty form:' },
+            { title: 'The CodeGist component', content: 'Show me the code!!!. You probably noticed there\'s a lot of code snippets in this portfolio, but how I did it??, I took advantage of the Github Gists highlighting syntax for code and markdown and implemented a responsive component that renders on full height the github gists just with the gist url' },
+            { title: 'The ActivateOnClick', content: 'This component was used above to show sample components, it works with a trigger button, simply wrap a component/effect you want to show/hide:' }
+        ],
+        code: [
+            { title: '', url: 'https://gist.github.com/buddyeorl/372f10c7bd3976b1b677c9451776f343.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/a7c22c1e879e7ca469855a404431016c.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/2e34c7fa16a6f162538c44cf32613901.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/ef1bac2faaf99e39ff21f82f48711afd.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/15c3254d3d92b847b8dcb18e1e81dff0.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/896d2ab5e0411676ebc1eef739805457.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/515f91d7b973c1e1033404c73c8c2b51.js' },
+            { title: 'Example of CodeGist with a MD file syntax', url: 'https://gist.github.com/buddyeorl/298b50ee07c66533b262c1df57cad4f8.js' },
+            { title: 'Example of CodeGist with a JS file syntax', url: 'https://gist.github.com/buddyeorl/fa2bb38aae4ec479b379eaeb7b850926.js' },
+            { title: 'See below how to use CodeGist', url: 'https://gist.github.com/buddyeorl/c78cd9e68a27bad7530dcff818624934.js' },
+            { title: 'See below how to use ActivateOnClick', url: 'https://gist.github.com/buddyeorl/0d01220bae0b2c0d76c81ee6b1b64154.js' }
+        ],
+        component: [
+            <ActivateOnClick> <div style={{ width: '200px' }}><Typing label={["Hey Im a react component", " check me out!!"]} /></div></ActivateOnClick>,
+            <ActivateOnClick> <SlideOnLoad direction='left' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClick>,
+            <ActivateOnClick> <SlideOnLoad direction='right' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClick>,
+            <ActivateOnClick> <SlideOnLoad direction='up' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClick>,
+            <ActivateOnClick> <SlideOnLoad direction='down' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClick>,
+            <React.Fragment><ChatButton label={'Try me'} shadow={true} direction='right-reversed' /><ChatButton label={'Try me'} shadow={true} direction='right' /> <ChatButton label={'Try me'} shadow={true} /><ChatButton label={'Try me'} shadow={true} direction='left-reversed' /></React.Fragment>,
+            <div style={{ width: '300px', position: 'relative' }}><ChatButton onClick={() => { alert("I\'m the only button here with onClick events") }} label={'Try rectangle button'} shadow={true} send={true} /></div>,
+            <div style={{ height: '400px', position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', backgroundColor: 'white', borderRadius: '10px', margin: '0px 5px', boxShadow: '-1px 2px 4px -2px' }}><ChattyForm standAlone={true} /></div>,
+            <ActivateOnClick> <p> {`I'm a wrapped component, the button add/remove me from the DOM`} </p></ActivateOnClick>,
+
+        ],
+        link: 'https://github.com/buddyeorl/portfolio',
+        reference: [
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/effects/Typing' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/blob/master/client/src/effects/SlideOnLoad' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ChatButton' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ChattyForm' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/CodeGist' },
+            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ActivateOnClick' },
+            { content: 'To clone this project or check all the components and to see how to customize it with your information check the', label: 'Portfolio Repo', url: 'https://github.com/buddyeorl/portfolio/tree/master/' },
+            { content: 'All the components used in this project', label: 'React Portfolio', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components' },
+            { content: 'All effects in this repo', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/effects' },
+            { content: 'All hooks in this repo', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/hooks' },
+        ],
+        //everything that goes after the main content
+        order: [
+            { type: 'paragraph', index: 0 },
+            { type: 'paragraph', index: 1 },
+            { type: 'code', index: 0 },
+            { type: 'paragraph', index: 2 },
+            { type: 'code', index: 1 },
+            { type: 'paragraph', index: 3 },
+            { type: 'code', index: 2 },
+            { type: 'paragraph', index: 4 },
+            { type: 'component', index: 0 },
+            { type: 'paragraph', index: 5 },
+            { type: 'code', index: 3 },
+            { type: 'reference', index: 0 },
+            { type: 'paragraph', index: 6 },
+            { type: 'component', index: 1 },
+            { type: 'component', index: 2 },
+            { type: 'component', index: 3 },
+            { type: 'component', index: 4 },
+            { type: 'paragraph', index: 7 },
+            { type: 'code', index: 4 },
+            { type: 'reference', index: 1 },
+            { type: 'paragraph', index: 8 },
+            { type: 'component', index: 5 },
+            { type: 'component', index: 6 },
+            { type: 'paragraph', index: 9 },
+            { type: 'code', index: 5 },
+            { type: 'reference', index: 2 },
+            { type: 'paragraph', index: 10 },
+            { type: 'component', index: 7 },
+            { type: 'paragraph', index: 11 },
+            { type: 'code', index: 6 },
+            { type: 'reference', index: 3 },
+            { type: 'paragraph', index: 12 },
+            { type: 'code', index: 7 },
+            { type: 'code', index: 8 },
+            { type: 'code', index: 9 },
+            { type: 'reference', index: 4 },
+            { type: 'paragraph', index: 13 },
+            { type: 'component', index: 8 },
+            { type: 'code', index: 10 },
+            { type: 'reference', index: 5 },
+            { type: 'technologies' },
+            { type: 'link' },
+            { type: 'reference', index: 6 },
+            { type: 'reference', index: 7 },
+            { type: 'reference', index: 8 },
+            { type: 'reference', index: 9 },
+        ]
+    },
+
     machinerypal: {
         url: '/projects/machinerypal',
 
@@ -89,6 +206,98 @@ const shortProjects = {
             { type: 'technologies' },
             { type: 'link' }
         ],
+    },
+    tinyMonitor: {
+        url: '/projects/tinyMonitor',
+
+        main: {
+            title: 'Tiny Monitor',
+            duty: 'Full Stack developer',
+            description: 'Tiny Monitor Raspberry PI prototype powered by nodejs and react native',
+            content: 'Using nodejs I Built the server and React Native App for a prototype device called "Tiny Monitor" which monitors baby car seats and alert parents when movement, sound and high temperature is detected inside a vehicle',
+            image: '../assets/images/tinyMonitor.png'
+        },
+        images: ['../assets/images/tinyMonitor.png', '../assets/images/tinyMonitor.gif'],
+        technologies: ['JS', 'NodeJS', 'React Native', 'Websockets', 'Twilio', 'rpi-gpio', 'ds18x20', 'onoff', 'Raspberry Pi', 'ExpressJS', 'PassportJS', 'MongoDB'],
+        paragraph: [
+            { title: 'Tiny monitor what?', content: 'Tiny monitor uses temperature, sound and movement sensors to warn parents when posibly a child is in a vehicle or else where and the conditions could be harmful for the child, this is a specially useful device for forgetful parents' },
+            { title: 'What I did', content: 'My main job was to design the system that would power this device, including a way to read sensor data and show a feedback on a mobile app,  I did this by setting up two servers for internal communication, a monitor system for the sensor data, a warning system for the external communication, and finally a client side app' },
+            { title: 'The servers', content: 'When working with raspberry pi prototypes, flexibility is the most important factor as prototypes change a lot during the development. I decided to use nodejs and build two servers. A local server on the RPi that would be able to create new users able to access it\'s data, read the sensors data and send feedback to the main server, the main server would authenticate the rpi device and let the users created by itself access its data from a mobile app, also the main server would handle the warnings' },
+            { title: 'The Communication between servers?', content: 'The  main and local server used websockets to communicate, as soon as any device is turned on, the local node server starts with it and communication through websockets is stablished with the main server, the main server starts receiving sensor and warning data that can be accessed by the mobile app, below is a simplified implementation of the local server websocket connection:' },
+            { title: 'What about the sensors?', content: 'I used rpi-gpio and onoff to access the Rpi gpio interface and gather the data from the sensors (used ds18x20 to read data from the temperature sensor) and send this data to the main server through websockets, check the code below where I set the sensor listeners and open the websocket connection if it has been cut:' },
+            { title: 'The warnings and Twilio API?', content: 'There were two warning systems in place, the local server would trigger a sound alarm if sensor data passed certain threshold (e.g. temperature above certain level when movement or sound was recognized), the main server  would trigger a cancellable alarm, if the alarm was not cancelled within few seconds the server would make phone calls, and send text messages to emergency contacts using the twilio API' },
+            { title: '', content: 'See below a short interaction and how movement, temperature and alarms are triggered on the app' },
+            { title: 'The Mobile App', content: 'I built the mobile app using React Native, most of the components were created from scratch using react native components, the temperature thermostat and temperature indicator was created with react-native-svg, below is the component that will render one section ofr the thermostat and the temperature indicator:' },
+            { title: '', content: 'Send me an email or contact me below if you need help building something similar to this or have any questions about this project' }
+        ],
+        code: [
+            { title: '', url: 'https://gist.github.com/buddyeorl/ee5ab9d30c2fd135c8936e3f5222d5e9.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/9bd9db82b352892015e8780c7a89babd.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/a76a8673dd9e3602ba0b1a82423d83be.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/38931b8f89ad6f325116aaf3ee2e7b33.js' }
+        ],
+        //everything that goes after the main content
+        order: [
+            { type: 'paragraph', index: 0 },
+            { type: 'paragraph', index: 1 },
+            { type: 'paragraph', index: 2 },
+            { type: 'paragraph', index: 3 },
+            { type: 'code', index: 0 },
+            { type: 'paragraph', index: 4 },
+            { type: 'code', index: 1 },
+            { type: 'paragraph', index: 5 },
+            { type: 'code', index: 2 },
+            { type: 'paragraph', index: 6 },
+            { type: 'image', index: 1 },
+            { type: 'paragraph', index: 7 },
+            { type: 'code', index: 3 },
+            { type: 'paragraph', index: 8 },
+            { type: 'technologies' },
+            // { type: 'link' }
+        ]
+    },
+    fastFleet: {
+        url: '/projects/fastFleet',
+
+        main: {
+            title: 'Fast Fleet',
+            duty: 'Full Stack developer',
+            description: 'React Native app used to internally manage large vehicle fleets',
+            content: 'Fast Fleet is powered by a Nodejs server and React Native for the mobile App ',
+            image: '../assets/images/fastFleet.png'
+        },
+        images: ['../assets/images/fastFleetSample.gif'],
+        technologies: ['JS', 'NodeJS', 'ExpressJS', 'Google Vision', 'AWS S3', 'React Native', 'Redux', 'PassportJS', 'Google Oauth', 'MySQL', 'Sequelize'],
+        paragraph: [
+            { title: 'Why Fast Fleet?', content: 'Fast fleet app was built as a solution for a Penske problem while trying to rent equipment that was down for repairs, rented out or simply not ready due to poor log keeping issues, We replaced the single purpose devices used to log in and out equipment, the main problem with that device was that you need to have it with you to report problems on vehicles, or you should call the fleet manager to write the report for the vehicle  and then send it to the rent managers where equipment is delisted from rental fleets. Also the device was extremely expensive, was failing and support was limited' },
+            { title: 'Framework', content: 'After discussing the main problems with the managers and teams involved in logging data, The team decided to work on a solution easy to implement, fast to develop and mantain. The solution was React Native (SDK 36.0), code once for IOS and Android, one team can handle the mobile development, the server was built with nodejs' },
+            { title: 'The db', content: 'Since most of penske legacy software is built on SQL and MYSQL, we decided to use MYSQL for the db to keep a natural flow between apps without needing to write or use additional plugins and how larget he MYSQL community is and how well supported the mysql node packages are. ' },
+            { title: 'Google Vision', content: 'I was in charge of the main upload and image processing components, to make the process as simple as possible for the users, I incorporated the google vision API to analyze the serial numbers or vin numbers of a vehicle. When given a picture, google vision analyzes any text in the picture and replies with an array of strings, I took this string and look it up in the database to match a possible equipment, if the equipment serial/vin number is found in the db, the user would get feedback with the response to continue or try again or manually add the vin/serial. This process reduced the time to log in/out equipment. Below is the main simplified implementation of google vision API to recognize text from an image uploaded and processed with multer:' },
+            { title: 'The Upload', content: 'I handled the images upload and storage  with amazon S3 buckets, S3 buckets are easy to implement and uploads are handle with a simple middleware that uses multer and multerS3:' },
+            { title: 'The Camera Frame', content: 'Below is a reusable react native component created to handle the camera permissions for this project, along with the picture taking, This component fetches the Fast Fleet API which I won\'t provide here, so if you want to reuse this component you need to set your own API url on line 42, Also this component requires a camera grid to work, I won\'t provide the camera grid here but if you need assistance implementing a camera grid to work with this component, just email me or contact me at the bottom of this page.' },
+            { title: '', content: 'Here is a sample of the google vision functionality, recognizing a serial number from the database' },
+        ],
+        code: [
+            { title: '', url: 'https://gist.github.com/buddyeorl/0a87ebd836ebb34e0629dcca2f063e92.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/d22830f7a09d7612860440cc90464706.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/6d2c9517d9727ffdb7439aab4a2fa9a0.js' },
+        ],
+        //everything that goes after the main content
+        order: [
+            { type: 'paragraph', index: 0 },
+            { type: 'paragraph', index: 1 },
+            { type: 'paragraph', index: 2 },
+            { type: 'paragraph', index: 3 },
+            { type: 'code', index: 0 },
+            { type: 'paragraph', index: 6 },
+            { type: 'image', index: 0 },
+            { type: 'paragraph', index: 4 },
+            { type: 'code', index: 1 },
+            { type: 'paragraph', index: 5 },
+            { type: 'code', index: 2 },
+            { type: 'technologies' },
+            // { type: 'link' }
+        ]
     },
     'MP Component Library': {
         url: '/projects/MP Component Library',
@@ -315,98 +524,6 @@ const shortProjects = {
             { type: 'technologies' },
             { type: 'link' }]
     },
-    fastFleet: {
-        url: '/projects/fastFleet',
-
-        main: {
-            title: 'Fast Fleet',
-            duty: 'Full Stack developer',
-            description: 'React Native app used to internally manage large vehicle fleets',
-            content: 'Fast Fleet is powered by a Nodejs server and React Native for the mobile App ',
-            image: '../assets/images/fastFleet.png'
-        },
-        images: ['../assets/images/fastFleetSample.gif'],
-        technologies: ['JS', 'NodeJS', 'ExpressJS', 'Google Vision', 'AWS S3', 'React Native', 'Redux', 'PassportJS', 'Google Oauth', 'MySQL', 'Sequelize'],
-        paragraph: [
-            { title: 'Why Fast Fleet?', content: 'Fast fleet app was built as a solution for a Penske problem while trying to rent equipment that was down for repairs, rented out or simply not ready due to poor log keeping issues, We replaced the single purpose devices used to log in and out equipment, the main problem with that device was that you need to have it with you to report problems on vehicles, or you should call the fleet manager to write the report for the vehicle  and then send it to the rent managers where equipment is delisted from rental fleets. Also the device was extremely expensive, was failing and support was limited' },
-            { title: 'Framework', content: 'After discussing the main problems with the managers and teams involved in logging data, The team decided to work on a solution easy to implement, fast to develop and mantain. The solution was React Native (SDK 36.0), code once for IOS and Android, one team can handle the mobile development, the server was built with nodejs' },
-            { title: 'The db', content: 'Since most of penske legacy software is built on SQL and MYSQL, we decided to use MYSQL for the db to keep a natural flow between apps without needing to write or use additional plugins and how larget he MYSQL community is and how well supported the mysql node packages are. ' },
-            { title: 'Google Vision', content: 'I was in charge of the main upload and image processing components, to make the process as simple as possible for the users, I incorporated the google vision API to analyze the serial numbers or vin numbers of a vehicle. When given a picture, google vision analyzes any text in the picture and replies with an array of strings, I took this string and look it up in the database to match a possible equipment, if the equipment serial/vin number is found in the db, the user would get feedback with the response to continue or try again or manually add the vin/serial. This process reduced the time to log in/out equipment. Below is the main simplified implementation of google vision API to recognize text from an image uploaded and processed with multer:' },
-            { title: 'The Upload', content: 'I handled the images upload and storage  with amazon S3 buckets, S3 buckets are easy to implement and uploads are handle with a simple middleware that uses multer and multerS3:' },
-            { title: 'The Camera Frame', content: 'Below is a reusable react native component created to handle the camera permissions for this project, along with the picture taking, This component fetches the Fast Fleet API which I won\'t provide here, so if you want to reuse this component you need to set your own API url on line 42, Also this component requires a camera grid to work, I won\'t provide the camera grid here but if you need assistance implementing a camera grid to work with this component, just email me or contact me at the bottom of this page.' },
-            { title: '', content: 'Here is a sample of the google vision functionality, recognizing a serial number from the database' },
-        ],
-        code: [
-            { title: '', url: 'https://gist.github.com/buddyeorl/0a87ebd836ebb34e0629dcca2f063e92.js' },
-            { title: '', url: 'https://gist.github.com/buddyeorl/d22830f7a09d7612860440cc90464706.js' },
-            { title: '', url: 'https://gist.github.com/buddyeorl/6d2c9517d9727ffdb7439aab4a2fa9a0.js' },
-        ],
-        //everything that goes after the main content
-        order: [
-            { type: 'paragraph', index: 0 },
-            { type: 'paragraph', index: 1 },
-            { type: 'paragraph', index: 2 },
-            { type: 'paragraph', index: 3 },
-            { type: 'code', index: 0 },
-            { type: 'paragraph', index: 6 },
-            { type: 'image', index: 0 },
-            { type: 'paragraph', index: 4 },
-            { type: 'code', index: 1 },
-            { type: 'paragraph', index: 5 },
-            { type: 'code', index: 2 },
-            { type: 'technologies' },
-            // { type: 'link' }
-        ]
-    },
-    tinyMonitor: {
-        url: '/projects/tinyMonitor',
-
-        main: {
-            title: 'Tiny Monitor',
-            duty: 'Full Stack developer',
-            description: 'Tiny Monitor Raspberry PI prototype powered by nodejs and react native',
-            content: 'Using nodejs I Built the server and React Native App for a prototype device called "Tiny Monitor" which monitors baby car seats and alert parents when movement, sound and high temperature is detected inside a vehicle',
-            image: '../assets/images/tinyMonitor.png'
-        },
-        images: ['../assets/images/tinyMonitor.png', '../assets/images/tinyMonitor.gif'],
-        technologies: ['JS', 'NodeJS', 'React Native', 'Websockets', 'Twilio', 'rpi-gpio', 'ds18x20', 'onoff', 'Raspberry Pi', 'ExpressJS', 'PassportJS', 'MongoDB'],
-        paragraph: [
-            { title: 'Tiny monitor what?', content: 'Tiny monitor uses temperature, sound and movement sensors to warn parents when posibly a child is in a vehicle or else where and the conditions could be harmful for the child, this is a specially useful device for forgetful parents' },
-            { title: 'What I did', content: 'My main job was to design the system that would power this device, including a way to read sensor data and show a feedback on a mobile app,  I did this by setting up two servers for internal communication, a monitor system for the sensor data, a warning system for the external communication, and finally a client side app' },
-            { title: 'The servers', content: 'When working with raspberry pi prototypes, flexibility is the most important factor as prototypes change a lot during the development. I decided to use nodejs and build two servers. A local server on the RPi that would be able to create new users able to access it\'s data, read the sensors data and send feedback to the main server, the main server would authenticate the rpi device and let the users created by itself access its data from a mobile app, also the main server would handle the warnings' },
-            { title: 'The Communication between servers?', content: 'The  main and local server used websockets to communicate, as soon as any device is turned on, the local node server starts with it and communication through websockets is stablished with the main server, the main server starts receiving sensor and warning data that can be accessed by the mobile app, below is a simplified implementation of the local server websocket connection:' },
-            { title: 'What about the sensors?', content: 'I used rpi-gpio and onoff to access the Rpi gpio interface and gather the data from the sensors (used ds18x20 to read data from the temperature sensor) and send this data to the main server through websockets, check the code below where I set the sensor listeners and open the websocket connection if it has been cut:' },
-            { title: 'The warnings and Twilio API?', content: 'There were two warning systems in place, the local server would trigger a sound alarm if sensor data passed certain threshold (e.g. temperature above certain level when movement or sound was recognized), the main server  would trigger a cancellable alarm, if the alarm was not cancelled within few seconds the server would make phone calls, and send text messages to emergency contacts using the twilio API' },
-            { title: '', content: 'See below a short interaction and how movement, temperature and alarms are triggered on the app' },
-            { title: 'The Mobile App', content: 'I built the mobile app using React Native, most of the components were created from scratch using react native components, the temperature thermostat and temperature indicator was created with react-native-svg, below is the component that will render one section ofr the thermostat and the temperature indicator:' },
-            { title: '', content: 'Send me an email or contact me below if you need help building something similar to this or have any questions about this project' }
-        ],
-        code: [
-            { title: '', url: 'https://gist.github.com/buddyeorl/ee5ab9d30c2fd135c8936e3f5222d5e9.js' },
-            { title: '', url: 'https://gist.github.com/buddyeorl/9bd9db82b352892015e8780c7a89babd.js' },
-            { title: '', url: 'https://gist.github.com/buddyeorl/a76a8673dd9e3602ba0b1a82423d83be.js' },
-            { title: '', url: 'https://gist.github.com/buddyeorl/38931b8f89ad6f325116aaf3ee2e7b33.js' }
-        ],
-        //everything that goes after the main content
-        order: [
-            { type: 'paragraph', index: 0 },
-            { type: 'paragraph', index: 1 },
-            { type: 'paragraph', index: 2 },
-            { type: 'paragraph', index: 3 },
-            { type: 'code', index: 0 },
-            { type: 'paragraph', index: 4 },
-            { type: 'code', index: 1 },
-            { type: 'paragraph', index: 5 },
-            { type: 'code', index: 2 },
-            { type: 'paragraph', index: 6 },
-            { type: 'image', index: 1 },
-            { type: 'paragraph', index: 7 },
-            { type: 'code', index: 3 },
-            { type: 'paragraph', index: 8 },
-            { type: 'technologies' },
-            // { type: 'link' }
-        ]
-    },
     codeListener: {
         url: '/projects/codeListener',
 
@@ -584,122 +701,6 @@ const shortProjects = {
             { type: 'technologies' },
             { type: 'link' },
             { type: 'reference', index: 2 }
-        ]
-    },
-    portfolio: {
-        url: '/projects/portfolio',
-
-        main: {
-            title: 'This Portfolio - Open Source',
-            duty: 'Full Stack developer',
-            description: 'Fully customizable portfolio, built with ReactJS',
-            content: 'I created this portfolio as a way to showcase my skills and help those devs in need of an open source portfolio builder, easy to build, easy to navigate, modern design.',
-            image: '../assets/images/portfolio.png'
-        },
-        images: ['../assets/images/portfolio.png'],
-        technologies: ['JS', 'NodeJS', 'ReactJS', 'React Router', 'CSS'],
-        paragraph: [
-            { title: 'The framework', content: 'I built this portfolio and every component from scratch using Reactjs, Hooks and functional components for the front end, and NodeJS for the backend. The main objective for this project is to make it easier for devs to present their skills, projects and code in a simple organized and responsive way' },
-            { title: 'The Setup', content: 'I built this portfolio to be easy to setup, a JS object holding all the project information, including images, titles, code etc, see below an example of setup, file located in:' },
-            { title: 'The Routes?', content: 'All the Routes are handled with react-router with client side rendering, and the routes are created dinamically from the project data urls. For the navigation, I used the Array.reduce function to add "back" and "forward" pointers to each project in the project object as follows:' },
-            { title: 'The Hooks', content: 'This project uses almost 100% hooks or functional components, below is the implementation of a hook that returns the screen width, height, and pageYOffset, used for responsiveness purposes:' },
-            { title: 'The Typing Effect', content: 'Among the effect components created for this portfolio, my favorite is the Typing effect, below is the sample:' },
-            { title: '', content: 'To use this component simply send an array of strings, each array item will render as an individual span:' },
-            { title: 'The Sliding On Load Effect', content: 'Another simple effect that transforms up,down,left,right or custom direction a component on Load:' },
-            { title: '', content: 'To use this component simply wrap your component with the SlideOnLoad component:' },
-            { title: 'The Chat Button', content: 'I created this button while looking for ways to make the loading indicator appear on the button perimeter, the main problem with this approach is that buttons can have any shape making it tricky for a loading indicator around the surface. I used a shadow span for the activity indicator and the result is the following: ' },
-            { title: '', content: 'See Below for usage of the chat button:' },
-            { title: 'The Chatty Form', content: 'Forms are plain, tedious, long (or short), and simply boring, they take a lot of space and you need to scroll over them, but they shouldn\'t be like that, that\'s why I built this form based on the typing component and chat button above with some creativity and coding I made a form natural to fill up and less boring, check it out:' },
-            { title: '', content: 'See Below how to use the chatty form:' },
-            { title: 'The CodeGist component', content: 'Show me the code!!!. You probably noticed there\'s a lot of code snippets in this portfolio, but how I did it??, I took advantage of the Github Gists highlighting syntax for code and markdown and implemented a responsive component that renders on full height the github gists just with the gist url' },
-            { title: 'The ActivateOnClick', content: 'This component was used above to show sample components, it works with a trigger button, simply wrap a component/effect you want to show/hide:' }
-        ],
-        code: [
-            { title: '', url: 'https://gist.github.com/buddyeorl/372f10c7bd3976b1b677c9451776f343.js' },
-            { title: '', url: 'https://gist.github.com/buddyeorl/a7c22c1e879e7ca469855a404431016c.js' },
-            { title: '', url: 'https://gist.github.com/buddyeorl/2e34c7fa16a6f162538c44cf32613901.js' },
-            { title: '', url: 'https://gist.github.com/buddyeorl/ef1bac2faaf99e39ff21f82f48711afd.js' },
-            { title: '', url: 'https://gist.github.com/buddyeorl/15c3254d3d92b847b8dcb18e1e81dff0.js' },
-            { title: '', url: 'https://gist.github.com/buddyeorl/896d2ab5e0411676ebc1eef739805457.js' },
-            { title: '', url: 'https://gist.github.com/buddyeorl/515f91d7b973c1e1033404c73c8c2b51.js' },
-            { title: 'Example of CodeGist with a MD file syntax', url: 'https://gist.github.com/buddyeorl/298b50ee07c66533b262c1df57cad4f8.js' },
-            { title: 'Example of CodeGist with a JS file syntax', url: 'https://gist.github.com/buddyeorl/fa2bb38aae4ec479b379eaeb7b850926.js' },
-            { title: 'See below how to use CodeGist', url: 'https://gist.github.com/buddyeorl/c78cd9e68a27bad7530dcff818624934.js' },
-            { title: 'See below how to use ActivateOnClick', url: 'https://gist.github.com/buddyeorl/0d01220bae0b2c0d76c81ee6b1b64154.js' }
-        ],
-        component: [
-            <ActivateOnClick> <div style={{ width: '200px' }}><Typing label={["Hey Im a react component", " check me out!!"]} /></div></ActivateOnClick>,
-            <ActivateOnClick> <SlideOnLoad direction='left' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClick>,
-            <ActivateOnClick> <SlideOnLoad direction='right' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClick>,
-            <ActivateOnClick> <SlideOnLoad direction='up' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClick>,
-            <ActivateOnClick> <SlideOnLoad direction='down' end={'20px'}><div style={{ width: '50px', height: '50px', backgroundColor: 'white', borderRadius: '10px', boxShadow: '-1px 1px 2px -1px' }} /> </SlideOnLoad></ActivateOnClick>,
-            <React.Fragment><ChatButton label={'Try me'} shadow={true} direction='right-reversed' /><ChatButton label={'Try me'} shadow={true} direction='right' /> <ChatButton label={'Try me'} shadow={true} /><ChatButton label={'Try me'} shadow={true} direction='left-reversed' /></React.Fragment>,
-            <div style={{ width: '300px', position: 'relative' }}><ChatButton onClick={() => { alert("I\'m the only button here with onClick events") }} label={'Try rectangle button'} shadow={true} send={true} /></div>,
-            <div style={{ height: '400px', position: 'relative', width: '100%', display: 'flex', justifyContent: 'center', backgroundColor: 'white', borderRadius: '10px', margin: '0px 5px', boxShadow: '-1px 2px 4px -2px' }}><ChattyForm standAlone={true} /></div>,
-            <ActivateOnClick> <p> {`I'm a wrapped component, the button add/remove me from the DOM`} </p></ActivateOnClick>,
-
-        ],
-        link: 'https://github.com/buddyeorl/portfolio',
-        reference: [
-            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/effects/Typing' },
-            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/blob/master/client/src/effects/SlideOnLoad' },
-            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ChatButton' },
-            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ChattyForm' },
-            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/CodeGist' },
-            { content: 'See the code or download the component', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components/ActivateOnClick' },
-            { content: 'To clone this project or check all the components and to see how to customize it with your information check the', label: 'Portfolio Repo', url: 'https://github.com/buddyeorl/portfolio/tree/master/' },
-            { content: 'All the components used in this project', label: 'React Portfolio', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/components' },
-            { content: 'All effects in this repo', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/effects' },
-            { content: 'All hooks in this repo', label: 'here', url: 'https://github.com/buddyeorl/portfolio/tree/master/client/src/hooks' },
-        ],
-        //everything that goes after the main content
-        order: [
-            { type: 'paragraph', index: 0 },
-            { type: 'paragraph', index: 1 },
-            { type: 'code', index: 0 },
-            { type: 'paragraph', index: 2 },
-            { type: 'code', index: 1 },
-            { type: 'paragraph', index: 3 },
-            { type: 'code', index: 2 },
-            { type: 'paragraph', index: 4 },
-            { type: 'component', index: 0 },
-            { type: 'paragraph', index: 5 },
-            { type: 'code', index: 3 },
-            { type: 'reference', index: 0 },
-            { type: 'paragraph', index: 6 },
-            { type: 'component', index: 1 },
-            { type: 'component', index: 2 },
-            { type: 'component', index: 3 },
-            { type: 'component', index: 4 },
-            { type: 'paragraph', index: 7 },
-            { type: 'code', index: 4 },
-            { type: 'reference', index: 1 },
-            { type: 'paragraph', index: 8 },
-            { type: 'component', index: 5 },
-            { type: 'component', index: 6 },
-            { type: 'paragraph', index: 9 },
-            { type: 'code', index: 5 },
-            { type: 'reference', index: 2 },
-            { type: 'paragraph', index: 10 },
-            { type: 'component', index: 7 },
-            { type: 'paragraph', index: 11 },
-            { type: 'code', index: 6 },
-            { type: 'reference', index: 3 },
-            { type: 'paragraph', index: 12 },
-            { type: 'code', index: 7 },
-            { type: 'code', index: 8 },
-            { type: 'code', index: 9 },
-            { type: 'reference', index: 4 },
-            { type: 'paragraph', index: 13 },
-            { type: 'component', index: 8 },
-            { type: 'code', index: 10 },
-            { type: 'reference', index: 5 },
-            { type: 'technologies' },
-            { type: 'link' },
-            { type: 'reference', index: 6 },
-            { type: 'reference', index: 7 },
-            { type: 'reference', index: 8 },
-            { type: 'reference', index: 9 },
         ]
     },
     giftastic: {
