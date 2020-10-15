@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css'
 
 
@@ -32,10 +32,10 @@ function App() {
   const [width, height] = useWindowsSize();
   const [isIntroDone, setIsIntroDone] = useState(false);
   const [loading, setLoading] = useState(false);
-
   //move social bar to the middle when clicking menu button on mobile
   const [moveSocial, setMoveSocial] = useState(false);
   const [centerSocial, setCenterSocial] = useState(false);
+
 
 
   const styles = {
@@ -131,6 +131,106 @@ function App() {
     //   //for specific projects
     //   default:
     // }
+    let meta
+    if (type === 'general') {
+      //GENERAL
+
+      //removing old tags
+      document.querySelector("[name='title']") && document.querySelector("[name='title']").remove();
+      document.querySelector("[name='description']") && document.querySelector("[name='description']").remove();
+      document.title = ownerInfo.name + ownerInfo.title;
+      meta = document.createElement('meta');
+      //primary meta tag
+      meta.name = 'title';
+      meta.content = ownerInfo.name + ' ' + ownerInfo.title;
+      document.getElementsByTagName('head')[0].prepend(meta);
+      meta = document.createElement('meta');
+      meta.name = 'description';
+      meta.content = shortProjects[type] ? shortProjects[type].main.description : 'Projects';
+      document.getElementsByTagName('head')[0].prepend(meta);
+
+      //OG / FB
+
+      //removing old tags
+      document.querySelector("[name='og:type']") && document.querySelector("[name='og:type']").remove();
+      document.querySelector("[name='og:url']") && document.querySelector("[name='og:url']").remove();
+      document.querySelector("[name='og:title']") && document.querySelector("[name='og:title']").remove();
+      document.querySelector("[name='og:description']") && document.querySelector("[name='og:description']").remove();
+      document.querySelector("[name='og:image']") && document.querySelector("[name='og:image']").remove();
+
+      //first
+      meta = document.createElement('meta');
+      meta.name = 'og:type';
+      meta.setAttribute('property', 'og:type');
+      meta.content = 'website';
+      document.getElementsByTagName('head')[0].prepend(meta);
+      //second
+      meta = document.createElement('meta');
+      meta.name = 'og:url';
+      meta.setAttribute('property', 'og:url');
+      meta.content = domain;
+      document.getElementsByTagName('head')[0].prepend(meta);
+      //third
+      meta = document.createElement('meta');
+      meta.name = 'og:title';
+      meta.setAttribute('property', 'og:title');
+      meta.content = ownerInfo.name + ' ' + ownerInfo.title
+      document.getElementsByTagName('head')[0].prepend(meta);
+      //fourth
+      meta = document.createElement('meta');
+      meta.name = 'og:description';
+      meta.setAttribute('property', 'og:description');
+      meta.content = ownerInfo.description;
+      document.getElementsByTagName('head')[0].prepend(meta);
+      //fourth
+      meta = document.createElement('meta');
+      meta.name = 'og:image';
+      meta.setAttribute('property', 'og:image');
+      meta.content = 'https://www.alexcode.io/logo512.png';
+      document.getElementsByTagName('head')[0].prepend(meta);
+
+      //TWITTER
+
+      //removing old tags
+      document.querySelector("[name='twitter:card']") && document.querySelector("[name='twitter:card']").remove();
+      document.querySelector("[name='twitter:url']") && document.querySelector("[name='twitter:url']").remove();
+      document.querySelector("[name='twitter:title']") && document.querySelector("[name='twitter:title']").remove();
+      document.querySelector("[name='twitter:description']") && document.querySelector("[name='twitter:description']").remove();
+      document.querySelector("[name='twitter:image']") && document.querySelector("[name='twitter:image']").remove();
+
+      //first
+      meta = document.createElement('meta');
+      meta.name = 'twitter:card';
+      meta.setAttribute('property', 'twitter:card');
+      meta.content = 'summary_large_image';
+      document.getElementsByTagName('head')[0].prepend(meta);
+      //second
+      meta = document.createElement('meta');
+      meta.name = 'twitter:url';
+      meta.setAttribute('property', 'twitter:url');
+      meta.content = domain;
+      document.getElementsByTagName('head')[0].prepend(meta);
+      //third
+      meta = document.createElement('meta');
+      meta.name = 'twitter:title';
+      meta.setAttribute('property', 'twitter:title');
+      meta.content = ownerInfo.name + ' ' + ownerInfo.title;
+      document.getElementsByTagName('head')[0].prepend(meta);
+      //fourth
+      meta = document.createElement('meta');
+      meta.name = 'twitter:description';
+      meta.setAttribute('property', 'twitter:description');
+      meta.content = ownerInfo.description;
+      document.getElementsByTagName('head')[0].prepend(meta);
+      //fourth
+      meta = document.createElement('meta');
+      meta.name = 'twitter:image';
+      meta.setAttribute('property', 'twitter:image');
+      meta.content = 'https://www.alexcode.io/logo512.png';
+      document.getElementsByTagName('head')[0].prepend(meta);
+
+      return
+    }
 
     //GENERAL
 
@@ -138,7 +238,7 @@ function App() {
     document.querySelector("[name='title']") && document.querySelector("[name='title']").remove();
     document.querySelector("[name='description']") && document.querySelector("[name='description']").remove();
     document.title = shortProjects[type] ? shortProjects[type].main.title : 'Projects';
-    let meta = document.createElement('meta');
+    meta = document.createElement('meta');
     //primary meta tag
     meta.name = 'title';
     meta.content = shortProjects[type] ? shortProjects[type].main.title : 'Projects';
@@ -263,11 +363,17 @@ function App() {
           </Route>
 
           {/* handle home path */}
-          <Route path="/">
-            <Intro effectEnded={handleIsIntroDone} />
-            {isIntroDone &&
-              <TaskBar loading={handleLoading} />
-            }
+          <Route path="/" render={() => {
+            metaTags('general');
+            return <React.Fragment>
+              <Intro effectEnded={handleIsIntroDone} />
+              {isIntroDone &&
+                <TaskBar loading={handleLoading} />
+
+              }
+            </React.Fragment>
+          }
+          }>
           </Route>
 
         </Switch>
