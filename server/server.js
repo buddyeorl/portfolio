@@ -32,6 +32,7 @@ if (process.env.PORT) {
     });
 
 }
+
 //statics
 app.use(express.static("../client/build"));
 //=========================================================================//
