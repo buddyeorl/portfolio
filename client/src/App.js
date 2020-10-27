@@ -129,6 +129,13 @@ function App() {
           </Route>
 
           {/* handle home path */}
+          <Route exact path="/cv">
+            {/* <Redirect to={`/CV%20JULY%202020.pdf`} /> */}
+            <SideBar loading={handleLoading} moveSocial={moveSocialBarMobile} />
+            <Resume />
+          </Route>
+
+          {/* handle home path */}
           <Route exact path="/contact">
             <SideBar loading={handleLoading} moveSocial={moveSocialBarMobile} />
             <Contact />
