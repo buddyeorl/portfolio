@@ -537,7 +537,7 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
         return (
             <React.Fragment>
                 {/* <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '28px', fontWeight: 300 }}> Resources:</h1> */}
-                <p style={{ ...styles.secondaryPara, marginTop: '15px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '10px', marginBottom: '15px' }}> {data.reference[index].content} <a href={data.reference[index].url} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>{data.reference[index].label}</strong></a></p>
+                <p style={{ ...styles.secondaryPara, marginTop: '15px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, marginBottom: '15px' }}> {data.reference[index].content} <a href={data.reference[index].url} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>{data.reference[index].label}</strong></a></p>
             </React.Fragment>
         )
     }
@@ -546,7 +546,7 @@ const ProjectPage = ({ loading, data, centerSocialBar }) => {
         return (
             <React.Fragment>
                 <h1 style={{ ...styles.secondaryPara, textAlign: 'left', fontSize: '28px', fontWeight: 300 }}> Resources:</h1>
-                <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, lineHeight: '10px', marginBottom: '30px' }}> Check or download the app <a href={data.link} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>here</strong></a></p>
+                <p style={{ ...styles.secondaryPara, marginTop: '20px', fontSize: '18px', textAlign: 'initial', fontWeight: 100, marginBottom: '30px' }}> Check or download the app <a href={data.link} rel="nofollow" style={{ textDecoration: 'none', cursor: 'pointer' }} target="_blank"><strong>here</strong></a></p>
             </React.Fragment>
         )
     }
