@@ -256,6 +256,69 @@ const shortProjects = {
             // { type: 'link' }
         ]
     },
+
+    'deep-talk': {
+        url: '/projects/deep-talk',
+
+        main: {
+            title: 'Deep Talk',
+            duty: 'Full Stack Developer',
+            description: 'Speech to text API using deepspeech',
+            content: 'Speech to text app using deepspeech node in the backend and a reactjs in the front end, free and open source API',
+            image: '../assets/images/deep-talk.png'
+        },
+        images: ['../assets/images/deep-talk.png'],
+        technologies: ['JS', 'NodeJS', 'ReactJS', 'Canvas', 'WebAudio API', 'VAD', 'deepspeech', 'multer', 'Microsoft Azure'],
+        paragraph: [
+            { title: 'Speech To Text', content: 'I built a speech-to-text API powered by nodejs and deepspeech (mozilla open source stt), The Api accepts audio files in form-data using an \'audio\' field and then returns a JSON object with the text recognized by deepspeech, below is a sample call and response:' },
+            { title: '', content: 'The speech to text was implemented in a simple and straight forward middleware, using the model and scorer files to analyze the audio received as follows:' },
+            { title: 'The WebApp', content: 'For the front end I used ReactJS and the webAudio Api to create a client side pipeline to get the voice from the user\'s mic using a custom Voice Activity Detection, resampling the audio and creating a downloadable wav file that is sent to the server for speech detection, the response is then sent to the user and displayed next to the downloadable audio wav file.' },
+            { title: 'Requesting STT from the API', content: 'Streaming the audio to the server was the first and biggest challenge in this project, the server overload is always in the mind of a developer, and streaming audio non stop could add an extreme server overload so I needed to find a solution. I narrowed the server overload solutions to two, using websockets or segmented audio stream using voice activity detection (VAD)' },
+            { title: '', content: 'If I used websockets, the implementation would be straight forward, just connect the sockets and start streaming the audio to the server, and in the back end handle the data chunks and send back partial responses, this simplify the process but keep the server load high, also the API might not be as easy to setup out of the box by third party apps if a websocket needs to be configured' },
+            { title: '', content: 'The second option and winner option was to implement a VAD, in this case the audio stream would be divided based on the activity detection (divided when silence is recognized), the audio stream segment would be converted into a wav file and then sent to the server for speech recognition' },
+            { title: 'The Voice Activity Detection - VAD', content: 'I implemented the VAD using the webaudio API, using an audio context on top of the audio stream and a stream audio analyzer that updates every 5ms with the current audiobuffer frequencies, below is a sample of this process' },
+            { title: 'The Voice Graph', content: 'Using the frequency array data from the audio analyzer, I implemented the voice graph using Canvas to render it, using the same 5ms analysis to update the Canvas with the current frequencies' },
+            { title: 'The Audio Resampling', content: 'I implemented a resampling function using the audio-resampler package and a custom inline-worker, this function takes the audio buffer from the source and resamples it to a 16kHZ mono 16 bits wav as required by deepspeech, the function returns an objectURL that is later used to download the wav file and to send the file to the server for analysis.' },
+            { title: 'The Downloadable Audio File', content: 'After each Audio Resampling an objectURL is created and displayed to the user, this objectURL is used as a downloadble link' },
+
+        ],
+        code: [
+            { title: '', url: 'https://gist.github.com/buddyeorl/5ffde5249888b3bc4fc6e5d05a60e75a.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/0681541e788e07af6b304cf65782328d.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/da055f102d72316e67d2aa3120630cf5.js' },
+            { title: '', url: 'https://gist.github.com/buddyeorl/aa92fafe4e7bea2e158012354f981c54.js' },
+        ],
+        reference: [
+            { content: 'Live Demo', label: 'here', url: 'https://deep-talk.azurewebsites.net/' },
+            { content: 'Check the Github Repo', label: 'here', url: 'https://github.com/buddyeorl/deep-talk' },
+        ],
+        link: 'https://deep-talk.azurewebsites.net/',
+        //everything that goes after the main content
+        order: [
+            { type: 'reference', index: 0 },
+            { type: 'reference', index: 1 },
+            { type: 'paragraph', index: 0 },
+            { type: 'code', index: 2 },
+            { type: 'paragraph', index: 1 },
+            { type: 'code', index: 3 },
+            { type: 'paragraph', index: 2 },
+
+            { type: 'paragraph', index: 3 },
+            { type: 'paragraph', index: 4 },
+
+            { type: 'paragraph', index: 5 },
+
+            { type: 'paragraph', index: 6 },
+            { type: 'code', index: 0 },
+            { type: 'paragraph', index: 7 },
+            { type: 'code', index: 1 },
+            { type: 'paragraph', index: 8 },
+            { type: 'paragraph', index: 9 },
+            { type: 'technologies' },
+            { type: 'link' },
+            { type: 'reference', index: 1 },
+        ],
+    },
     fastFleet: {
         url: '/projects/fastFleet',
 

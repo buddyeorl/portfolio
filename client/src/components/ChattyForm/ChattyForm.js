@@ -292,7 +292,7 @@ const Input = ({ messages }) => {
                 {/* Icon and Label for this input */}
                 <div style={{ position: 'absolute', left: 0, display: 'inline-flex' }}>
                     {(messages[cur].icon) ? messages[cur].icon : <span style={{ width: '24px', height: '24px' }}></span>}
-                    <label style={styles.label} htmlFor='name'> {!input.name && messages[cur].label}</label>
+                    <label style={styles.label} htmlFor='name1'> {!input.name && messages[cur].label}</label>
                 </div>
 
 
@@ -319,9 +319,9 @@ const Input = ({ messages }) => {
                 {!editMode &&
                     <React.Fragment>
                         {messages[cur].type === 'textarea' ?
-                            <textarea maxLength="150" onChange={handleChange} style={{ ...styles.input, fontFamily: 'inherit', fontWeight: 'inherit', resize: 'none', paddingTop: '15px' }} className='contactInput' id='name' name='name' value={input.name} rows='5' />
+                            <textarea maxLength="150" onChange={handleChange} style={{ ...styles.input, fontFamily: 'inherit', fontWeight: 'inherit', resize: 'none', paddingTop: '15px' }} className='contactInput' id='name1' name='name' value={input.name} rows='5' />
                             :
-                            <input onChange={handleChange} className='contactInput' id='name' name='name' value={input.name} style={styles.input} />
+                            <input onChange={handleChange} className='contactInput' id='name1' name='name' value={input.name} style={styles.input} />
                         }
                         <ChatButton onClick={handleSubmit} label='send' shadow={true} />
                     </React.Fragment>
