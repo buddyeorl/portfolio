@@ -262,7 +262,7 @@ const Input = ({ messages = [
         }
 
         //wait for fetch
-        return await fetch('https://www.alexcode.io/api/email/send', request).then((res) => res.json()
+        return await fetch('/api/send', request).then((res) => res.json()
         ).then((res) => {
             setSending(true);
             setMessageToType(messages[messages.length - 1])
