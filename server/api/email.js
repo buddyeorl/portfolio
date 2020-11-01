@@ -7,7 +7,7 @@ router.use(bodyParser.json());
 const nodemailer = require('nodemailer');
 
 //send email
-router.post("send", (req, res) => {
+router.post('/send', (req, res) => {
     let transporter = nodemailer.createTransport({
         service: process.env.SERVICE,
         auth: {

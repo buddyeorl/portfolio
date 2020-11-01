@@ -42,7 +42,7 @@ app.set('port', (process.env.PORT || 3001));
 
 
 //routes
-const send = require('./api/email')
+const send = require('./api/email.js')
 app.use('/api', send);
 
 app.get('/*', (req, res) => {
